@@ -1,0 +1,155 @@
+{
+  "synthetic": true,
+  "objective": "Success rate: payments that ended captured over final payments (declines count as not captured), compared per seed on identical payment references. Revenue captured per currency is reported alongside; p95 creation-to-final latency is a guardrail (ADR-0016).",
+  "baseline": "static",
+  "candidate": null,
+  "win_rule": {
+    "mean_uplift_pp": 1,
+    "better_share_percent": 80,
+    "latency_margin_percent": 10
+  },
+  "runs": [
+    {
+      "scenario": "processor-a-outage",
+      "seed": 7,
+      "strategy": "static",
+      "payments": 300,
+      "final": 300,
+      "captured": 174,
+      "success_rate_pct": 58.0,
+      "revenue_captured": {
+        "EUR": 5207559,
+        "GBP": 4550101,
+        "JPY": 1216178,
+        "USD": 9883575
+      },
+      "p95_latency_ms": 4821.065,
+      "duration_seconds": 291.65600000001723,
+      "digest": "95d24392bd5ed7de484fea92f59b0549fb0a257d5b2136165f20b30b282cce3b"
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 7,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 267,
+      "success_rate_pct": 89.0,
+      "revenue_captured": {
+        "EUR": 8239887,
+        "GBP": 6168319,
+        "JPY": 2118211,
+        "USD": 16693669
+      },
+      "p95_latency_ms": 24752.357,
+      "duration_seconds": 322.11000000004424,
+      "digest": "8b42c36379bb99b47fd831903e112f4a8663df8eced1edbeb041c13c6886cce4"
+    }
+  ],
+  "pairs": [
+    {
+      "scenario": "processor-a-outage",
+      "seed": 7,
+      "baseline": "static",
+      "candidate": "rules",
+      "baseline_success_rate_pct": 58.0,
+      "candidate_success_rate_pct": 89.0,
+      "diff_pp": 31.0,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 3032328,
+        "GBP": 1618218,
+        "JPY": 902033,
+        "USD": 6810094
+      },
+      "baseline_p95_latency_ms": 4821.065,
+      "candidate_p95_latency_ms": 24752.357
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "processor-a-outage",
+      "candidate": "rules",
+      "pairs": 1,
+      "mean_diff_pp": 31.0,
+      "share_better": 1.0,
+      "latency_ratio": 5.1342,
+      "latency_ok": false
+    }
+  ],
+  "verdict": null,
+  "total_duration_seconds": 613.8,
+  "command": "python scripts/routing_experiment.py --strategies static,rules --scenarios processor-a-outage --seeds 7 --out docs/evaluation/routing-experiments/rel30-reproduction --rel30 --progress <workspace>/.local/rel43-scratch/progress.txt",
+  "health_window_seconds": 120,
+  "rate_per_second": 2.0,
+  "wall_clock_seconds": 673.4,
+  "rel30_agreement": {
+    "reference": {
+      "scenario": "processor-a-outage",
+      "seed": 7,
+      "tolerance": {
+        "success_rate_pp": 1.0,
+        "revenue_recovered_pct": 1.0
+      }
+    },
+    "success_rate_pp": {
+      "baseline": {
+        "values": [
+          58.0,
+          58.0
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "relay": {
+        "values": [
+          89.0,
+          89.0
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      }
+    },
+    "revenue_recovered": {
+      "EUR": {
+        "values": [
+          3032328,
+          3032328
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "GBP": {
+        "values": [
+          1618218,
+          1618218
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "JPY": {
+        "values": [
+          902033,
+          902033
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "USD": {
+        "values": [
+          6810094,
+          6810094
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      }
+    },
+    "pass": true
+  }
+}

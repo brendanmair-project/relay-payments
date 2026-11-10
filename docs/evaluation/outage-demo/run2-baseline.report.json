@@ -1,0 +1,93 @@
+{
+  "window": {
+    "since": null,
+    "until": null,
+    "reference_prefix": "processor-a-outage-7-",
+    "as_of": "2026-11-02T12:59:09.440311Z"
+  },
+  "payments": {
+    "selected": 300,
+    "final": 300
+  },
+  "latency": {
+    "count": 300,
+    "p50_ms": 677.615,
+    "p95_ms": 5128.796,
+    "p99_ms": 5760.842
+  },
+  "publish_lag": {
+    "published": 1976,
+    "unpublished": 0,
+    "p50_ms": 345.448,
+    "p95_ms": 501.722,
+    "p99_ms": 513.173
+  },
+  "processor_success": {
+    "A": {
+      "captured": 174,
+      "failed": 104,
+      "declined": 22,
+      "success_rate": 0.6259
+    },
+    "B": {
+      "captured": 0,
+      "failed": 0,
+      "declined": 0,
+      "success_rate": null
+    }
+  },
+  "not_final": {
+    "threshold_seconds": 40.0,
+    "count": 0,
+    "payments": []
+  },
+  "rescue_paths": {
+    "retry": {
+      "count": 0,
+      "amount_minor_by_currency": {}
+    },
+    "failover": {
+      "count": 0,
+      "amount_minor_by_currency": {}
+    },
+    "redrive": {
+      "count": 0,
+      "amount_minor_by_currency": {}
+    }
+  },
+  "explanations": {
+    "available": true,
+    "sources": {
+      "model": {
+        "count": 23,
+        "p50_ms": 1045.196,
+        "p95_ms": 2014.179
+      },
+      "rules": {
+        "count": 103,
+        "p50_ms": 3966.566,
+        "p95_ms": 6485.598
+      }
+    },
+    "all": {
+      "count": 126,
+      "p50_ms": 2891.466,
+      "p95_ms": 6475.213
+    },
+    "fallback_rate": 0.8175,
+    "fallback_reasons": {
+      "cause_mismatch": 103
+    },
+    "fallback_cause_mismatch": 103,
+    "fallback_model_failures": 0,
+    "backlog_max": 13,
+    "backlog_end": 0
+  },
+  "api_5xx": {
+    "available": true,
+    "total": 678,
+    "server_errors": 0,
+    "rate_5xx": 0.0,
+    "malformed": 0
+  }
+}

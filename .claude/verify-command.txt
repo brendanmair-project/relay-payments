@@ -1,0 +1,2 @@
+# Fast local suite (REL-13, ADR-0007): run by the Stop hook at the end of each turn; skipped while .claude/tdd-red exists or Docker is down.
+docker compose run --rm --build api sh -c "ruff check . && ruff format --check . && mypy app && pytest" && docker compose run --rm --build --no-deps simulator sh -c "ruff check . && ruff format --check . && pytest" && npm --prefix frontend run lint && npm --prefix frontend run format:check && npm --prefix frontend run typecheck && npm --prefix frontend test

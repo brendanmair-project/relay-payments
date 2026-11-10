@@ -1,0 +1,438 @@
+{
+  "synthetic": true,
+  "scenario": "processor-a-outage",
+  "seed": 7,
+  "baseline_description": "static routing: ROUTING_STRATEGY=static, every payment to Processor A, no failover, no retry (ADR-0009)",
+  "manual_baseline_seconds": 7200,
+  "health_window_seconds": 120,
+  "tolerance": {
+    "success_rate_pp": 1.0,
+    "revenue_recovered_pct": 1.0
+  },
+  "runs": [
+    {
+      "run": 1,
+      "baseline_success_rate_pct": 58.0,
+      "relay_success_rate_pct": 89.0,
+      "uplift_pp": 31.0,
+      "revenue_recovered": {
+        "EUR": 3032328,
+        "GBP": 1618218,
+        "JPY": 902033,
+        "USD": 6810094
+      },
+      "revenue_by_rescue_path": {
+        "retry": {
+          "EUR": 2832363,
+          "GBP": 1446165,
+          "JPY": 902033,
+          "USD": 6713460
+        },
+        "failover": {
+          "EUR": 199965,
+          "GBP": 172053,
+          "USD": 96634
+        },
+        "redrive": {}
+      },
+      "rescued_payments_by_path": {
+        "retry": 89,
+        "failover": 4,
+        "redrive": 0
+      },
+      "pairing": {
+        "references": 300,
+        "improved": 93,
+        "improved_from": {
+          "failed": 93
+        },
+        "worsened": 0,
+        "worsened_references": [],
+        "unchanged": 207
+      },
+      "median_time_to_explanation_ms": 1033.549,
+      "manual_baseline_ratio": 6966.3,
+      "explanations": {
+        "baseline": {
+          "available": true,
+          "sources": {
+            "model": {
+              "count": 23,
+              "p50_ms": 953.689,
+              "p95_ms": 1984.545
+            },
+            "rules": {
+              "count": 103,
+              "p50_ms": 4760.923,
+              "p95_ms": 7298.448
+            }
+          },
+          "all": {
+            "count": 126,
+            "p50_ms": 3957.459,
+            "p95_ms": 7272.559
+          },
+          "fallback_rate": 0.8175,
+          "fallback_reasons": {
+            "cause_mismatch": 103
+          },
+          "fallback_cause_mismatch": 103,
+          "fallback_model_failures": 0,
+          "backlog_max": 14,
+          "backlog_end": 0
+        },
+        "relay": {
+          "available": true,
+          "sources": {
+            "model": {
+              "count": 30,
+              "p50_ms": 1033.549,
+              "p95_ms": 1945.053
+            },
+            "rules": {
+              "count": 3,
+              "p50_ms": 984.641,
+              "p95_ms": 1729.899
+            }
+          },
+          "all": {
+            "count": 33,
+            "p50_ms": 1033.549,
+            "p95_ms": 1945.053
+          },
+          "fallback_rate": 0.0909,
+          "fallback_reasons": {
+            "cause_mismatch": 3
+          },
+          "fallback_cause_mismatch": 3,
+          "fallback_model_failures": 0,
+          "backlog_max": 3,
+          "backlog_end": 0
+        }
+      },
+      "recovery_lag_seconds": 105.9,
+      "recovery_lags": {
+        "baseline": [
+          {
+            "processor": "a",
+            "lag_seconds": 118.0,
+            "waited_seconds": 126.0
+          }
+        ],
+        "relay": [
+          {
+            "processor": "a",
+            "lag_seconds": 105.9,
+            "waited_seconds": 125.9
+          }
+        ]
+      }
+    },
+    {
+      "run": 2,
+      "baseline_success_rate_pct": 58.0,
+      "relay_success_rate_pct": 89.0,
+      "uplift_pp": 31.0,
+      "revenue_recovered": {
+        "EUR": 3032328,
+        "GBP": 1618218,
+        "JPY": 902033,
+        "USD": 6810094
+      },
+      "revenue_by_rescue_path": {
+        "retry": {
+          "EUR": 2832363,
+          "GBP": 1446165,
+          "JPY": 902033,
+          "USD": 6713460
+        },
+        "failover": {
+          "EUR": 199965,
+          "GBP": 172053,
+          "USD": 96634
+        },
+        "redrive": {}
+      },
+      "rescued_payments_by_path": {
+        "retry": 89,
+        "failover": 4,
+        "redrive": 0
+      },
+      "pairing": {
+        "references": 300,
+        "improved": 93,
+        "improved_from": {
+          "failed": 93
+        },
+        "worsened": 0,
+        "worsened_references": [],
+        "unchanged": 207
+      },
+      "median_time_to_explanation_ms": 1093.942,
+      "manual_baseline_ratio": 6581.7,
+      "explanations": {
+        "baseline": {
+          "available": true,
+          "sources": {
+            "model": {
+              "count": 23,
+              "p50_ms": 1045.196,
+              "p95_ms": 2014.179
+            },
+            "rules": {
+              "count": 103,
+              "p50_ms": 3966.566,
+              "p95_ms": 6485.598
+            }
+          },
+          "all": {
+            "count": 126,
+            "p50_ms": 2891.466,
+            "p95_ms": 6475.213
+          },
+          "fallback_rate": 0.8175,
+          "fallback_reasons": {
+            "cause_mismatch": 103
+          },
+          "fallback_cause_mismatch": 103,
+          "fallback_model_failures": 0,
+          "backlog_max": 13,
+          "backlog_end": 0
+        },
+        "relay": {
+          "available": true,
+          "sources": {
+            "model": {
+              "count": 30,
+              "p50_ms": 1024.308,
+              "p95_ms": 1874.647
+            },
+            "rules": {
+              "count": 3,
+              "p50_ms": 1428.394,
+              "p95_ms": 1532.05
+            }
+          },
+          "all": {
+            "count": 33,
+            "p50_ms": 1093.942,
+            "p95_ms": 1874.647
+          },
+          "fallback_rate": 0.0909,
+          "fallback_reasons": {
+            "cause_mismatch": 3
+          },
+          "fallback_cause_mismatch": 3,
+          "fallback_model_failures": 0,
+          "backlog_max": 3,
+          "backlog_end": 0
+        }
+      },
+      "recovery_lag_seconds": 100.8,
+      "recovery_lags": {
+        "baseline": [
+          {
+            "processor": "a",
+            "lag_seconds": 117.0,
+            "waited_seconds": 126.0
+          }
+        ],
+        "relay": [
+          {
+            "processor": "a",
+            "lag_seconds": 100.8,
+            "waited_seconds": 125.8
+          }
+        ]
+      }
+    },
+    {
+      "run": 3,
+      "baseline_success_rate_pct": 58.0,
+      "relay_success_rate_pct": 89.0,
+      "uplift_pp": 31.0,
+      "revenue_recovered": {
+        "EUR": 3032328,
+        "GBP": 1618218,
+        "JPY": 902033,
+        "USD": 6810094
+      },
+      "revenue_by_rescue_path": {
+        "retry": {
+          "EUR": 2832363,
+          "GBP": 1446165,
+          "JPY": 902033,
+          "USD": 6713460
+        },
+        "failover": {
+          "EUR": 199965,
+          "GBP": 172053,
+          "USD": 96634
+        },
+        "redrive": {}
+      },
+      "rescued_payments_by_path": {
+        "retry": 89,
+        "failover": 4,
+        "redrive": 0
+      },
+      "pairing": {
+        "references": 300,
+        "improved": 93,
+        "improved_from": {
+          "failed": 93
+        },
+        "worsened": 0,
+        "worsened_references": [],
+        "unchanged": 207
+      },
+      "median_time_to_explanation_ms": 1052.952,
+      "manual_baseline_ratio": 6837.9,
+      "explanations": {
+        "baseline": {
+          "available": true,
+          "sources": {
+            "model": {
+              "count": 23,
+              "p50_ms": 934.555,
+              "p95_ms": 1721.377
+            },
+            "rules": {
+              "count": 103,
+              "p50_ms": 3405.846,
+              "p95_ms": 5693.073
+            }
+          },
+          "all": {
+            "count": 126,
+            "p50_ms": 2976.154,
+            "p95_ms": 5675.876
+          },
+          "fallback_rate": 0.8175,
+          "fallback_reasons": {
+            "cause_mismatch": 103
+          },
+          "fallback_cause_mismatch": 103,
+          "fallback_model_failures": 0,
+          "backlog_max": 11,
+          "backlog_end": 0
+        },
+        "relay": {
+          "available": true,
+          "sources": {
+            "model": {
+              "count": 30,
+              "p50_ms": 994.019,
+              "p95_ms": 1771.787
+            },
+            "rules": {
+              "count": 3,
+              "p50_ms": 1342.693,
+              "p95_ms": 1617.264
+            }
+          },
+          "all": {
+            "count": 33,
+            "p50_ms": 1052.952,
+            "p95_ms": 1771.787
+          },
+          "fallback_rate": 0.0909,
+          "fallback_reasons": {
+            "cause_mismatch": 3
+          },
+          "fallback_cause_mismatch": 3,
+          "fallback_model_failures": 0,
+          "backlog_max": 3,
+          "backlog_end": 0
+        }
+      },
+      "recovery_lag_seconds": 105.9,
+      "recovery_lags": {
+        "baseline": [
+          {
+            "processor": "a",
+            "lag_seconds": 118.0,
+            "waited_seconds": 126.0
+          }
+        ],
+        "relay": [
+          {
+            "processor": "a",
+            "lag_seconds": 105.9,
+            "waited_seconds": 125.9
+          }
+        ]
+      }
+    }
+  ],
+  "reproducibility": {
+    "runs": 3,
+    "success_rate_pp": {
+      "values": [
+        89.0,
+        89.0,
+        89.0
+      ],
+      "spread": 0.0,
+      "tolerance": 1.0,
+      "pass": true
+    },
+    "baseline_success_rate_pp": {
+      "values": [
+        58.0,
+        58.0,
+        58.0
+      ],
+      "spread": 0.0,
+      "tolerance": 1.0,
+      "pass": true
+    },
+    "revenue_recovered": {
+      "EUR": {
+        "values": [
+          3032328,
+          3032328,
+          3032328
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "GBP": {
+        "values": [
+          1618218,
+          1618218,
+          1618218
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "JPY": {
+        "values": [
+          902033,
+          902033,
+          902033
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      },
+      "USD": {
+        "values": [
+          6810094,
+          6810094,
+          6810094
+        ],
+        "spread": 0.0,
+        "tolerance": 1.0,
+        "pass": true
+      }
+    },
+    "differing_references": {
+      "baseline": [],
+      "relay": []
+    },
+    "pass": true
+  }
+}

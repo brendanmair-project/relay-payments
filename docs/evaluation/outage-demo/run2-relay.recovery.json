@@ -1,0 +1,7 @@
+[
+  {
+    "processor": "a",
+    "lag_seconds": 100.8,
+    "waited_seconds": 125.8
+  }
+]

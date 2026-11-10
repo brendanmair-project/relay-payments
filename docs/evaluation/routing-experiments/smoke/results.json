@@ -1,0 +1,212 @@
+{
+  "synthetic": true,
+  "objective": "Success rate: payments that ended captured over final payments (declines count as not captured), compared per seed on identical payment references. Revenue captured per currency is reported alongside; p95 creation-to-final latency is a guardrail (ADR-0016).",
+  "baseline": "static",
+  "candidate": null,
+  "win_rule": {
+    "mean_uplift_pp": 1,
+    "better_share_percent": 80,
+    "latency_margin_percent": 10
+  },
+  "runs": [
+    {
+      "scenario": "normal-day",
+      "seed": 11,
+      "strategy": "static",
+      "payments": 200,
+      "final": 200,
+      "captured": 170,
+      "success_rate_pct": 85.0,
+      "revenue_captured": {
+        "EUR": 4785915,
+        "GBP": 2956639,
+        "JPY": 891900,
+        "USD": 12442471
+      },
+      "p95_latency_ms": 12437.109,
+      "duration_seconds": 117.26500000001397,
+      "digest": "d0e7d05b9f6b125a0e26b55c817ded0e1b4c6c227ccdb00c423dce90dc303116"
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 200,
+      "final": 200,
+      "captured": 172,
+      "success_rate_pct": 86.0,
+      "revenue_captured": {
+        "EUR": 4785915,
+        "GBP": 2956639,
+        "JPY": 891900,
+        "USD": 12644870
+      },
+      "p95_latency_ms": 15720.731,
+      "duration_seconds": 122.56300000002375,
+      "digest": "e3c5b5744543d2b9987fd84fbc662e758cb13bdf029783ecdb4d0a34357c5af7"
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "strategy": "static",
+      "payments": 300,
+      "final": 300,
+      "captured": 168,
+      "success_rate_pct": 56.0,
+      "revenue_captured": {
+        "EUR": 6111568,
+        "GBP": 3456992,
+        "JPY": 793164,
+        "USD": 11310563
+      },
+      "p95_latency_ms": 13992.647,
+      "duration_seconds": 313.375,
+      "digest": "c4f37904500643c0b8e22f1325ffb53a3ac643df6d864486714161c2890d9506"
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 262,
+      "success_rate_pct": 87.33,
+      "revenue_captured": {
+        "EUR": 9295344,
+        "GBP": 5067954,
+        "JPY": 1164608,
+        "USD": 17358510
+      },
+      "p95_latency_ms": 25420.146,
+      "duration_seconds": 350.31199999997625,
+      "digest": "d834df8fd7f1b22603df8b9063b9abebb406e47cb62f81ac0b9e6cc73e895134"
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "strategy": "static",
+      "payments": 300,
+      "final": 300,
+      "captured": 203,
+      "success_rate_pct": 67.67,
+      "revenue_captured": {
+        "EUR": 7542101,
+        "GBP": 4001181,
+        "JPY": 1221184,
+        "USD": 12996639
+      },
+      "p95_latency_ms": 219258.004,
+      "duration_seconds": 439.25,
+      "digest": "6b0d6233d9df68393da7e2f089b014314f5f9c26b105108941b1cd4d54061f63"
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 264,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 8663746,
+        "GBP": 5415170,
+        "JPY": 1525408,
+        "USD": 17396560
+      },
+      "p95_latency_ms": 132589.39,
+      "duration_seconds": 305.25,
+      "digest": "a9f9811cd441003aa24eb4c455cbe091c415c687f54c111a5e40fe85b32fff5f"
+    }
+  ],
+  "pairs": [
+    {
+      "scenario": "normal-day",
+      "seed": 11,
+      "baseline": "static",
+      "candidate": "rules",
+      "baseline_success_rate_pct": 85.0,
+      "candidate_success_rate_pct": 86.0,
+      "diff_pp": 1.0,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 0,
+        "GBP": 0,
+        "JPY": 0,
+        "USD": 202399
+      },
+      "baseline_p95_latency_ms": 12437.109,
+      "candidate_p95_latency_ms": 15720.731
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "baseline": "static",
+      "candidate": "rules",
+      "baseline_success_rate_pct": 56.0,
+      "candidate_success_rate_pct": 87.33,
+      "diff_pp": 31.3333,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 3183776,
+        "GBP": 1610962,
+        "JPY": 371444,
+        "USD": 6047947
+      },
+      "baseline_p95_latency_ms": 13992.647,
+      "candidate_p95_latency_ms": 25420.146
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "baseline": "static",
+      "candidate": "rules",
+      "baseline_success_rate_pct": 67.67,
+      "candidate_success_rate_pct": 88.0,
+      "diff_pp": 20.3333,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 1121645,
+        "GBP": 1413989,
+        "JPY": 304224,
+        "USD": 4399921
+      },
+      "baseline_p95_latency_ms": 219258.004,
+      "candidate_p95_latency_ms": 132589.39
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "normal-day",
+      "candidate": "rules",
+      "pairs": 1,
+      "mean_diff_pp": 1.0,
+      "share_better": 1.0,
+      "latency_ratio": 1.264,
+      "latency_ok": false
+    },
+    {
+      "scenario": "processor-a-outage",
+      "candidate": "rules",
+      "pairs": 1,
+      "mean_diff_pp": 31.3333,
+      "share_better": 1.0,
+      "latency_ratio": 1.8167,
+      "latency_ok": false
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "candidate": "rules",
+      "pairs": 1,
+      "mean_diff_pp": 20.3333,
+      "share_better": 1.0,
+      "latency_ratio": 0.6047,
+      "latency_ok": true
+    }
+  ],
+  "verdict": null,
+  "total_duration_seconds": 1648.0,
+  "command": "python scripts/routing_experiment.py --strategies static,rules --scenarios normal-day,processor-a-outage,processor-a-degraded --seeds 11 --out docs/evaluation/routing-experiments/smoke --progress <workspace>/.local/rel43-scratch/progress.txt",
+  "health_window_seconds": 120,
+  "rate_per_second": 2.0,
+  "wall_clock_seconds": 1794.5
+}

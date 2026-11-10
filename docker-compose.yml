@@ -1,0 +1,425 @@
+# Relay local stack (REL-12). Containers, ports and flows: docs/architecture/containers.md.
+# Every published port is bound to 127.0.0.1. Start with: docker compose up -d --wait
+# Images are pinned to exact versions and long-running services restart on their own (ADR-0012).
+
+x-api-image: &api-image
+  image: relay/api:local
+  build: ./api
+  # No shared environment here: each service lists only the variables its code reads (ADR-0012). Compose fills them from
+  # the shell or the repository's env file (interpolation) and falls back to the defaults of the committed example, so a
+  # clean clone needs only RELAY_API_KEY.
+
+# Container stdout logs are capped (REL-52): 3 files of 10 MB per service.
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    logging: *default-logging
+    image: postgres:16.15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: relay
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-relay}
+      POSTGRES_DB: relay
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./scripts/postgres-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U relay -d relay"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # Valkey: the Redis-compatible, BSD-licensed stream server (ADR-0012). The service keeps the name redis, so
+  # REDIS_URL and the client stay the same; valkeydata is a new volume because Valkey cannot read Redis 7.4 data.
+  redis:
+    logging: *default-logging
+    image: valkey/valkey:9.1.2
+    restart: unless-stopped
+    command: ["valkey-server", "--appendonly", "yes"]
+    volumes:
+      - valkeydata:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    logging: *default-logging
+    <<: *api-image
+    command: ["alembic", "upgrade", "head"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    logging: *default-logging
+    <<: *api-image
+    restart: unless-stopped
+    environment:
+      RELAY_API_KEY: ${RELAY_API_KEY:?set RELAY_API_KEY in .env (cp .env.example .env)}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      REQUEST_LOG_PATH: ${REQUEST_LOG_PATH:-/var/log/relay/api-requests.jsonl}
+      IDEMPOTENCY_TTL_HOURS: ${IDEMPOTENCY_TTL_HOURS:-24}
+      IDEMPOTENCY_LEASE_SECONDS: ${IDEMPOTENCY_LEASE_SECONDS:-30}
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-granite3.3:2b}
+      EXPLAIN_TIMEOUT_SECONDS: ${EXPLAIN_TIMEOUT_SECONDS:-20}
+      ROUTING_STRATEGY: ${ROUTING_STRATEGY:-rules}
+      HEALTH_WINDOW_SECONDS: ${HEALTH_WINDOW_SECONDS:-60}
+      HEALTH_MIN_ATTEMPTS: ${HEALTH_MIN_ATTEMPTS:-5}
+      HEALTH_ERROR_THRESHOLD: ${HEALTH_ERROR_THRESHOLD:-0.5}
+      BASELINE_RESULTS_PATH: ${BASELINE_RESULTS_PATH:-/app/baseline/results.json}
+      WEBHOOK_ALLOWED_HOSTS: ${WEBHOOK_ALLOWED_HOSTS:-webhook-sink,localhost,127.0.0.1}
+      METRICS_PORT: ${METRICS_PORT:-9100}
+    ports:
+      - "127.0.0.1:${API_HOST_PORT:-8000}:8000"
+    volumes:
+      - api-logs:/var/log/relay
+      # REL-37: the REL-30 baseline for the analytics (read-only; absent file means the baseline is unavailable).
+      - ./docs/evaluation/outage-demo/results.json:/app/baseline/results.json:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,urllib.request as u; u.urlopen(u.Request('http://127.0.0.1:8000/health', headers={'X-API-Key': os.environ['RELAY_API_KEY']}), timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Outbox publisher (REL-20): one instance only. It moves payment_events rows to the stream and touches a heartbeat
+  # file on every pass; the health check fails when the file is missing or older than 30 seconds.
+  publisher:
+    logging: *default-logging
+    <<: *api-image
+    command: ["python", "-m", "app.publisher"]
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      STREAM_MAXLEN: ${STREAM_MAXLEN:-10000}
+      METRICS_PORT: ${METRICS_PORT:-9100}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,time,sys; sys.exit(0 if time.time() - os.path.getmtime('/tmp/publisher-heartbeat') < 30 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Payment worker (REL-21): consumes trigger events, routes, authorizes and captures through the simulator. It touches
+  # a heartbeat file on every pass (at most a second apart); the health check fails when it is missing or stale.
+  worker:
+    logging: *default-logging
+    <<: *api-image
+    command: ["python", "-m", "app.worker"]
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      SIMULATOR_URL: ${SIMULATOR_URL:-http://simulator:8100}
+      PROCESSOR_TIMEOUT_SECONDS: ${PROCESSOR_TIMEOUT_SECONDS:-5}
+      RECLAIM_IDLE_MS: ${RECLAIM_IDLE_MS:-30000}
+      SWEEP_TIMEOUT_GRACE_SECONDS: ${SWEEP_TIMEOUT_GRACE_SECONDS:-5}
+      REDRIVE_AFTER_SECONDS: ${REDRIVE_AFTER_SECONDS:-30}
+      SWEEP_INTERVAL_SECONDS: ${SWEEP_INTERVAL_SECONDS:-5}
+      KEY_CLEANUP_INTERVAL_SECONDS: ${KEY_CLEANUP_INTERVAL_SECONDS:-60}
+      ROUTING_STRATEGY: ${ROUTING_STRATEGY:-rules}
+      HEALTH_WINDOW_SECONDS: ${HEALTH_WINDOW_SECONDS:-60}
+      HEALTH_MIN_ATTEMPTS: ${HEALTH_MIN_ATTEMPTS:-5}
+      HEALTH_ERROR_THRESHOLD: ${HEALTH_ERROR_THRESHOLD:-0.5}
+      METRICS_PORT: ${METRICS_PORT:-9100}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      simulator:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import time,sys,os; sys.exit(0 if time.time() - os.path.getmtime('/tmp/worker-heartbeat') < 30 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Explainer (REL-25, ADR-0012): consumer group `explanations` on payment.final. It writes the automatic explanation
+  # of a declined or failed payment, asking Ollama on the host (OLLAMA_URL) and falling back to the rules, so a slow
+  # or absent model never delays the payment worker. It keeps running with no Ollama reachable. Heartbeat as for the worker.
+  explainer:
+    logging: *default-logging
+    <<: *api-image
+    command: ["python", "-m", "app.explainer"]
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      RELAY_API_KEY: ${RELAY_API_KEY:?set RELAY_API_KEY in .env (cp .env.example .env)}
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-granite3.3:2b}
+      EXPLAIN_TIMEOUT_SECONDS: ${EXPLAIN_TIMEOUT_SECONDS:-20}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import time,sys,os; sys.exit(0 if time.time() - os.path.getmtime('/tmp/explainer-heartbeat') < 30 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Incident detector (REL-34, ADR-0014): consumer group `incidents` on payment.routed. It opens an incident when the
+  # router starts avoiding a processor and records recovery; only an analyst resolves. It never runs in the payment
+  # worker, reads only the database and the stream, and publishes no port. Heartbeat as for the worker.
+  incidents:
+    logging: *default-logging
+    <<: *api-image
+    command: ["python", "-m", "app.incidents"]
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      METRICS_PORT: ${METRICS_PORT:-9100}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import time,sys,os; sys.exit(0 if time.time() - os.path.getmtime('/tmp/incidents-heartbeat') < 30 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Webhook delivery (REL-39, ADR-0015): consumer group `webhooks` on the lifecycle events. It stores one delivery per
+  # matching subscription in the database, posts each one signed with the subscription secret, and retries with
+  # exponential backoff (at most 8 attempts); subscriber failures never touch the payment worker. It reads only the
+  # database and the stream (no API key), publishes no port, and checks the target allowlist again at send time.
+  # Heartbeat as for the worker.
+  webhooks:
+    logging: *default-logging
+    <<: *api-image
+    command: ["python", "-m", "app.webhooks"]
+    restart: unless-stopped
+    stop_grace_period: 15s
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
+      WEBHOOK_ALLOWED_HOSTS: ${WEBHOOK_ALLOWED_HOSTS:-webhook-sink,localhost,127.0.0.1}
+      WEBHOOK_BACKOFF_BASE_SECONDS: ${WEBHOOK_BACKOFF_BASE_SECONDS:-2}
+      WEBHOOK_BACKOFF_FACTOR: ${WEBHOOK_BACKOFF_FACTOR:-2}
+      WEBHOOK_BACKOFF_MAX_SECONDS: ${WEBHOOK_BACKOFF_MAX_SECONDS:-60}
+      WEBHOOK_LOG_RETENTION_DAYS: ${WEBHOOK_LOG_RETENTION_DAYS:-7}
+      WEBHOOK_TIMEOUT_SECONDS: ${WEBHOOK_TIMEOUT_SECONDS:-5}
+      METRICS_PORT: ${METRICS_PORT:-9100}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import time,sys,os; sys.exit(0 if time.time() - os.path.getmtime('/tmp/webhooks-heartbeat') < 30 else 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Demo webhook sink (REL-39), profile `webhooks-demo`: `docker compose --profile webhooks-demo up -d --wait`. It records
+  # what Relay posts, verifies the signature when given the secret (POST /config, or WEBHOOK_SINK_SECRET) and can fail
+  # the next N requests so retries can be shown. In memory only, no key, no database; reachable from the host on
+  # 127.0.0.1 for inspection. Subscribe to http://webhook-sink:8200/hook.
+  webhook-sink:
+    logging: *default-logging
+    <<: *api-image
+    profiles: ["webhooks-demo"]
+    command: ["uvicorn", "app.webhooks.sink:app", "--host", "0.0.0.0", "--port", "8200"]
+    restart: unless-stopped
+    environment:
+      WEBHOOK_SINK_SECRET: ${WEBHOOK_SINK_SECRET:-}
+    ports:
+      - "127.0.0.1:${WEBHOOK_SINK_HOST_PORT:-8200}:8200"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request as u; u.urlopen('http://127.0.0.1:8200/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # Guardrail metrics report (REL-51), tools profile: `docker compose run --rm reporting [--since ... --until ...
+  # --reference-prefix <scenario>-<seed>- --json-out /reports/report.json]`. Reads api-logs read-only; the JSON goes
+  # to ./reports on the host (mounted at /reports, which must be writable by the container user).
+  reporting:
+    logging: *default-logging
+    <<: *api-image
+    profiles: ["tools"]
+    command: ["python", "-m", "app.reporting"]
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://relay:relay@postgres:5432/relay}
+      REQUEST_LOG_PATH: ${REQUEST_LOG_PATH:-/var/log/relay/api-requests.jsonl}
+      PROCESSOR_TIMEOUT_SECONDS: ${PROCESSOR_TIMEOUT_SECONDS:-5}
+      SWEEP_TIMEOUT_GRACE_SECONDS: ${SWEEP_TIMEOUT_GRACE_SECONDS:-5}
+      REDRIVE_AFTER_SECONDS: ${REDRIVE_AFTER_SECONDS:-30}
+    volumes:
+      - api-logs:/var/log/relay:ro
+      - ./reports:/reports
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  # SDK tests (REL-41), profile `sdk`: `docker compose --profile sdk run --rm sdk [pytest]`. Built from sdk/python on the
+  # same pinned Python image as the api; the default command runs ruff, the format check, mypy and pytest. It publishes
+  # no port, holds no secret and needs no other service (the tests use a mock transport). To run the examples against
+  # the stack: `docker compose --profile sdk run --rm -e RELAY_API_URL=http://api:8000 -e RELAY_API_KEY sdk python examples/create_and_list.py`.
+  sdk:
+    logging: *default-logging
+    image: relay/sdk:local
+    build: ./sdk/python
+    profiles: ["sdk"]
+    restart: "no"
+
+  simulator:
+    logging: *default-logging
+    image: relay/simulator:local
+    build: ./simulator
+    restart: unless-stopped
+    environment:
+      RELAY_API_KEY: ${RELAY_API_KEY:?set RELAY_API_KEY in .env (cp .env.example .env)}
+      SIM_SEED: ${SIM_SEED:-42}
+      PROCESSOR_TIMEOUT_SECONDS: ${PROCESSOR_TIMEOUT_SECONDS:-5}
+    ports:
+      - "127.0.0.1:${SIM_CONTROL_HOST_PORT:-8101}:8101"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os,urllib.request as u; u.urlopen(u.Request('http://127.0.0.1:8101/health', headers={'X-API-Key': os.environ['RELAY_API_KEY']}), timeout=3); u.urlopen('http://127.0.0.1:8100/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  frontend:
+    logging: *default-logging
+    image: relay/frontend:local
+    build: ./frontend
+    restart: unless-stopped
+    environment:
+      RELAY_API_KEY: ${RELAY_API_KEY:?set RELAY_API_KEY in .env (cp .env.example .env)}
+      API_URL: ${API_URL:-http://api:8000}
+      SIMULATOR_CONTROL_URL: ${SIMULATOR_CONTROL_URL:-http://simulator:8101}
+    ports:
+      - "127.0.0.1:${FRONTEND_HOST_PORT:-3000}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # Optional local model (ADR-0010, ADR-0012), profile `llm`: `docker compose --profile llm up -d --wait`. It publishes no
+  # host port, so it never clashes with an Ollama installed on the host. With it, set OLLAMA_URL=http://ollama:11434 for
+  # the api and the explainer and pull the model once: `docker compose --profile llm exec ollama ollama pull granite3.3:2b`.
+  # Default runs never start it; they reach the host install through host.docker.internal.
+  ollama:
+    logging: *default-logging
+    image: ollama/ollama:0.40.11
+    profiles: ["llm"]
+    restart: unless-stopped
+    volumes:
+      - ollama-models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  # Metrics and dashboards (REL-33, ADR-0006, ADR-0014), profile `observability`:
+  # `docker compose --profile observability up -d --wait`. Default runs and CI never start them. The api, worker and
+  # publisher serve metrics on METRICS_PORT (9100) inside the compose network only (no `ports:` for it), so Prometheus
+  # scrapes without a key. Provisioning is read-only from ./observability. Grafana shows dashboards to anonymous
+  # viewers and has no admin user at all (no password in any file); the dashboards are files, not edited in the UI.
+  prometheus:
+    logging: *default-logging
+    image: prom/prometheus:v3.15.1
+    profiles: ["observability"]
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=7d"
+    ports:
+      - "127.0.0.1:${PROMETHEUS_HOST_PORT:-9090}:9090"
+    volumes:
+      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:9090/-/healthy"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  grafana:
+    logging: *default-logging
+    image: grafana/grafana:13.3.0
+    profiles: ["observability"]
+    restart: unless-stopped
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: true
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_AUTH_DISABLE_LOGIN_FORM: true
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: true
+      GF_ANALYTICS_REPORTING_ENABLED: false
+      GF_ANALYTICS_CHECK_FOR_UPDATES: false
+    ports:
+      - "127.0.0.1:${GRAFANA_HOST_PORT:-3001}:3000"
+    volumes:
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/api/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  pgdata:
+  valkeydata:
+  api-logs:
+  ollama-models:
+  prometheus-data:
+  grafana-data:

@@ -1,0 +1,1105 @@
+{
+  "synthetic": true,
+  "objective": "Success rate: payments that ended captured over final payments (declines count as not captured), compared per seed on identical payment references. Revenue captured per currency is reported alongside; p95 creation-to-final latency is a guardrail (ADR-0016).",
+  "baseline": "rules",
+  "candidate": "adaptive",
+  "win_rule": {
+    "mean_uplift_pp": 1,
+    "better_share_percent": 80,
+    "latency_margin_percent": 10
+  },
+  "runs": [
+    {
+      "scenario": "normal-day",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 200,
+      "final": 200,
+      "captured": 172,
+      "success_rate_pct": 86.0,
+      "revenue_captured": {
+        "EUR": 4785915,
+        "GBP": 2956639,
+        "JPY": 891900,
+        "USD": 12644870
+      },
+      "p95_latency_ms": 15819.544,
+      "duration_seconds": 123.0,
+      "digest": "e3c5b5744543d2b9987fd84fbc662e758cb13bdf029783ecdb4d0a34357c5af7",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 11,
+      "strategy": "adaptive",
+      "payments": 200,
+      "final": 200,
+      "captured": 183,
+      "success_rate_pct": 91.5,
+      "revenue_captured": {
+        "EUR": 5357155,
+        "GBP": 3584271,
+        "JPY": 1269748,
+        "USD": 12687912
+      },
+      "p95_latency_ms": 33308.425,
+      "duration_seconds": 148.0,
+      "digest": "6e41e56da355ce6242d594364de0816a1dace121002bf710ea9dd1f7820c6e02",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 12,
+      "strategy": "rules",
+      "payments": 200,
+      "final": 200,
+      "captured": 176,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 4675299,
+        "GBP": 3208954,
+        "JPY": 865631,
+        "USD": 12269335
+      },
+      "p95_latency_ms": 47379.407,
+      "duration_seconds": 158.0,
+      "digest": "47308eed504c970c733330030c13aa722ea60e45f73c1a9e6b1cd4cd81dd8395",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 12,
+      "strategy": "adaptive",
+      "payments": 200,
+      "final": 200,
+      "captured": 183,
+      "success_rate_pct": 91.5,
+      "revenue_captured": {
+        "EUR": 4792895,
+        "GBP": 2946698,
+        "JPY": 754137,
+        "USD": 13015930
+      },
+      "p95_latency_ms": 38173.738,
+      "duration_seconds": 148.0,
+      "digest": "63c08564e7a8c86fad8f92b534f70268fe00d24e3d2603fa15dc1ea88c44de1f",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 13,
+      "strategy": "rules",
+      "payments": 200,
+      "final": 200,
+      "captured": 170,
+      "success_rate_pct": 85.0,
+      "revenue_captured": {
+        "EUR": 5709139,
+        "GBP": 2578938,
+        "JPY": 2117064,
+        "USD": 11133057
+      },
+      "p95_latency_ms": 7955.584,
+      "duration_seconds": 113.0,
+      "digest": "00919b4e6cc7064448e8901a363a84704e8991a5235f2ca5df53a2fae1dae092",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 13,
+      "strategy": "adaptive",
+      "payments": 200,
+      "final": 200,
+      "captured": 179,
+      "success_rate_pct": 89.5,
+      "revenue_captured": {
+        "EUR": 6317455,
+        "GBP": 2758143,
+        "JPY": 2227555,
+        "USD": 11441169
+      },
+      "p95_latency_ms": 40462.175,
+      "duration_seconds": 153.0,
+      "digest": "d3590f0a3ca38143e86ff2c5c63017b13d808b004ae24350b1a30bb4078e9de0",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 14,
+      "strategy": "rules",
+      "payments": 200,
+      "final": 200,
+      "captured": 172,
+      "success_rate_pct": 86.0,
+      "revenue_captured": {
+        "EUR": 6310456,
+        "GBP": 3900542,
+        "JPY": 1248208,
+        "USD": 10019284
+      },
+      "p95_latency_ms": 18490.131,
+      "duration_seconds": 123.0,
+      "digest": "d7b0b07d3e90381e8565d520b58e81bdbf0850b94980a319392bcd3e8c2e9dd9",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 14,
+      "strategy": "adaptive",
+      "payments": 200,
+      "final": 200,
+      "captured": 176,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 6619529,
+        "GBP": 3424740,
+        "JPY": 1248208,
+        "USD": 10548466
+      },
+      "p95_latency_ms": 44309.227,
+      "duration_seconds": 153.0,
+      "digest": "9e8ec6201b82fc8c9d2c82de0021a0be00a6bfe929c2e5274d51e3ae83dcab06",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 15,
+      "strategy": "rules",
+      "payments": 200,
+      "final": 200,
+      "captured": 173,
+      "success_rate_pct": 86.5,
+      "revenue_captured": {
+        "EUR": 5259742,
+        "GBP": 2761870,
+        "JPY": 2442780,
+        "USD": 12292912
+      },
+      "p95_latency_ms": 9434.023,
+      "duration_seconds": 113.0,
+      "digest": "bc819ea418967d021438478d3dfd10c0307c7fecd1c4162d8e9c4e937eb5a58c",
+      "exploration": null
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 15,
+      "strategy": "adaptive",
+      "payments": 200,
+      "final": 200,
+      "captured": 178,
+      "success_rate_pct": 89.0,
+      "revenue_captured": {
+        "EUR": 5111121,
+        "GBP": 2849157,
+        "JPY": 2272415,
+        "USD": 12903243
+      },
+      "p95_latency_ms": 24923.221,
+      "duration_seconds": 133.0,
+      "digest": "2b80c15df75e0d8f0fc7b15871a7f2abe38fbb852d460ef5195d6365d7ec0d74",
+      "exploration": null
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 262,
+      "success_rate_pct": 87.33,
+      "revenue_captured": {
+        "EUR": 9295344,
+        "GBP": 5067954,
+        "JPY": 1164608,
+        "USD": 17358510
+      },
+      "p95_latency_ms": 36166.795,
+      "duration_seconds": 352.0,
+      "digest": "b0016fc98ddd44f89873461d57e149f96f1015d362c47677888dfbda192d43df",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 82,
+        "share": 0.82
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 258,
+      "success_rate_pct": 86.0,
+      "revenue_captured": {
+        "EUR": 8355842,
+        "GBP": 5241041,
+        "JPY": 1456127,
+        "USD": 17193923
+      },
+      "p95_latency_ms": 32102.558,
+      "duration_seconds": 378.0,
+      "digest": "2187a10ca0aeeb2c7992896da02e3e477186fdda8db55a8b0e44be5fbddf093c",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 8,
+        "share": 0.08
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 12,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 265,
+      "success_rate_pct": 88.33,
+      "revenue_captured": {
+        "EUR": 7903410,
+        "GBP": 4673750,
+        "JPY": 1656742,
+        "USD": 18076526
+      },
+      "p95_latency_ms": 36580.391,
+      "duration_seconds": 344.0,
+      "digest": "89b7079d549d00643f168aba32ced2c8c2caea5e9a0fb52706c325accf06e940",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 89,
+        "share": 0.89
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 12,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 264,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 8400709,
+        "GBP": 4334341,
+        "JPY": 1708402,
+        "USD": 17166769
+      },
+      "p95_latency_ms": 29332.519,
+      "duration_seconds": 383.0,
+      "digest": "dd9969d92cf7fa3439bb4d0cb0e8289023be63e695a1568ef43a782f9e1f5a86",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 2,
+        "share": 0.02
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 13,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 270,
+      "success_rate_pct": 90.0,
+      "revenue_captured": {
+        "EUR": 8600320,
+        "GBP": 5019547,
+        "JPY": 2809958,
+        "USD": 17625290
+      },
+      "p95_latency_ms": 18710.01,
+      "duration_seconds": 313.0,
+      "digest": "df905af00e658009a0f65dbf9850f90c7321c89b650e8c3d99ee9b0214b76784",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 97,
+        "share": 0.97
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 13,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 267,
+      "success_rate_pct": 89.0,
+      "revenue_captured": {
+        "EUR": 8758740,
+        "GBP": 4794940,
+        "JPY": 2844707,
+        "USD": 17816761
+      },
+      "p95_latency_ms": 12817.628,
+      "duration_seconds": 311.0,
+      "digest": "915030e2ba45fef1cafc3e05b97cdf588c7c71d470d4dba94dfb711afd960b57",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 15,
+        "share": 0.15
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 14,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 269,
+      "success_rate_pct": 89.67,
+      "revenue_captured": {
+        "EUR": 9527848,
+        "GBP": 5551169,
+        "JPY": 2072769,
+        "USD": 17228124
+      },
+      "p95_latency_ms": 31691.784,
+      "duration_seconds": 343.0,
+      "digest": "1b1cf3e305d22d9901c2fcdf1a28cf616176574512edef46d8c7b9d379c1a051",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 93,
+        "share": 0.93
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 14,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 272,
+      "success_rate_pct": 90.67,
+      "revenue_captured": {
+        "EUR": 9611919,
+        "GBP": 5567458,
+        "JPY": 1989215,
+        "USD": 17800234
+      },
+      "p95_latency_ms": 29664.597,
+      "duration_seconds": 350.0,
+      "digest": "6c4644de52689882c82a83ab5b17647e33640e034601cddbdb85bf857288b817",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 9,
+        "share": 0.09
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 15,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 273,
+      "success_rate_pct": 91.0,
+      "revenue_captured": {
+        "EUR": 8114247,
+        "GBP": 4726817,
+        "JPY": 2717770,
+        "USD": 20133623
+      },
+      "p95_latency_ms": 24561.04,
+      "duration_seconds": 345.0,
+      "digest": "9e0fbff993b5b1fe2455edba407a1487704a6d7388281e50aaae3cfccba574fd",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 85,
+        "share": 0.85
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 15,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 265,
+      "success_rate_pct": 88.33,
+      "revenue_captured": {
+        "EUR": 8069079,
+        "GBP": 4558151,
+        "JPY": 2467003,
+        "USD": 19513850
+      },
+      "p95_latency_ms": 15457.998,
+      "duration_seconds": 330.0,
+      "digest": "00c8b2526e4fae234b1da20372db68b540e64d139550f7dc403ec444d6aa5db2",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 2,
+        "share": 0.02
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 264,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 8663746,
+        "GBP": 5415170,
+        "JPY": 1525408,
+        "USD": 17396560
+      },
+      "p95_latency_ms": 132569.654,
+      "duration_seconds": 305.0,
+      "digest": "a9f9811cd441003aa24eb4c455cbe091c415c687f54c111a5e40fe85b32fff5f",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 39,
+        "share": 0.39
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 264,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 8877383,
+        "GBP": 4992032,
+        "JPY": 1868994,
+        "USD": 17431972
+      },
+      "p95_latency_ms": 52642.008,
+      "duration_seconds": 256.0,
+      "digest": "1cd1ad9a1f12b3d57cd1029603a1983de49d6cdd8b8bea698e3ed95a85a4959b",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 6,
+        "share": 0.06
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 12,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 259,
+      "success_rate_pct": 86.33,
+      "revenue_captured": {
+        "EUR": 8581545,
+        "GBP": 4208911,
+        "JPY": 1459511,
+        "USD": 16902587
+      },
+      "p95_latency_ms": 126845.892,
+      "duration_seconds": 318.0,
+      "digest": "4ec099774d626ade9ac45f2a1c317d4fbb7aaa25499ed7e7c06f4dba97abc3fa",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 38,
+        "share": 0.38
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 12,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 276,
+      "success_rate_pct": 92.0,
+      "revenue_captured": {
+        "EUR": 9032202,
+        "GBP": 4776450,
+        "JPY": 1586534,
+        "USD": 17682501
+      },
+      "p95_latency_ms": 39385.118,
+      "duration_seconds": 245.0,
+      "digest": "2282de627d6663661c92b15af98306adf7c8d4987ea8a401cbfd97d2ca9dc9b4",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 6,
+        "share": 0.06
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 13,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 263,
+      "success_rate_pct": 87.67,
+      "revenue_captured": {
+        "EUR": 8316788,
+        "GBP": 5234793,
+        "JPY": 2853273,
+        "USD": 17329381
+      },
+      "p95_latency_ms": 119536.778,
+      "duration_seconds": 309.0,
+      "digest": "e05416e1fc3d4c6aa1f1a6afbc3f7810d64601224a242dac9ba3a4654c6054f2",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 40,
+        "share": 0.4
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 13,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 269,
+      "success_rate_pct": 89.67,
+      "revenue_captured": {
+        "EUR": 8238188,
+        "GBP": 5439065,
+        "JPY": 2901094,
+        "USD": 17603895
+      },
+      "p95_latency_ms": 53248.082,
+      "duration_seconds": 262.0,
+      "digest": "066109bef15f8a6091839ad29a4224875631ca4a8a2b4a7ba574e8c18b513898",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 15,
+        "share": 0.15
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 14,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 251,
+      "success_rate_pct": 83.67,
+      "revenue_captured": {
+        "EUR": 8531556,
+        "GBP": 4437003,
+        "JPY": 1639062,
+        "USD": 16323720
+      },
+      "p95_latency_ms": 116670.982,
+      "duration_seconds": 319.0,
+      "digest": "f633398fe7bddc249d87d86ffbab94ddbed2eee67b334440f01962a87d78bba2",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 49,
+        "share": 0.49
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 14,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 256,
+      "success_rate_pct": 85.33,
+      "revenue_captured": {
+        "EUR": 8121565,
+        "GBP": 4731855,
+        "JPY": 1639062,
+        "USD": 17119844
+      },
+      "p95_latency_ms": 38651.514,
+      "duration_seconds": 257.0,
+      "digest": "225fd63fea41b4af01afd61272532c4ab598cb2d9cf985e41838c2a7f6c45ccc",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 5,
+        "share": 0.05
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 15,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 252,
+      "success_rate_pct": 84.0,
+      "revenue_captured": {
+        "EUR": 7614661,
+        "GBP": 4282635,
+        "JPY": 2447922,
+        "USD": 18455150
+      },
+      "p95_latency_ms": 111318.417,
+      "duration_seconds": 293.0,
+      "digest": "350cdba6854b015b78a4215d847f5f4d2c274a198aed9e26f816472d52104642",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 33,
+        "share": 0.33
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 15,
+      "strategy": "adaptive",
+      "payments": 300,
+      "final": 300,
+      "captured": 265,
+      "success_rate_pct": 88.33,
+      "revenue_captured": {
+        "EUR": 7976971,
+        "GBP": 4777507,
+        "JPY": 2732717,
+        "USD": 18646631
+      },
+      "p95_latency_ms": 22101.603,
+      "duration_seconds": 222.0,
+      "digest": "54692c1fab7762b9f08c2f5a1435b9e4457661b2cc4394959299227816dd1f6f",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 2,
+        "share": 0.02
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "scenario": "normal-day",
+      "seed": 11,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 86.0,
+      "candidate_success_rate_pct": 91.5,
+      "diff_pp": 5.5,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 571240,
+        "GBP": 627632,
+        "JPY": 377848,
+        "USD": 43042
+      },
+      "baseline_p95_latency_ms": 15819.544,
+      "candidate_p95_latency_ms": 33308.425
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 12,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 88.0,
+      "candidate_success_rate_pct": 91.5,
+      "diff_pp": 3.5,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 117596,
+        "GBP": -262256,
+        "JPY": -111494,
+        "USD": 746595
+      },
+      "baseline_p95_latency_ms": 47379.407,
+      "candidate_p95_latency_ms": 38173.738
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 13,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 85.0,
+      "candidate_success_rate_pct": 89.5,
+      "diff_pp": 4.5,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 608316,
+        "GBP": 179205,
+        "JPY": 110491,
+        "USD": 308112
+      },
+      "baseline_p95_latency_ms": 7955.584,
+      "candidate_p95_latency_ms": 40462.175
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 14,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 86.0,
+      "candidate_success_rate_pct": 88.0,
+      "diff_pp": 2.0,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 309073,
+        "GBP": -475802,
+        "JPY": 0,
+        "USD": 529182
+      },
+      "baseline_p95_latency_ms": 18490.131,
+      "candidate_p95_latency_ms": 44309.227
+    },
+    {
+      "scenario": "normal-day",
+      "seed": 15,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 86.5,
+      "candidate_success_rate_pct": 89.0,
+      "diff_pp": 2.5,
+      "better": true,
+      "revenue_diff": {
+        "EUR": -148621,
+        "GBP": 87287,
+        "JPY": -170365,
+        "USD": 610331
+      },
+      "baseline_p95_latency_ms": 9434.023,
+      "candidate_p95_latency_ms": 24923.221
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 87.33,
+      "candidate_success_rate_pct": 86.0,
+      "diff_pp": -1.3333,
+      "better": false,
+      "revenue_diff": {
+        "EUR": -939502,
+        "GBP": 173087,
+        "JPY": 291519,
+        "USD": -164587
+      },
+      "baseline_p95_latency_ms": 36166.795,
+      "candidate_p95_latency_ms": 32102.558
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 12,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 88.33,
+      "candidate_success_rate_pct": 88.0,
+      "diff_pp": -0.3333,
+      "better": false,
+      "revenue_diff": {
+        "EUR": 497299,
+        "GBP": -339409,
+        "JPY": 51660,
+        "USD": -909757
+      },
+      "baseline_p95_latency_ms": 36580.391,
+      "candidate_p95_latency_ms": 29332.519
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 13,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 90.0,
+      "candidate_success_rate_pct": 89.0,
+      "diff_pp": -1.0,
+      "better": false,
+      "revenue_diff": {
+        "EUR": 158420,
+        "GBP": -224607,
+        "JPY": 34749,
+        "USD": 191471
+      },
+      "baseline_p95_latency_ms": 18710.01,
+      "candidate_p95_latency_ms": 12817.628
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 14,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 89.67,
+      "candidate_success_rate_pct": 90.67,
+      "diff_pp": 1.0,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 84071,
+        "GBP": 16289,
+        "JPY": -83554,
+        "USD": 572110
+      },
+      "baseline_p95_latency_ms": 31691.784,
+      "candidate_p95_latency_ms": 29664.597
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 15,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 91.0,
+      "candidate_success_rate_pct": 88.33,
+      "diff_pp": -2.6667,
+      "better": false,
+      "revenue_diff": {
+        "EUR": -45168,
+        "GBP": -168666,
+        "JPY": -250767,
+        "USD": -619773
+      },
+      "baseline_p95_latency_ms": 24561.04,
+      "candidate_p95_latency_ms": 15457.998
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 88.0,
+      "candidate_success_rate_pct": 88.0,
+      "diff_pp": 0.0,
+      "better": false,
+      "revenue_diff": {
+        "EUR": 213637,
+        "GBP": -423138,
+        "JPY": 343586,
+        "USD": 35412
+      },
+      "baseline_p95_latency_ms": 132569.654,
+      "candidate_p95_latency_ms": 52642.008
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 12,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 86.33,
+      "candidate_success_rate_pct": 92.0,
+      "diff_pp": 5.6667,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 450657,
+        "GBP": 567539,
+        "JPY": 127023,
+        "USD": 779914
+      },
+      "baseline_p95_latency_ms": 126845.892,
+      "candidate_p95_latency_ms": 39385.118
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 13,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 87.67,
+      "candidate_success_rate_pct": 89.67,
+      "diff_pp": 2.0,
+      "better": true,
+      "revenue_diff": {
+        "EUR": -78600,
+        "GBP": 204272,
+        "JPY": 47821,
+        "USD": 274514
+      },
+      "baseline_p95_latency_ms": 119536.778,
+      "candidate_p95_latency_ms": 53248.082
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 14,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 83.67,
+      "candidate_success_rate_pct": 85.33,
+      "diff_pp": 1.6667,
+      "better": true,
+      "revenue_diff": {
+        "EUR": -409991,
+        "GBP": 294852,
+        "JPY": 0,
+        "USD": 796124
+      },
+      "baseline_p95_latency_ms": 116670.982,
+      "candidate_p95_latency_ms": 38651.514
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 15,
+      "baseline": "rules",
+      "candidate": "adaptive",
+      "baseline_success_rate_pct": 84.0,
+      "candidate_success_rate_pct": 88.33,
+      "diff_pp": 4.3333,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 362310,
+        "GBP": 494872,
+        "JPY": 284795,
+        "USD": 191481
+      },
+      "baseline_p95_latency_ms": 111318.417,
+      "candidate_p95_latency_ms": 22101.603
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "normal-day",
+      "candidate": "adaptive",
+      "pairs": 5,
+      "mean_diff_pp": 3.6,
+      "share_better": 1.0,
+      "latency_ratio": 1.8286,
+      "latency_ok": false
+    },
+    {
+      "scenario": "processor-a-outage",
+      "candidate": "adaptive",
+      "pairs": 5,
+      "mean_diff_pp": -0.8667,
+      "share_better": 0.2,
+      "latency_ratio": 0.8082,
+      "latency_ok": true
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "candidate": "adaptive",
+      "pairs": 5,
+      "mean_diff_pp": 2.7333,
+      "share_better": 0.8,
+      "latency_ratio": 0.3395,
+      "latency_ok": true
+    }
+  ],
+  "verdict": {
+    "baseline": "rules",
+    "candidate": "adaptive",
+    "pairs": 15,
+    "mean_uplift_pp": 1.8222,
+    "mean_uplift_required_pp": 1,
+    "mean_uplift_ok": true,
+    "better_share": 0.6666666666666666,
+    "better_share_required": 0.8,
+    "better_ok": false,
+    "worst_latency_ratio": 1.8286,
+    "latency_margin_percent": 10,
+    "latency_ok": false,
+    "win": false
+  },
+  "exploration": [
+    {
+      "scenario": "processor-a-outage",
+      "strategy": "rules",
+      "processor": "A",
+      "payments": 500,
+      "to_degraded": 446,
+      "share": 0.892,
+      "per_seed": {
+        "11": 0.82,
+        "12": 0.89,
+        "13": 0.97,
+        "14": 0.93,
+        "15": 0.85
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "strategy": "adaptive",
+      "processor": "A",
+      "payments": 500,
+      "to_degraded": 36,
+      "share": 0.072,
+      "per_seed": {
+        "11": 0.08,
+        "12": 0.02,
+        "13": 0.15,
+        "14": 0.09,
+        "15": 0.02
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "strategy": "rules",
+      "processor": "A",
+      "payments": 500,
+      "to_degraded": 199,
+      "share": 0.398,
+      "per_seed": {
+        "11": 0.39,
+        "12": 0.38,
+        "13": 0.4,
+        "14": 0.49,
+        "15": 0.33
+      }
+    },
+    {
+      "scenario": "processor-a-degraded",
+      "strategy": "adaptive",
+      "processor": "A",
+      "payments": 500,
+      "to_degraded": 34,
+      "share": 0.068,
+      "per_seed": {
+        "11": 0.06,
+        "12": 0.06,
+        "13": 0.15,
+        "14": 0.05,
+        "15": 0.02
+      }
+    }
+  ],
+  "total_duration_seconds": 7600.0,
+  "command": "python scripts/routing_experiment.py --strategies rules,adaptive --scenarios normal-day,processor-a-outage,processor-a-degraded --seeds 11,12,13,14,15 --baseline rules --candidate adaptive --out docs/evaluation/routing-experiments/rel44/ (runs 1 to 26; cut off in run 27 by the tool's time limit), then python scripts/routing_experiment.py --strategies rules,adaptive --scenarios processor-a-degraded --seeds 14,15 --baseline rules --candidate adaptive (runs 27 to 30); merged from the saved per-run files",
+  "health_window_seconds": 120,
+  "rate_per_second": 2.0
+}

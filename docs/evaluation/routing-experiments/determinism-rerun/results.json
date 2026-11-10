@@ -1,0 +1,46 @@
+{
+  "synthetic": true,
+  "objective": "Success rate: payments that ended captured over final payments (declines count as not captured), compared per seed on identical payment references. Revenue captured per currency is reported alongside; p95 creation-to-final latency is a guardrail (ADR-0016).",
+  "baseline": "rules",
+  "candidate": null,
+  "win_rule": {
+    "mean_uplift_pp": 1,
+    "better_share_percent": 80,
+    "latency_margin_percent": 10
+  },
+  "runs": [
+    {
+      "scenario": "processor-a-degraded",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 264,
+      "success_rate_pct": 88.0,
+      "revenue_captured": {
+        "EUR": 8663746,
+        "GBP": 5415170,
+        "JPY": 1525408,
+        "USD": 17396560
+      },
+      "p95_latency_ms": 132582.67,
+      "duration_seconds": 304.4529999999795,
+      "digest": "a9f9811cd441003aa24eb4c455cbe091c415c687f54c111a5e40fe85b32fff5f"
+    }
+  ],
+  "pairs": [],
+  "scenarios": [],
+  "verdict": null,
+  "total_duration_seconds": 304.5,
+  "command": "python scripts/routing_experiment.py --strategies rules --scenarios processor-a-degraded --seeds 11 --out docs/evaluation/routing-experiments/determinism-rerun --compare-with docs/evaluation/routing-experiments/smoke --progress <workspace>/.local/rel43-scratch/progress.txt",
+  "health_window_seconds": 120,
+  "rate_per_second": 2.0,
+  "wall_clock_seconds": 321.9,
+  "determinism": {
+    "compared_with": "docs/evaluation/routing-experiments/smoke",
+    "differing_references": {
+      "processor-a-degraded-11-rules": []
+    },
+    "identical": true
+  }
+}

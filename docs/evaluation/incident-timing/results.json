@@ -1,0 +1,74 @@
+{
+  "rate": 2.0,
+  "health_window_seconds": 120,
+  "runs": [
+    {
+      "seed": 11,
+      "incident_id": "59b08e22-ee42-47e7-8548-457e43a1318c",
+      "outage_on": "2026-11-03T14:57:21.420000+00:00",
+      "outage_off": "2026-11-03T14:58:43.232000+00:00",
+      "opened_at": "2026-11-03T14:58:14.094Z",
+      "recovered_at": "2026-11-03T15:00:51.682Z",
+      "triaged_at": "2026-11-03T15:01:38.807Z",
+      "resolved_at": "2026-11-03T15:01:38.819Z",
+      "mttd_seconds": 52.674,
+      "recovery_seconds": 128.45,
+      "mttr_seconds": 204.725,
+      "triage_to_resolve_seconds": 0.012
+    },
+    {
+      "seed": 12,
+      "incident_id": "122b7714-fd43-4761-adf5-ce35dd99b630",
+      "outage_on": "2026-11-03T15:02:56.160000+00:00",
+      "outage_off": "2026-11-03T15:04:20.697000+00:00",
+      "opened_at": "2026-11-03T15:03:51.951Z",
+      "recovered_at": "2026-11-03T15:06:28.991Z",
+      "triaged_at": "2026-11-03T15:07:16.385Z",
+      "resolved_at": "2026-11-03T15:07:16.400Z",
+      "mttd_seconds": 55.791,
+      "recovery_seconds": 128.294,
+      "mttr_seconds": 204.449,
+      "triage_to_resolve_seconds": 0.015
+    },
+    {
+      "seed": 13,
+      "incident_id": "5c8fad01-1975-4851-93e7-e8340fad9762",
+      "outage_on": "2026-11-03T15:08:26.207000+00:00",
+      "outage_off": "2026-11-03T15:09:39.274000+00:00",
+      "opened_at": "2026-11-03T15:09:28.994Z",
+      "recovered_at": "2026-11-03T15:11:51.792Z",
+      "triaged_at": "2026-11-03T15:12:35.026Z",
+      "resolved_at": "2026-11-03T15:12:35.057Z",
+      "mttd_seconds": 62.787,
+      "recovery_seconds": 132.518,
+      "mttr_seconds": 186.063,
+      "triage_to_resolve_seconds": 0.031
+    }
+  ],
+  "summary": {
+    "mttd_seconds": {
+      "mean": 57.084,
+      "min": 52.674,
+      "max": 62.787,
+      "stdev": 5.179
+    },
+    "recovery_seconds": {
+      "mean": 129.754,
+      "min": 128.294,
+      "max": 132.518,
+      "stdev": 2.395
+    },
+    "mttr_seconds": {
+      "mean": 198.412,
+      "min": 186.063,
+      "max": 204.725,
+      "stdev": 10.696
+    },
+    "triage_to_resolve_seconds": {
+      "mean": 0.019,
+      "min": 0.012,
+      "max": 0.031,
+      "stdev": 0.01
+    }
+  }
+}

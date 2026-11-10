@@ -1,0 +1,12 @@
+#!/bin/sh
+# Secret guard (Tracked). The guard lives in the parent workspace (the repository sits at
+# <workspace>/projects/professional/relay, so it is three levels up under maintenance/). A clone without the workspace
+# has no guard: the hook says so and lets the push through.
+root=$(git rev-parse --show-toplevel)
+guard="$root/../../../maintenance/test-shared-git.ps1"
+if [ ! -f "$guard" ]; then
+  echo "relay: workspace secret guard not present (no parent workspace); skipping check." >&2
+  exit 0
+fi
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$guard" -Repository "$root" -Mode Tracked
+exit $?

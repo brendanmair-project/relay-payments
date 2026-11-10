@@ -1,0 +1,5 @@
+# Unix line endings in every checkout, Windows included: Prettier, ruff and the Linux CI expect LF, and
+# core.autocrlf=true would otherwise write CRLF on Windows (REL-13, 2026-10-14).
+* text=auto eol=lf
+.githooks/* text eol=lf
+*.sh text eol=lf

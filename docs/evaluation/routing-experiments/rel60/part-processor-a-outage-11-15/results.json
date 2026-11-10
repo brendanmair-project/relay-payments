@@ -1,0 +1,428 @@
+{
+  "synthetic": true,
+  "objective": "Success rate: payments that ended captured over final payments (declines count as not captured), compared per seed on identical payment references. Revenue captured per currency is reported alongside; p95 creation-to-final latency is a guardrail (ADR-0016).",
+  "baseline": "rules",
+  "candidate": "hybrid",
+  "win_rule": {
+    "mean_uplift_pp": 1,
+    "better_share_percent": 80,
+    "latency_margin_percent": 10
+  },
+  "runs": [
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 262,
+      "success_rate_pct": 87.33,
+      "revenue_captured": {
+        "EUR": 9295344,
+        "GBP": 5067954,
+        "JPY": 1164608,
+        "USD": 17358510
+      },
+      "p95_latency_ms": 35263.865,
+      "duration_seconds": 350.0929999999935,
+      "digest": "ca40b484c6693af47cebd37bc0b6e761b2a40587291247298be849d99fe149de",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 81,
+        "share": 0.81
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "strategy": "hybrid",
+      "payments": 300,
+      "final": 300,
+      "captured": 262,
+      "success_rate_pct": 87.33,
+      "revenue_captured": {
+        "EUR": 9225433,
+        "GBP": 5241041,
+        "JPY": 1175564,
+        "USD": 17170161
+      },
+      "p95_latency_ms": 29026.362,
+      "duration_seconds": 354.3279999999795,
+      "digest": "e971a612a22c76bb69d7f64596d7b007f35c4bc3dac29a30611ce1aacf405e98",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 12,
+        "share": 0.12
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 12,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 265,
+      "success_rate_pct": 88.33,
+      "revenue_captured": {
+        "EUR": 7903410,
+        "GBP": 4673750,
+        "JPY": 1656742,
+        "USD": 18076526
+      },
+      "p95_latency_ms": 37585.818,
+      "duration_seconds": 346.56300000008196,
+      "digest": "89b7079d549d00643f168aba32ced2c8c2caea5e9a0fb52706c325accf06e940",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 89,
+        "share": 0.89
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 12,
+      "strategy": "hybrid",
+      "payments": 300,
+      "final": 300,
+      "captured": 266,
+      "success_rate_pct": 88.67,
+      "revenue_captured": {
+        "EUR": 7962284,
+        "GBP": 4792215,
+        "JPY": 1661175,
+        "USD": 17514207
+      },
+      "p95_latency_ms": 25265.779,
+      "duration_seconds": 334.9529999999795,
+      "digest": "2d7fd8c7757b5924e00f79848fdd103987db729507923c750ca72bae97f4f50f",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 13,
+        "share": 0.13
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 13,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 270,
+      "success_rate_pct": 90.0,
+      "revenue_captured": {
+        "EUR": 8600320,
+        "GBP": 5019547,
+        "JPY": 2809958,
+        "USD": 17625290
+      },
+      "p95_latency_ms": 18961.35,
+      "duration_seconds": 314.4070000000065,
+      "digest": "df905af00e658009a0f65dbf9850f90c7321c89b650e8c3d99ee9b0214b76784",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 97,
+        "share": 0.97
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 13,
+      "strategy": "hybrid",
+      "payments": 300,
+      "final": 300,
+      "captured": 268,
+      "success_rate_pct": 89.33,
+      "revenue_captured": {
+        "EUR": 8538787,
+        "GBP": 4953713,
+        "JPY": 2844707,
+        "USD": 17795584
+      },
+      "p95_latency_ms": 8957.83,
+      "duration_seconds": 306.4529999999795,
+      "digest": "31545abc5e6afb70ad651b2b6b40084948ec7c86f386f01879ddf60b56f80a2e",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 16,
+        "share": 0.16
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 14,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 269,
+      "success_rate_pct": 89.67,
+      "revenue_captured": {
+        "EUR": 9527848,
+        "GBP": 5551169,
+        "JPY": 2072769,
+        "USD": 17228124
+      },
+      "p95_latency_ms": 31585.817,
+      "duration_seconds": 342.6720000000205,
+      "digest": "1b1cf3e305d22d9901c2fcdf1a28cf616176574512edef46d8c7b9d379c1a051",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 93,
+        "share": 0.93
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 14,
+      "strategy": "hybrid",
+      "payments": 300,
+      "final": 300,
+      "captured": 274,
+      "success_rate_pct": 91.33,
+      "revenue_captured": {
+        "EUR": 9671685,
+        "GBP": 5740356,
+        "JPY": 2072769,
+        "USD": 17553310
+      },
+      "p95_latency_ms": 20138.409,
+      "duration_seconds": 331.21899999992456,
+      "digest": "271c0b119a361abd05fd5429d46433d6a13109f34259ef08a2e396d8f65b1f71",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 14,
+        "share": 0.14
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 15,
+      "strategy": "rules",
+      "payments": 300,
+      "final": 300,
+      "captured": 273,
+      "success_rate_pct": 91.0,
+      "revenue_captured": {
+        "EUR": 8114247,
+        "GBP": 4726817,
+        "JPY": 2717770,
+        "USD": 20133623
+      },
+      "p95_latency_ms": 24736.775,
+      "duration_seconds": 345.4220000000205,
+      "digest": "cc5e8954b869598aae63c219e99685ee8c6eced4be376e9ca638c00fd689e6b4",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 84,
+        "share": 0.84
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 15,
+      "strategy": "hybrid",
+      "payments": 300,
+      "final": 300,
+      "captured": 266,
+      "success_rate_pct": 88.67,
+      "revenue_captured": {
+        "EUR": 7978498,
+        "GBP": 4639530,
+        "JPY": 2243320,
+        "USD": 19881519
+      },
+      "p95_latency_ms": 13686.435,
+      "duration_seconds": 325.3429999999935,
+      "digest": "0ab202a27abc80b120dae282be36d6627d24a39544bcd4cfca1a8577ada4ff67",
+      "exploration": {
+        "processor": "A",
+        "start": 100,
+        "end": 200,
+        "payments": 100,
+        "to_degraded": 12,
+        "share": 0.12
+      }
+    }
+  ],
+  "pairs": [
+    {
+      "scenario": "processor-a-outage",
+      "seed": 11,
+      "baseline": "rules",
+      "candidate": "hybrid",
+      "baseline_success_rate_pct": 87.33,
+      "candidate_success_rate_pct": 87.33,
+      "diff_pp": 0.0,
+      "better": false,
+      "revenue_diff": {
+        "EUR": -69911,
+        "GBP": 173087,
+        "JPY": 10956,
+        "USD": -188349
+      },
+      "baseline_p95_latency_ms": 35263.865,
+      "candidate_p95_latency_ms": 29026.362
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 12,
+      "baseline": "rules",
+      "candidate": "hybrid",
+      "baseline_success_rate_pct": 88.33,
+      "candidate_success_rate_pct": 88.67,
+      "diff_pp": 0.3333,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 58874,
+        "GBP": 118465,
+        "JPY": 4433,
+        "USD": -562319
+      },
+      "baseline_p95_latency_ms": 37585.818,
+      "candidate_p95_latency_ms": 25265.779
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 13,
+      "baseline": "rules",
+      "candidate": "hybrid",
+      "baseline_success_rate_pct": 90.0,
+      "candidate_success_rate_pct": 89.33,
+      "diff_pp": -0.6667,
+      "better": false,
+      "revenue_diff": {
+        "EUR": -61533,
+        "GBP": -65834,
+        "JPY": 34749,
+        "USD": 170294
+      },
+      "baseline_p95_latency_ms": 18961.35,
+      "candidate_p95_latency_ms": 8957.83
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 14,
+      "baseline": "rules",
+      "candidate": "hybrid",
+      "baseline_success_rate_pct": 89.67,
+      "candidate_success_rate_pct": 91.33,
+      "diff_pp": 1.6667,
+      "better": true,
+      "revenue_diff": {
+        "EUR": 143837,
+        "GBP": 189187,
+        "JPY": 0,
+        "USD": 325186
+      },
+      "baseline_p95_latency_ms": 31585.817,
+      "candidate_p95_latency_ms": 20138.409
+    },
+    {
+      "scenario": "processor-a-outage",
+      "seed": 15,
+      "baseline": "rules",
+      "candidate": "hybrid",
+      "baseline_success_rate_pct": 91.0,
+      "candidate_success_rate_pct": 88.67,
+      "diff_pp": -2.3333,
+      "better": false,
+      "revenue_diff": {
+        "EUR": -135749,
+        "GBP": -87287,
+        "JPY": -474450,
+        "USD": -252104
+      },
+      "baseline_p95_latency_ms": 24736.775,
+      "candidate_p95_latency_ms": 13686.435
+    }
+  ],
+  "scenarios": [
+    {
+      "scenario": "processor-a-outage",
+      "candidate": "hybrid",
+      "pairs": 5,
+      "mean_diff_pp": -0.2,
+      "share_better": 0.4,
+      "latency_ratio": 0.6553,
+      "latency_ok": true
+    }
+  ],
+  "verdict": {
+    "baseline": "rules",
+    "candidate": "hybrid",
+    "pairs": 5,
+    "mean_uplift_pp": -0.2,
+    "mean_uplift_required_pp": 1,
+    "mean_uplift_ok": false,
+    "better_share": 0.4,
+    "better_share_required": 0.8,
+    "better_ok": false,
+    "worst_latency_ratio": 0.6553,
+    "latency_margin_percent": 10,
+    "latency_ok": true,
+    "win": false
+  },
+  "exploration": [
+    {
+      "scenario": "processor-a-outage",
+      "strategy": "rules",
+      "processor": "A",
+      "payments": 500,
+      "to_degraded": 444,
+      "share": 0.888,
+      "per_seed": {
+        "11": 0.81,
+        "12": 0.89,
+        "13": 0.97,
+        "14": 0.93,
+        "15": 0.84
+      }
+    },
+    {
+      "scenario": "processor-a-outage",
+      "strategy": "hybrid",
+      "processor": "A",
+      "payments": 500,
+      "to_degraded": 67,
+      "share": 0.134,
+      "per_seed": {
+        "11": 0.12,
+        "12": 0.13,
+        "13": 0.16,
+        "14": 0.14,
+        "15": 0.12
+      }
+    }
+  ],
+  "total_duration_seconds": 3351.5,
+  "command": "python scripts/routing_experiment.py --strategies rules,hybrid --scenarios processor-a-outage --seeds 11,12,13,14,15 --baseline rules --candidate hybrid --out docs/evaluation/routing-experiments/rel60/part-processor-a-outage-11-15 --progress <workspace>/.local/rel60-scratch/progress.txt",
+  "health_window_seconds": 120,
+  "rate_per_second": 2.0,
+  "wall_clock_seconds": 3600.7
+}

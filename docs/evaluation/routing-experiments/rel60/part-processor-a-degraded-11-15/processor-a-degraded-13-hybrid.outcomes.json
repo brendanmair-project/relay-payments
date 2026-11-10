@@ -1,0 +1,2718 @@
+{
+  "processor-a-degraded-13-000000": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 32189,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000001": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 130644,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000002": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 58670,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000003": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 211658,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000004": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 177366,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000005": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 67624,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000006": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 39553,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000007": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 112564,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000008": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 179124,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000009": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 19306,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000010": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 120787,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000011": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 176188,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000012": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 98885,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000013": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 116095,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000014": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 209071,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000015": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 29735,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000016": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 85648,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000017": {
+    "status": "declined",
+    "currency": "GBP",
+    "amount_minor": 28803,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000018": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 52969,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000019": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 39463,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000020": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 78957,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000021": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 211800,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000022": {
+    "status": "failed",
+    "currency": "EUR",
+    "amount_minor": 58813,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000023": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 135222,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000024": {
+    "status": "failed",
+    "currency": "USD",
+    "amount_minor": 123673,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000025": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 192979,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000026": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 141208,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000027": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 17413,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000028": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 52117,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000029": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 36525,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000030": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 146944,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000031": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 47261,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000032": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 78200,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000033": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 117124,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000034": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 63798,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000035": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 215301,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000036": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 139108,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000037": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 185126,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000038": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 219953,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000039": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 245576,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000040": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 245641,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000041": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 260108,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000042": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 210088,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000043": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 200479,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000044": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 125749,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000045": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 102665,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000046": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 229115,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000047": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 30168,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000048": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 88120,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000049": {
+    "status": "failed",
+    "currency": "EUR",
+    "amount_minor": 159242,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000050": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 6385,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000051": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 10446,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000052": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 92899,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000053": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 26683,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000054": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 228579,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000055": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 46367,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000056": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 42666,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000057": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 105344,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000058": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 242179,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000059": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 48731,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000060": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 89849,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000061": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 66069,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000062": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 69284,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000063": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 147196,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000064": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 66766,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000065": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 108486,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000066": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 128877,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000067": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 252785,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000068": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 239124,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000069": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 96995,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000070": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 193542,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000071": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 86151,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000072": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 224333,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000073": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 213159,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000074": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 205090,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000075": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 192501,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000076": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 140511,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000077": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 96437,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000078": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 248887,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000079": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 192873,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000080": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 201364,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000081": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 150466,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000082": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 10345,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000083": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 77638,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000084": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 74166,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000085": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 186662,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000086": {
+    "status": "failed",
+    "currency": "EUR",
+    "amount_minor": 100584,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000087": {
+    "status": "declined",
+    "currency": "GBP",
+    "amount_minor": 44818,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000088": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 9370,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000089": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 127016,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000090": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 21929,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000091": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 147102,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000092": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 42115,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000093": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 58992,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000094": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 24870,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000095": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 40087,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000096": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 184122,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000097": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 10948,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000098": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 242350,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000099": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 277150,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000100": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 192316,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000101": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 205262,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000102": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 31447,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000103": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 142255,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000104": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 54299,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000105": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 242398,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000106": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 137093,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000107": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 199035,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000108": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 118811,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000109": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 67816,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000110": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 10678,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000111": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 89557,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000112": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 236797,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000113": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 86270,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000114": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 25487,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000115": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 79885,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000116": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 156885,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000117": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 83335,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000118": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 218740,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000119": {
+    "status": "declined",
+    "currency": "JPY",
+    "amount_minor": 47821,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000120": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 195836,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000121": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 128549,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000122": {
+    "status": "failed",
+    "currency": "EUR",
+    "amount_minor": 106396,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000123": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 235624,
+    "processor": "B",
+    "routing": [
+      "A:initial",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000124": {
+    "status": "failed",
+    "currency": "GBP",
+    "amount_minor": 192804,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000125": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 102462,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000126": {
+    "status": "failed",
+    "currency": "USD",
+    "amount_minor": 207891,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000127": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 165148,
+    "processor": "B",
+    "routing": [
+      "A:adaptive",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000128": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 103123,
+    "processor": "A",
+    "routing": [
+      "A:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000129": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 162460,
+    "processor": "A",
+    "routing": [
+      "A:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000130": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 138107,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000131": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 92832,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000132": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 2558,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000133": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 27988,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000134": {
+    "status": "failed",
+    "currency": "USD",
+    "amount_minor": 64200,
+    "processor": "A",
+    "routing": [
+      "A:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000135": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 13478,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000136": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 136643,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000137": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 190706,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000138": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 38178,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000139": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 164023,
+    "processor": "B",
+    "routing": [
+      "A:adaptive",
+      "B:retry"
+    ]
+  },
+  "processor-a-degraded-13-000140": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 150519,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000141": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 42742,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000142": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 106673,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000143": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 227699,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000144": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 283663,
+    "processor": "A",
+    "routing": [
+      "B:adaptive",
+      "A:retry"
+    ]
+  },
+  "processor-a-degraded-13-000145": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 189083,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000146": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 98244,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000147": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 116157,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000148": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 203992,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000149": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 93192,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000150": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 229777,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000151": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 183353,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000152": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 82323,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000153": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 124856,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000154": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 126144,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000155": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 136530,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000156": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 30290,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000157": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 88220,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000158": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 61344,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000159": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 190923,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000160": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 78282,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000161": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 65792,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000162": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 285846,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000163": {
+    "status": "declined",
+    "currency": "GBP",
+    "amount_minor": 8040,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000164": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 66142,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000165": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 206406,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000166": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 207090,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000167": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 53466,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000168": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 96722,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000169": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 224820,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000170": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 126919,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000171": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 68247,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000172": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 34749,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000173": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 227984,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000174": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 159618,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000175": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 242274,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000176": {
+    "status": "failed",
+    "currency": "USD",
+    "amount_minor": 80419,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000177": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 75728,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000178": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 56458,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000179": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 128867,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000180": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 212931,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000181": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 59190,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000182": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 76561,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000183": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 225942,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000184": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 170184,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000185": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 189410,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000186": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 219066,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000187": {
+    "status": "declined",
+    "currency": "EUR",
+    "amount_minor": 237943,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000188": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 75403,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000189": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 132655,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000190": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 84586,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000191": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 202074,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000192": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 239905,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000193": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 215159,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000194": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 102981,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000195": {
+    "status": "failed",
+    "currency": "USD",
+    "amount_minor": 211324,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000196": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 172878,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000197": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 190278,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000198": {
+    "status": "declined",
+    "currency": "EUR",
+    "amount_minor": 221419,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000199": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 51573,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000200": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 161303,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000201": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 183330,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000202": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 185528,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000203": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 98052,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000204": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 90164,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000205": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 183340,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000206": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 118183,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000207": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 186793,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000208": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 88645,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000209": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 5980,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000210": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 96920,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000211": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 222228,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000212": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 32364,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000213": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 182206,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000214": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 190747,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000215": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 174538,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000216": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 141042,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000217": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 217444,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000218": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 236077,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000219": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 105640,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000220": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 196697,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000221": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 23023,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000222": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 158773,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000223": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 129349,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000224": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 26465,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000225": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 35368,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000226": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 169917,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000227": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 111608,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000228": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 123569,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000229": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 56361,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000230": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 90324,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000231": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 172426,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000232": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 220559,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000233": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 219217,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000234": {
+    "status": "failed",
+    "currency": "GBP",
+    "amount_minor": 66038,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000235": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 18576,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000236": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 128307,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000237": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 53962,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000238": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 104633,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000239": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 234637,
+    "processor": "A",
+    "routing": [
+      "B:failover",
+      "A:retry"
+    ]
+  },
+  "processor-a-degraded-13-000240": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 247765,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000241": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 97231,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000242": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 209619,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000243": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 243063,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000244": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 38961,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000245": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 3923,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000246": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 244370,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000247": {
+    "status": "declined",
+    "currency": "EUR",
+    "amount_minor": 104504,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000248": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 90515,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000249": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 146659,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000250": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 53106,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000251": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 128844,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000252": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 17290,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000253": {
+    "status": "declined",
+    "currency": "GBP",
+    "amount_minor": 125476,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000254": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 36014,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000255": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 135088,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000256": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 7656,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000257": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 143567,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000258": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 24439,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000259": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 177853,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000260": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 26360,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000261": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 167296,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000262": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 54343,
+    "processor": "B",
+    "routing": [
+      "B:failover"
+    ]
+  },
+  "processor-a-degraded-13-000263": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 119439,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000264": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 220765,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000265": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 7255,
+    "processor": "A",
+    "routing": [
+      "B:adaptive",
+      "A:retry"
+    ]
+  },
+  "processor-a-degraded-13-000266": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 174211,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000267": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 66985,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000268": {
+    "status": "failed",
+    "currency": "EUR",
+    "amount_minor": 16239,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000269": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 172981,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000270": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 74756,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000271": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 45164,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000272": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 27720,
+    "processor": "A",
+    "routing": [
+      "A:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000273": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 230667,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000274": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 51090,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000275": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 91802,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000276": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 132092,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000277": {
+    "status": "failed",
+    "currency": "USD",
+    "amount_minor": 169406,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000278": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 190455,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000279": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 172402,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000280": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 62090,
+    "processor": "B",
+    "routing": [
+      "B:adaptive"
+    ]
+  },
+  "processor-a-degraded-13-000281": {
+    "status": "declined",
+    "currency": "GBP",
+    "amount_minor": 77673,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000282": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 71553,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000283": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 246456,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000284": {
+    "status": "captured",
+    "currency": "JPY",
+    "amount_minor": 110687,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000285": {
+    "status": "declined",
+    "currency": "USD",
+    "amount_minor": 769,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000286": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 77728,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000287": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 23215,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000288": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 212566,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000289": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 123659,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000290": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 230152,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000291": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 217976,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000292": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 150850,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000293": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 161867,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000294": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 81724,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000295": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 106046,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000296": {
+    "status": "captured",
+    "currency": "EUR",
+    "amount_minor": 217340,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000297": {
+    "status": "captured",
+    "currency": "GBP",
+    "amount_minor": 4146,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000298": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 246679,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  },
+  "processor-a-degraded-13-000299": {
+    "status": "captured",
+    "currency": "USD",
+    "amount_minor": 123439,
+    "processor": "A",
+    "routing": [
+      "A:initial"
+    ]
+  }
+}

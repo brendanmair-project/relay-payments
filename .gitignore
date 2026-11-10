@@ -1,0 +1,55 @@
+# Relay .gitignore: build output, tool caches, test reports, secrets and personal files.
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.json
+htmlcov/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+coverage/
+
+# Playwright reports
+test-results/
+playwright-report/
+blob-report/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Docker
+*.pid
+
+# Logs
+*.log
+
+# Metric reports written by the `reporting` tools service (REL-51); results to keep go to docs/evaluation/
+reports/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Test-first marker for the verify hook (see AGENTS.md workflow)
+.claude/tdd-red
+
+# Personal Claude Code files
+CLAUDE.local.md

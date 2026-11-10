@@ -1,0 +1,7 @@
+{
+  "compared_with": "docs/evaluation/routing-experiments/smoke",
+  "differing_references": {
+    "processor-a-degraded-11-rules": []
+  },
+  "identical": true
+}
