@@ -46,7 +46,7 @@ Every task in plan order. A task is Ready when everything it depends on is Done.
 | [REL-55](REL-55.md) | Static security analysis with Semgrep in CI | Done | Claude | REL-13 |
 | [REL-56](REL-56.md) | Pin CI actions to commit SHAs | Done | Claude | REL-55 |
 | [REL-32](REL-32.md) | Phase 1 exit review and Phase 2 refinement | Done | Claude | REL-31, REL-47, REL-55, REL-56 |
-| [REL-46](REL-46.md) | Portfolio release: publish checklist, public repo, optional free-tier demo | Ready | You (the owner) | REL-32, REL-61 |
+| [REL-46](REL-46.md) | Portfolio release: publish checklist, public repo, optional free-tier demo | Done | You (the owner) | REL-32, REL-61 |
 
 ## Phase 2 - Operations depth
 
@@ -80,3 +80,14 @@ Every task in plan order. A task is Ready when everything it depends on is Done.
 | [REL-60](REL-60.md) | Second adaptive iteration: gated hybrid measured on fresh seeds | Done | Claude | REL-59 |
 | [REL-45](REL-45.md) | Phase 4 exit review and project retrospective | Done | Claude | REL-60 |
 | [REL-61](REL-61.md) | Release preparation: local paths removed, recorded walkthrough | Done | Claude | REL-45 |
+
+## Phase 5 - Showcase polish
+
+| Task | Title | Status | Owner | Depends on |
+|---|---|---|---|---|
+| [REL-62](REL-62.md) | Phase 5 decisions and three console design directions | Done | Claude | REL-46 |
+| [REL-63](REL-63.md) | AI made visible: how each explanation was produced | Done | Claude | REL-62 |
+| [REL-64](REL-64.md) | Money-saved metrics: revenue recovered and investigation time saved | Done | Claude | REL-62 |
+| [REL-65](REL-65.md) | Console redesign in the chosen direction with the money-saved headline | Done | Claude | REL-63, REL-64 |
+| [REL-66](REL-66.md) | One-click outage story mode | Done | Claude | REL-65 |
+| [REL-67](REL-67.md) | Phase 5 exit: review, refreshed public copy and rebuilt demo video | Done | Claude | REL-66 |

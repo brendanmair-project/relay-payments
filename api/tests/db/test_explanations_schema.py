@@ -18,6 +18,11 @@ COLUMNS = {
     "fallback_reason": ("text", "YES"),
     "final_event_at": (TZ, "NO"),
     "generated_at": (TZ, "NO"),
+    "attempted_model": ("text", "YES"),
+    "model_cause": ("text", "YES"),
+    "rules_cause": ("text", "YES"),
+    "generation_ms": ("integer", "YES"),
+    "inputs": ("jsonb", "YES"),
 }
 INSERT = (
     "INSERT INTO payment_explanations (payment_id, source, model, text, cited_event_seqs, trigger, final_event_at,"
@@ -106,3 +111,39 @@ def test_migration_downgrade_removes_only_the_explanations_table(engine: Engine)
     finally:
         command.upgrade(config, "head")
     assert "payment_explanations" in set(inspect(engine).get_table_names())
+
+
+def test_new_columns_are_checked_and_old_rows_read_as_unknown(conn: Connection, payment: None) -> None:
+    add(conn)
+    row = conn.execute(
+        text("SELECT attempted_model, model_cause, rules_cause, generation_ms, inputs FROM payment_explanations")
+    ).one()
+    assert tuple(row) == (None, None, None, None, None)
+    insert = "UPDATE payment_explanations SET generation_ms = :ms, attempted_model = :am, model = :m WHERE id = :id"
+    row_id = conn.execute(text("SELECT id FROM payment_explanations")).scalar_one()
+    assert rejected(conn, insert, {"ms": -1, "am": None, "m": None, "id": row_id})
+
+
+def test_migration_0008_keeps_old_rows_both_ways(engine: Engine) -> None:
+    config = alembic_config()
+    try:
+        command.downgrade(config, "0007")
+        assert "inputs" not in {c["name"] for c in inspect(engine).get_columns("payment_explanations")}
+        with engine.begin() as c:
+            c.execute(text("TRUNCATE payments, payment_events, payment_explanations RESTART IDENTITY CASCADE"))
+            insert_payment(c)
+            insert_event(c)
+            add(c, source="model", model="granite3.3:2b")
+        command.upgrade(config, "head")
+        with engine.connect() as c:
+            row = c.execute(
+                text("SELECT model, attempted_model, generation_ms, inputs FROM payment_explanations")
+            ).one()
+        assert tuple(row) == ("granite3.3:2b", None, None, None)
+        command.downgrade(config, "0007")
+        with engine.connect() as c:
+            assert c.execute(text("SELECT count(*) FROM payment_explanations")).scalar_one() == 1
+    finally:
+        command.upgrade(config, "head")
+        with engine.begin() as c:
+            c.execute(text("TRUNCATE payments, payment_events, payment_explanations RESTART IDENTITY CASCADE"))

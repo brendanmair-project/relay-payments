@@ -568,12 +568,40 @@
       "ExplanationResponse": {
         "description": "GET and POST /payments/{id}/explanation (api-contract.md \"Explanation\").",
         "properties": {
+          "attempted_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempted Model"
+          },
           "cited_event_seqs": {
             "items": {
               "type": "integer"
             },
             "title": "Cited Event Seqs",
             "type": "array"
+          },
+          "cross_check": {
+            "anyOf": [
+              {
+                "enum": [
+                  "agreed",
+                  "disagreed_rules_used",
+                  "model_unavailable",
+                  "rules_only"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cross Check"
           },
           "fallback_reason": {
             "anyOf": [
@@ -590,6 +618,29 @@
             "title": "Generated At",
             "type": "string"
           },
+          "generation_ms": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Generation Ms"
+          },
+          "inputs": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Inputs"
+          },
           "model": {
             "anyOf": [
               {
@@ -601,9 +652,31 @@
             ],
             "title": "Model"
           },
+          "model_cause": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model Cause"
+          },
           "payment_id": {
             "title": "Payment Id",
             "type": "string"
+          },
+          "rules_cause": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rules Cause"
           },
           "source": {
             "enum": [
@@ -635,7 +708,13 @@
           "cited_event_seqs",
           "trigger",
           "generated_at",
-          "fallback_reason"
+          "fallback_reason",
+          "attempted_model",
+          "model_cause",
+          "rules_cause",
+          "generation_ms",
+          "inputs",
+          "cross_check"
         ],
         "title": "ExplanationResponse",
         "type": "object"
@@ -2733,7 +2812,7 @@
     },
     "/payments/{payment_id}/explanation": {
       "get": {
-        "description": "Returns the latest stored explanation, labelled with its source (`model` or `rules`). A final payment without one gets one generated and stored with `trigger=on_request`. 404 for an unknown payment, 409 `payment_not_final` while it is still processing or retrying.",
+        "description": "Returns the latest stored explanation, labelled with its source (`model` or `rules`). A final payment without one gets one generated and stored with `trigger=on_request`. Also returns how it was produced: the model asked, the cause each side named, `generation_ms`, the `inputs` the model was given (never the description) and the `cross_check` verdict (null for rows stored before these were kept). 404 for an unknown payment, 409 `payment_not_final` while it is still processing or retrying.",
         "operationId": "get_explanation_payments__payment_id__explanation_get",
         "parameters": [
           {

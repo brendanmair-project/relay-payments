@@ -1,0 +1,2 @@
+# Approval screenshots stay local (Relay's repository is near its 25 MiB storage limit); attach them to the pull request.
+*.png

@@ -1,0 +1,33 @@
+{
+  "available": true,
+  "label": "synthetic data, static-routing baseline",
+  "synthetic": true,
+  "scenario": "processor-a-outage",
+  "seed": 7,
+  "run": 1,
+  "run_date": null,
+  "baseline_description": "static routing: ROUTING_STRATEGY=static, every payment to Processor A, no failover, no retry (ADR-0009)",
+  "success_rate_static_pct": 58.0,
+  "success_rate_relay_pct": 89.0,
+  "uplift_pp": 31.0,
+  "revenue_recovered": {
+    "EUR": 3032328,
+    "GBP": 1618218,
+    "JPY": 902033,
+    "USD": 6810094
+  },
+  "revenue_by_rescue_path": {
+    "retry": {
+      "EUR": 2832363,
+      "GBP": 1446165,
+      "JPY": 902033,
+      "USD": 6713460
+    },
+    "failover": {
+      "EUR": 199965,
+      "GBP": 172053,
+      "USD": 96634
+    },
+    "redrive": {}
+  }
+}

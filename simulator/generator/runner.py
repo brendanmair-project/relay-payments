@@ -50,10 +50,16 @@ def wait_until_final(
     timeout: float,
     sleep: Callable[[float], None],
     clock: Callable[[], float],
+    should_stop: Callable[[], bool] | None = None,
 ) -> None:
-    """Poll the public API until every id in `pending` is final; raises DrainTimeout after `timeout` seconds."""
+    """Poll the public API until every id in `pending` is final; raises DrainTimeout after `timeout` seconds.
+
+    Returns early, with ids still pending, when `should_stop()` turns true.
+    """
     deadline = clock() + timeout
     while True:
+        if should_stop is not None and should_stop():
+            return
         pending.difference_update([pid for pid in sorted(pending) if client.is_final(pid)])
         if not pending:
             return
@@ -81,13 +87,18 @@ def _avoided(health: dict, processor: str) -> bool:
 
 
 def wait_for_health_window(
-    client: RelayClient, processor: str, sleep: Callable[[float], None], clock: Callable[[], float]
+    client: RelayClient,
+    processor: str,
+    sleep: Callable[[float], None],
+    clock: Callable[[], float],
+    should_stop: Callable[[], bool] | None = None,
 ) -> dict:
     """After an outage ends, wait `window_seconds + 5` s from the switch, polling the health once a second.
 
     The router's health window still holds the outage failures, so payments sent right away would be routed by
     timing. Returns the processor, the lag in seconds until its state is no longer `avoided` (None when it never
-    changed) and the seconds waited. `window_seconds` comes from GET /processors/health.
+    changed) and the seconds waited. `window_seconds` comes from GET /processors/health. Returns early when
+    `should_stop()` turns true.
     """
     switched = clock()
     window = client.processor_health().get("window_seconds", DEFAULT_HEALTH_WINDOW_SECONDS)
@@ -97,7 +108,7 @@ def wait_for_health_window(
         elapsed = clock() - switched
         if lag is None and not _avoided(client.processor_health(), processor):
             lag = round(elapsed, 1)
-        if elapsed >= total:
+        if elapsed >= total or (should_stop is not None and should_stop()):
             return {"processor": processor, "lag_seconds": lag, "waited_seconds": round(elapsed, 1)}
         sleep(1.0)
 
@@ -115,6 +126,8 @@ def run_scenario(
     drain: bool = True,
     drain_timeout: float = DEFAULT_DRAIN_TIMEOUT_SECONDS,
     wall_clock: Callable[[], float] = time.time,
+    should_stop: Callable[[], bool] | None = None,
+    on_progress: Callable[[RunResult], None] | None = None,
 ) -> RunResult:
     if rate <= 0:
         raise ValueError("rate must be positive")
@@ -132,12 +145,16 @@ def run_scenario(
     index = 0
     try:
         while (count is None or index < count) and (duration is None or index / rate < duration):
+            if should_stop is not None and should_stop():
+                break
             wait = start + index / rate - clock()
             if wait > 0:
                 sleep(wait)
             if drain and index in steps:
                 # A switch must not race the worker: every earlier payment is final before the outage changes.
-                wait_until_final(client, unfinished, result.sent, drain_timeout, sleep, clock)
+                wait_until_final(client, unfinished, result.sent, drain_timeout, sleep, clock, should_stop)
+                if should_stop is not None and should_stop():
+                    break
                 start = clock() - index / rate
             for step in steps.get(index, []):
                 if isinstance(step, ProfileStep):
@@ -158,14 +175,20 @@ def run_scenario(
                         "at": datetime.fromtimestamp(wall_clock(), UTC).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
                     }
                 )
+                if on_progress is not None:
+                    on_progress(result)
                 if drain and not step.outage:
                     # Recovery starts from a clean health window; the pacing resumes from here, with no burst.
-                    result.recovery_lags.append(wait_for_health_window(client, step.processor, sleep, clock))
+                    result.recovery_lags.append(
+                        wait_for_health_window(client, step.processor, sleep, clock, should_stop)
+                    )
                     start = clock() - index / rate
                 if step.outage:
                     outages_on.add(step.processor)
                 else:
                     outages_on.discard(step.processor)
+            if should_stop is not None and should_stop():
+                break
             payment = build_payment(scenario.name, seed, index, mix)
             status, payment_id = client.create_payment_with_id(payment.idempotency_key, payment.body)
             if payment_id:
@@ -173,6 +196,8 @@ def run_scenario(
             result.sent += 1
             result.statuses[status] += 1
             index += 1
+            if on_progress is not None:
+                on_progress(result)
             if status == 0:
                 result.unreachable = True
                 break

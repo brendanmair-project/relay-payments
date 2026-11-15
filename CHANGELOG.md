@@ -8,8 +8,21 @@ Every change that lands in this project, newest first. One entry per day under a
 
 ## Entries
 
+### 2026-11-15
+
+- REL-67: Phase 5 exit review (all four criteria met), accessibility fixes from the exit check, walkthrough screenshots retaken and README updated for Phase 5. (REL-67, 0401164)
+
+### 2026-11-14
+
+- REL-66: one-click outage story mode: keyed simulator story run, same-origin console route and step captions driven by the run state. (REL-66, 8451325)
+- REL-65: console redesign (value band with money saved per currency, payments rescued and estimated investigation time saved; AI section; processor health, open incident and payments console). (REL-65, 550c7f0)
+- REL-64: money-saved metrics in /analytics (payments rescued and revenue recovered per currency by rescue path; investigation time saved, estimated against the 2-hour manual baseline). (REL-64, 5c79b76)
+
 ### 2026-11-10
 
+- REL-63: explanations record what the model saw, its answer, generation time and the rules cross-check; the payment page shows them (REL-63, bb9d193)
+- REL-62: Phase 5 decisions (ADR-0018: AI made visible, money saved, redesign, story mode; local model; bolder but trustworthy UI) and three console prototypes on real data; the owner chose a mix of value story, AI section and dense console. (REL-62, 28f3763)
+- REL-46: public release as https://github.com/brendanmair-project/relay-payments (one commit with the GitHub noreply author, gitleaks clean, no machine paths; recorded walkthrough instead of a hosted demo; branch protection ruleset on main; first public CI run green). This private repository keeps its full history (REL-46, 2140c46 in relay-payments).
 - REL-61: release preparation: no machine paths in tracked files (with a test), hooks that skip without the workspace, and a recorded walkthrough of the outage demo in the README. (REL-61, fea8249)
 
 ### 2026-11-09

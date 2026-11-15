@@ -8,6 +8,7 @@ The model must answer with JSON naming the cause, the text and the seqs it cites
 
 import json
 from collections.abc import Sequence
+from typing import Any
 
 from app.domain.money import CURRENCY_DIGITS
 from app.explain.rules import PATTERNS, ExplainEvent
@@ -48,6 +49,37 @@ def format_amount(amount_minor: int, currency: str) -> str:
         return f"{amount_minor} {currency}"
     major, minor = divmod(amount_minor, 10**digits)
     return f"{major}.{minor:0{digits}d} {currency}"
+
+
+def prompt_inputs(events: Sequence[ExplainEvent], *, amount_minor: int, currency: str) -> dict[str, Any]:
+    """The structured facts `build_prompt` is built from, for storage (REL-63): the same per-event fields and the
+    formatted amount, plus the payment's final status and distinct reason codes. Never the description."""
+    timeline = sorted(events, key=lambda e: e.seq)
+    final = next((e for e in reversed(timeline) if e.type == "payment.final"), None)
+    outcome = final.data.get("outcome") if final else None
+    last_status = next((e.to_status for e in reversed(timeline) if e.to_status), None)
+    status = outcome if isinstance(outcome, str) else last_status
+    rows = []
+    for e in timeline:
+        result, out = e.data.get("result"), e.data.get("outcome")
+        rows.append(
+            {
+                "seq": e.seq,
+                "type": e.type,
+                "time": e.occurred_at,
+                "attempt": e.attempt_no,
+                "processor": e.processor,
+                "reason": e.reason,
+                "result": result if isinstance(result, str) else None,
+                "outcome": out if isinstance(out, str) else None,
+            }
+        )
+    return {
+        "status": status,
+        "reason_codes": sorted({e.reason for e in timeline if e.reason}),
+        "amount": format_amount(amount_minor, currency),
+        "events": rows,
+    }
 
 
 def build_prompt(events: Sequence[ExplainEvent], *, amount_minor: int, currency: str) -> str:

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import ExplanationPanel from "./ExplanationPanel";
 import { FALLBACK_WORDS, formatAmount, formatTime, reasonText, statusLabel } from "./lib/format";
 import type { Explanation, PaymentDetailData, ProcessorHealth } from "./lib/types";
 
@@ -211,6 +212,7 @@ function ExplanationView({ state, onRetry }: { state: ExplanationLoad; onRetry: 
           {x.fallback_reason && (
             <p className="mono">{`Why rules text: ${FALLBACK_WORDS[x.fallback_reason] ?? x.fallback_reason}.`}</p>
           )}
+          <ExplanationPanel explanation={x} />
         </>
       );
     }

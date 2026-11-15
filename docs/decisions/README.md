@@ -33,3 +33,4 @@ Write an ADR when a decision is expensive to reverse, resolves an open question,
 | 0015 | [Webhook delivery in its own consumer, signed, with a target allowlist](0015-webhook-delivery-signing-and-target-allowlist.md) | Accepted |
 | 0016 | [Adaptive routing objective, experiment harness and algorithm](0016-adaptive-routing-objective-harness-and-algorithm.md) | Accepted |
 | 0017 | [Second adaptive iteration: a gated hybrid of rules and Thompson sampling](0017-gated-hybrid-routing-second-iteration.md) | Accepted |
+| 0018 | [Phase 5 showcase scope and the bolder-but-trustworthy UI direction](0018-phase-5-showcase-and-ui-direction.md) | Accepted |

@@ -2,9 +2,9 @@
 
 # What to do next: Relay delivery plan
 
-Status source: GitHub status as of 2026-11-10T14:10:23Z.
+Status source: GitHub status as of 2026-11-15T13:34:16Z.
 
-Progress: 51 of 52 tasks done. Full order: [delivery-plan.md](delivery-plan.md). How to work a task: [workflow](../workflow/workflow.md).
+Progress: 58 of 58 tasks done. Full order: [delivery-plan.md](delivery-plan.md). How to work a task: [workflow](../workflow/workflow.md).
 
 ## In progress
 
@@ -12,7 +12,7 @@ Progress: 51 of 52 tasks done. Full order: [delivery-plan.md](delivery-plan.md).
 
 ## Ready now, in plan order
 
-1. [REL-46](tasks/REL-46.md) Portfolio release: publish checklist, public repo, optional free-tier demo - You (the owner)
+- Nothing is ready: every open task waits on another.
 
 ## After that, in dependency order
 

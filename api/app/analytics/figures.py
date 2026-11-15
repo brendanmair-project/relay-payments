@@ -16,6 +16,7 @@ from app.reporting.metrics import (
     PaymentRow,
     explanation_metrics,
     latency_metrics,
+    money_saved,
     nearest_rank,
     processor_success,
     rescue_paths,
@@ -87,5 +88,6 @@ def analytics_figures(
         "latency": latency_metrics(payments, timelines),
         "processors": processors,
         "revenue_recovered_by_rescue_path": rescue_paths(payments, timelines),
+        "money_saved": money_saved(payments, events),
         "time_to_explanation": explanation_metrics(payments, timelines, fallback_reasons),
     }

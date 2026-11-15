@@ -2,7 +2,7 @@
 
 # REL-46: Portfolio release: publish checklist, public repo, optional free-tier demo
 
-Status: **Ready** | Phase 1 - Showcase slice | Owner: You (the owner) | issue #37
+Status: **Done** | Phase 1 - Showcase slice | Owner: You (the owner) | issue #37
 
 ## Outcome
 
@@ -15,23 +15,23 @@ Portfolio release: publish checklist, public repo, optional free-tier demo
 
 ## Unblocks
 
-- Nothing.
+- [REL-62](REL-62.md) Phase 5 decisions and three console design directions
 
 ## Acceptance
 
-- [ ] User runs /publish-project relay and approves going public
-- [ ] Any demo hosting is free tier and recorded in an ADR
-- [ ] The hosting ADR compares the free tiers of Vercel or Cloudflare (frontend) and Neon or Supabase (managed PostgreSQL) with keeping the demo on Docker Compose, and keeps the demo read-only (ADR-0012) (owner's tooling review, 2026-10-27)
-- [ ] Before going public, the owner reviews commit author emails in history (private-phase commits use the personal Gmail address) and decides whether to accept or rewrite them
-- [ ] Once public, branch protection requiring CI is turned on (risk R12)
-- [ ] A public demo runs read-only (no outage switch, no regeneration, rate-limited), with its own authentication decided in its hosting ADR (ADR-0012)
+- [x] User runs /publish-project relay and approves going public
+- [x] Any demo hosting is free tier and recorded in an ADR
+- [x] The hosting ADR compares the free tiers of Vercel or Cloudflare (frontend) and Neon or Supabase (managed PostgreSQL) with keeping the demo on Docker Compose, and keeps the demo read-only (ADR-0012) (owner's tooling review, 2026-10-27)
+- [x] Before going public, the owner reviews commit author emails in history (private-phase commits use the personal Gmail address) and decides whether to accept or rewrite them
+- [x] Once public, branch protection requiring CI is turned on (risk R12)
+- [x] A public demo runs read-only (no outage switch, no regeneration, rate-limited), with its own authentication decided in its hosting ADR (ADR-0012)
 
 ## Steps
 
-1. **REL-46.1 Run the publish checklist** - Run `/publish-project relay` and read its checklist findings.
-2. **REL-46.2 Fix any checklist findings** - Resolve items such as secrets, licence, README and history; rerun until it passes. Include the commit author email review and, after going public, branch protection requiring CI.
-3. **REL-46.3 Decide on demo hosting** - If you want a hosted demo, choose a free tier and have the choice recorded in an ADR; otherwise skip.
-4. **REL-46.4 Approve going public** - Explicitly approve making the repository public, then confirm in chat.
+1. **REL-46.1 Run the publish checklist** (done) - Run `/publish-project relay` and read its checklist findings.
+2. **REL-46.2 Fix any checklist findings** (done) - Resolve items such as secrets, licence, README and history; rerun until it passes. Include the commit author email review and, after going public, branch protection requiring CI.
+3. **REL-46.3 Decide on demo hosting** (done) - If you want a hosted demo, choose a free tier and have the choice recorded in an ADR; otherwise skip.
+4. **REL-46.4 Approve going public** (done) - Explicitly approve making the repository public, then confirm in chat.
 
 ## Files this task may change
 

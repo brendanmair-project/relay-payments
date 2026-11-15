@@ -14,6 +14,22 @@ export default function OutageControl() {
   const [active, setActive] = useState<boolean | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [storyActive, setStoryActive] = useState(false);
+  const [reload, setReload] = useState(0);
+
+  // The story run (StoryMode) switches the outage itself, so the manual toggle steps aside while it runs and the
+  // state is read again once it ends.
+  useEffect(() => {
+    const onStory = (e: Event) => {
+      const running = (e as CustomEvent<{ active: boolean }>).detail.active;
+      setStoryActive((was) => {
+        if (was && !running) setReload((n) => n + 1);
+        return running;
+      });
+    };
+    window.addEventListener("relay:story", onStory);
+    return () => window.removeEventListener("relay:story", onStory);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -30,7 +46,7 @@ export default function OutageControl() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [reload]);
 
   async function toggle() {
     const enabled = !active;
@@ -57,9 +73,14 @@ export default function OutageControl() {
       <p role="status" className="mono">
         Processor A outage: {active === null ? "Unknown" : active ? "Active" : "Inactive"}
       </p>
-      <button type="button" onClick={toggle} disabled={pending || active === null}>
+      <button type="button" onClick={toggle} disabled={pending || active === null || storyActive}>
         {active ? "Stop Processor A outage" : "Start Processor A outage"}
       </button>
+      {storyActive && (
+        <p className="fine-dark">
+          The outage demo is running and controls the outage; this switch is read-only until it ends.
+        </p>
+      )}
       {error && (
         <p role="alert" className="banner">
           {error}

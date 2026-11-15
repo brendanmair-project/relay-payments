@@ -34,6 +34,24 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+describe("OutageControl during a story run", () => {
+  it("is read-only while a story run is active and says why", async () => {
+    fetchMock.mockResolvedValue(state(false));
+    render(<OutageControl />);
+    await flush();
+    expect(screen.getByRole("button", { name: "Start Processor A outage" })).toBeEnabled();
+    await act(async () => {
+      window.dispatchEvent(new CustomEvent("relay:story", { detail: { active: true } }));
+    });
+    expect(screen.getByRole("button", { name: "Start Processor A outage" })).toBeDisabled();
+    expect(screen.getByText(/outage demo is running/i)).toBeInTheDocument();
+    await act(async () => {
+      window.dispatchEvent(new CustomEvent("relay:story", { detail: { active: false } }));
+    });
+    expect(screen.getByRole("button", { name: "Start Processor A outage" })).toBeEnabled();
+  });
+});
+
 describe("OutageControl", () => {
   it("reads /api/demo/state on load and shows Inactive with a start button", async () => {
     fetchMock.mockResolvedValue(state(false));

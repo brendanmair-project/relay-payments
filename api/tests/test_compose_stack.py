@@ -69,7 +69,15 @@ READS: dict[str, set[str]] = {
     "webhook-sink": {"WEBHOOK_SINK_SECRET"},
     "migrate": {"DATABASE_URL"},
     "reporting": {"DATABASE_URL", "REQUEST_LOG_PATH"} | SWEEP,
-    "simulator": {"RELAY_API_KEY", "SIM_SEED", "PROCESSOR_TIMEOUT_SECONDS"},
+    # REL-66: the story run reads RELAY_API_URL, STORY_SEED and STORY_RATE (simulator/app/story.py).
+    "simulator": {
+        "RELAY_API_KEY",
+        "SIM_SEED",
+        "PROCESSOR_TIMEOUT_SECONDS",
+        "RELAY_API_URL",
+        "STORY_SEED",
+        "STORY_RATE",
+    },
     "frontend": {"RELAY_API_KEY", "API_URL", "SIMULATOR_CONTROL_URL"},
 }
 

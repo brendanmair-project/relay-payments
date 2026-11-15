@@ -1,0 +1,78 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Relay console, direction C: AI first</title><style>
+:root{--bg:#0d0f14;--panel:#161a22;--panel2:#1d222c;--line:#323a49;--ink:#eef1f6;--mut:#aab3c2;--cy:#7fd4ff;--gr:#7be0a4;--am:#ffc470;--rd:#ff9a94}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.mono{font-family:ui-monospace,SFMono-Regular,Consolas,Menlo,monospace}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);padding:12px 0}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.brand{font-weight:800;letter-spacing:.06em}
+.saved{background:linear-gradient(90deg,#10263a,#142a1f);border-bottom:1px solid var(--line);padding:14px 0}
+.saved .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline}
+.saved .n{font-size:clamp(30px,6vw,44px);font-weight:800;color:var(--gr);line-height:1;overflow-wrap:anywhere}
+.saved p{margin:0;color:var(--mut)}
+.lab{display:inline-block;font-size:12px;font-weight:700;border:1px solid currentColor;border-radius:4px;padding:0 8px;color:var(--am)}
+button.run{font:inherit;font-weight:800;background:var(--cy);color:#04141f;border:0;border-radius:6px;padding:10px 18px;min-height:44px;cursor:pointer}
+button.run:focus-visible{outline:3px solid #fff;outline-offset:2px}
+@media (prefers-reduced-motion:no-preference){button.run{transition:box-shadow .15s}button.run:hover{box-shadow:0 0 0 4px rgba(127,212,255,.3)}}
+#runnote{display:none;margin:0;padding:8px 0;color:var(--am)}#runnote.on{display:block}
+h1{font-size:clamp(24px,4vw,34px);line-height:1.2;margin:28px 0 6px}
+.lead{color:var(--mut);max-width:48em;margin:0 0 20px}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;list-style:none;margin:0 0 16px;padding:0;counter-reset:s}
+.flow li{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:13px;counter-increment:s}
+.flow li::before{content:counter(s);display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--cy);color:#04141f;text-align:center;font-weight:800;margin-right:6px}
+.flow li.on{border-color:var(--cy)}
+.flow b{display:block;margin-top:4px}
+@media (max-width:860px){.flow{grid-template-columns:minmax(0,1fr)}}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1fr);gap:14px;margin-bottom:20px}
+@media (max-width:1000px){.stage{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
+.panel h2{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--cy)}
+.answer{font-size:21px;line-height:1.35;margin:6px 0 10px;overflow-wrap:anywhere}
+.answer mark{background:rgba(127,212,255,.2);color:var(--ink);padding:0 3px;border-radius:3px}
+.fact{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0}.fact dt{color:var(--mut)}.fact dd{margin:0;overflow-wrap:anywhere}
+.verdict{border:2px solid var(--gr);border-radius:8px;padding:8px 10px;margin:8px 0}
+.verdict.no{border-color:var(--am);border-style:dashed}
+ol.tl{margin:8px 0 0;padding:0;list-style:none;font-size:13px}ol.tl li{padding:3px 0 3px 8px;border-left:3px solid var(--line);overflow-wrap:anywhere}ol.tl li.cited{border-left-color:var(--cy);background:rgba(127,212,255,.12)}
+.cit{color:var(--cy)}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:900px){.cols{grid-template-columns:minmax(0,1fr)}}
+.proc{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;margin-bottom:10px}
+.state{font-weight:800;border:2px solid;border-radius:4px;padding:0 10px}.state.avoided{color:var(--rd);border-style:dashed}.state.preferred{color:var(--gr)}
+.st{font-weight:700;border:1px solid currentColor;padding:0 6px;border-radius:4px;white-space:nowrap}
+.st-captured{color:var(--gr)}.st-declined{color:var(--am)}.st-failed{color:var(--rd)}.st-retrying{color:var(--cy)}.st-received,.st-processing{color:var(--mut);border-style:dashed}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;color:var(--mut);font-size:12px;border-bottom:2px solid var(--line);padding:4px 8px 4px 0}
+td{padding:5px 8px 5px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+@media (max-width:640px){table.pay thead{display:none}table.pay tr:nth-child(n+6){display:none}table.pay,table.pay tbody,table.pay tr,table.pay td{display:block}table.pay tr{border-bottom:1px solid var(--line);padding:6px 0}table.pay td{border:0;display:flex;gap:8px;padding:1px 0}table.pay td::before{content:attr(data-l);color:var(--mut);min-width:78px;flex:none}}
+.quote{border-left:4px solid var(--cy);padding:4px 0 4px 10px;margin:8px 0;overflow-wrap:anywhere}
+.note{color:var(--mut);font-size:13px;margin:8px 0 0}
+svg{max-width:100%;height:auto}
+footer{padding:24px 0 40px;color:var(--mut);font-size:13px}
+</style></head><body>
+<header class="top"><div class="wrap"><span class="brand">RELAY</span><span style="font-size:13px;color:var(--mut)">Prototype C, AI first. Synthetic data.</span><button type="button" class="run" id="run" aria-describedby="runnote">Run the outage demo</button></div></header>
+<div class="saved"><div class="wrap" role="region" aria-label="Money saved"><span class="n mono">$73,321.01</span><p>recovered in USD by retry, failover and re-drive <span class="lab">synthetic</span></p><p>104 payments rescued · 88.7% captured <span class="lab">synthetic</span></p><p>68.0 h investigation saved <span class="lab">estimated against the 2-hour manual baseline</span></p></div></div>
+<div class="wrap"><p id="runnote" role="status"></p></div>
+<main class="wrap">
+<h1>A local model explains every failure, and rules check it</h1>
+<p class="lead">Failed payments take about 2 hours to explain by hand (the manual baseline, an estimate). Relay explains each one in a median of 1.06 s with <span class="mono">granite3.3:2b</span> running on this machine, and shows its working so an analyst can check it.</p>
+<ol class="flow" aria-label="How an explanation is produced"><li><b>Saw</b>status, reason codes, timeline</li><li><b>Asked</b>granite3.3:2b, locally</li><li><b>Answered</b>one sentence, cites events #3 and #7</li><li class="on"><b>Cross-checked</b>rules read the same timeline</li><li><b>Shown</b>model text, labelled</li></ol>
+<div class="stage">
+<section class="panel" aria-labelledby="saw"><h2 id="saw">What the model saw</h2><dl class="fact"><dt>Payment</dt><dd class="mono">75a0d7b4 · €761.52</dd><dt>Status</dt><dd><span class="st st-declined"><span aria-hidden="true">⊘</span> Declined</span> after 2 attempts</dd><dt>Reason codes</dt><dd class="mono">outage, do_not_honor</dd><dt>Never sent</dt><dd>The payment description</dd></dl>
+<ol class="tl"><li class=""><span class="mono">#1 payment.received</span></li><li class=""><span class="mono">#2 payment.routed A (initial)</span></li><li class="cited"><span class="mono">#3 attempt.authorize_result A (outage)</span> <strong class="cit">cited</strong></li><li class=""><span class="mono">#4 payment.failed A (outage)</span></li><li class=""><span class="mono">#5 payment.retry_scheduled</span></li><li class=""><span class="mono">#6 payment.routed B (retry)</span></li><li class="cited"><span class="mono">#7 attempt.authorize_result B (do_not_honor)</span> <strong class="cit">cited</strong></li><li class=""><span class="mono">#8 payment.declined (do_not_honor)</span></li><li class=""><span class="mono">#9 payment.final</span></li></ol></section>
+<section class="panel" aria-labelledby="ans"><h2 id="ans">Its answer</h2><p class="answer">The customer's bank refused the payment 761.52 EUR on the second attempt due to the processor's 'do not honor' reason.</p><dl class="fact"><dt>Model</dt><dd class="mono">granite3.3:2b (local, Apache 2.0)</dd><dt>Time taken</dt><dd class="mono">0.96 s from the final event</dd><dt>Cites</dt><dd class="mono">events #3, #7: B answered do_not_honor</dd></dl>
+<div class="verdict"><strong>Cross-check: ✓ Agreed. The model named the same cause as the rules explainer, so the model text is shown.</strong></div></section>
+<section class="panel" aria-labelledby="alt"><h2 id="alt">When the check disagrees</h2><p style="margin:0 0 6px">Payment <span class="mono">64e6e238</span> failed on Processor A (outage) and was captured on B.</p><p class="quote">The payment stalled before it finished, so Relay's recovery job restarted it and it was then captured. No action is needed.</p><div class="verdict no"><strong>Cross-check: ✕ Disagreed.</strong> The model named a different cause, so Relay shows the rules text instead (<span class="mono">cause_mismatch</span>, ADR-0013).</div><p class="note">Of 34 explained failures, 31 show model text and 3 show rules text (fallback rate 8.8%).</p></section>
+</div>
+<div class="cols">
+<div style="display:grid;gap:14px;min-width:0;align-content:start">
+<section class="panel" aria-labelledby="ph"><h2 id="ph">Processor health and failover</h2><div class="proc"><strong>Processor A</strong><span class="state avoided">⛔ Avoided</span><span class="mono">54 of 94 failed (57.5%)</span></div><div class="proc"><strong>Processor B</strong><span class="state preferred">✓ Preferred</span><span class="mono">3 of 25 failed (12.0%)</span></div><p class="note">Routing sends new payments to B while A is avoided. Rescued: 59 by retry, 33 by failover, 12 by re-drive.</p></section>
+<section class="panel" aria-labelledby="ic"><h2 id="ic">Incident and its AI summary</h2><p style="margin:0 0 4px"><strong>Processor A is being avoided by routing</strong> <span class="st st-retrying">Detected</span></p><p class="note mono" style="margin:0">opened 23:33:58Z · recovered 23:35:53Z (114.4 s) · 64 payments</p><p class="quote">Processor A: 64 payments were affected. Failures by kind: 63 outage, 1 timeout, 0 capture_failed. They ran from 2026-11-10T23:33:12.621Z to 2026-11-10T23:34:44.500Z. 59 of the affected payments were rescued by failover or retry. Routing saw the processor healthy again 114 seconds after the incident opened.</p><p class="note">Source: rules text; the model named a different cause (<span class="mono">cause_mismatch</span>).</p></section>
+</div>
+<section class="panel" aria-labelledby="py"><h2 id="py">Payments during the outage</h2><table class="pay"><caption class="sr">Payments during the Processor A outage, newest first (10 of 21 in progress or final)</caption><thead><tr><th scope="col">Payment</th><th scope="col">Amount</th><th scope="col">Status</th><th scope="col">Processor</th><th scope="col">Attempt</th><th scope="col">Created</th></tr></thead><tbody><tr><td data-l="Payment" class="mono">41c89e8a</td><td data-l="Amount" class="mono num">€2,355.45</td><td data-l="Status"><span class="st st-processing"><span aria-hidden="true">…</span> Processing</span></td><td data-l="Processor">Processor B</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:50Z</td></tr><tr><td data-l="Payment" class="mono">b9406419</td><td data-l="Amount" class="mono num">$818.46</td><td data-l="Status"><span class="st st-captured"><span aria-hidden="true">✓</span> Captured</span></td><td data-l="Processor">Processor B</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:50Z</td></tr><tr><td data-l="Payment" class="mono">34954680</td><td data-l="Amount" class="mono num">€1,544.38</td><td data-l="Status"><span class="st st-captured"><span aria-hidden="true">✓</span> Captured</span></td><td data-l="Processor">Processor B</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:49Z</td></tr><tr><td data-l="Payment" class="mono">c4d10e90</td><td data-l="Amount" class="mono num">$2,440.70</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:49Z</td></tr><tr><td data-l="Payment" class="mono">012cca12</td><td data-l="Amount" class="mono num">€851.80</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:49Z</td></tr><tr><td data-l="Payment" class="mono">a200607c</td><td data-l="Amount" class="mono num">£1,383.54</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:48Z</td></tr><tr><td data-l="Payment" class="mono">0af8a221</td><td data-l="Amount" class="mono num">$1,901.89</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:48Z</td></tr><tr><td data-l="Payment" class="mono">59c2b54d</td><td data-l="Amount" class="mono num">£957.00</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:48Z</td></tr><tr><td data-l="Payment" class="mono">d61f7e16</td><td data-l="Amount" class="mono num">€1,727.89</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:47Z</td></tr><tr><td data-l="Payment" class="mono">78a4cde3</td><td data-l="Amount" class="mono num">€421.66</td><td data-l="Status"><span class="st st-retrying"><span aria-hidden="true">↻</span> Retrying</span></td><td data-l="Processor">Processor A</td><td data-l="Attempt" class="mono">1</td><td data-l="Created" class="mono">23:46:47Z</td></tr></tbody></table><p class="note">Live capture while A was avoided; 39 of 60 newest were still waiting to be routed and are hidden. UTC.</p></section>
+</div>
+</main>
+<footer><div class="wrap">Every number comes from the running stack or the committed results file; synthetic data only. Derived only from the captured API responses in data/ and the committed results file docs/evaluation/outage-demo/results.json.</div></footer>
+<script>document.getElementById('run').addEventListener('click',function(){var n=document.getElementById('runnote');n.textContent='Static prototype: in the real console this button would start the outage story from one click.';n.classList.add('on')})</script>
+</body></html>

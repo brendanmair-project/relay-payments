@@ -76,7 +76,7 @@ Preserve these invariants unless the task explicitly changes the architecture an
 - Keep this repository independent of the parent workspace; it has its own git history.
 - Follow automated formatter and linter output; do not duplicate their complete rule sets here.
 - Add comments for non-obvious intent and constraints, not line-by-line narration.
-- UI direction: an operations tool for payment analysts. Dense, restrained and trustworthy; monospace for payment IDs, amounts and timestamps; status never shown by color alone; motion only in response to user actions. Write a dashboard spec before the first UI task (REL-26). This direction overrides generic design-skill defaults.
+- UI direction (amended by ADR-0018, 2026-11-10): bolder but trustworthy. The console leads with value: the problem and the money saved first, then the AI section (how each failure was explained and cross-checked), then the dense analyst console. Monospace for payment IDs, amounts and timestamps; status never shown by colour alone; WCAG AA; motion only in response to user actions and respecting reduced motion; every figure labelled synthetic or estimated. New frontend libraries only with an Accepted ADR. This direction overrides generic design-skill defaults.
 - Browser verification: Playwright MCP, project-scoped in `.mcp.json` (isolated profile). Screenshot UI changes at desktop and phone width before calling them done.
 - Security review: the `security-guidance` plugin is enabled for this project only (`.claude/settings.json`). It reviews edits and diffs, and adds a model call at the end of each turn.
 

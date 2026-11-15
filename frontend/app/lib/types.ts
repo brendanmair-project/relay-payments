@@ -37,6 +37,29 @@ export type Explanation = {
   trigger: string;
   generated_at: string;
   fallback_reason: string | null;
+  // REL-63: how it was produced. Null (or absent) on rows stored before these were kept.
+  attempted_model?: string | null;
+  model_cause?: string | null;
+  rules_cause?: string | null;
+  generation_ms?: number | null;
+  inputs?: ExplanationInputs | null;
+  cross_check?: "agreed" | "disagreed_rules_used" | "model_unavailable" | "rules_only" | null;
+};
+
+export type ExplanationInputs = {
+  status: string | null;
+  reason_codes: string[];
+  amount: string;
+  events: {
+    seq: number;
+    type: string;
+    time: string | null;
+    attempt: number | null;
+    processor: string | null;
+    reason: string | null;
+    result: string | null;
+    outcome: string | null;
+  }[];
 };
 
 export type ProcessorHealth = {
@@ -108,6 +131,19 @@ export type ProcessorFigures = {
 
 export type RescuePath = { count: number; amount_minor_by_currency: Record<string, number> };
 
+export type MoneySaved = {
+  payments_rescued: { count: number; by_rescue_path: Record<string, RescuePath> };
+  revenue_recovered: { amount_minor_by_currency: Record<string, number>; definition: string };
+  investigation_time_saved: {
+    estimated: boolean;
+    label: string;
+    baseline_seconds: number;
+    explained_failures: number;
+    seconds_saved: number;
+    definition: string;
+  };
+};
+
 export type ExplanationTiming =
   | { available: false; note: string }
   | {
@@ -128,6 +164,7 @@ export type AnalyticsData = {
   latency: Percentiles;
   processors: Record<string, ProcessorFigures>;
   revenue_recovered_by_rescue_path: Record<string, RescuePath>;
+  money_saved: MoneySaved;
   time_to_explanation: ExplanationTiming;
 };
 

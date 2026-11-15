@@ -169,9 +169,17 @@ class PaymentExplanation(Base):
     fallback_reason: Mapped[str | None] = mapped_column(Text)
     final_event_at: Mapped[datetime] = mapped_column(TIMESTAMPTZ)
     generated_at: Mapped[datetime] = mapped_column(TIMESTAMPTZ)
+    # REL-63: null on rows stored before these were kept ("unknown").
+    attempted_model: Mapped[str | None] = mapped_column(Text)
+    model_cause: Mapped[str | None] = mapped_column(Text)
+    rules_cause: Mapped[str | None] = mapped_column(Text)
+    generation_ms: Mapped[int | None] = mapped_column(Integer)
+    inputs: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
 
     __table_args__ = (
         CheckConstraint("source IN ('model','rules')", name="ck_payment_explanations_source"),
+        CheckConstraint("generation_ms IS NULL OR generation_ms >= 0", name="ck_payment_explanations_generation_ms"),
+        CheckConstraint("model IS NULL OR attempted_model = model", name="ck_payment_explanations_attempted_model"),
         CheckConstraint("(source = 'model') = (model IS NOT NULL)", name="ck_payment_explanations_model"),
         CheckConstraint(
             "trigger IN ('final_failure','on_request','regenerate')", name="ck_payment_explanations_trigger"

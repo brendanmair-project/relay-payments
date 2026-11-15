@@ -264,3 +264,77 @@ def compute_metrics(
         "rescue_paths": rescue_paths(payments, timelines),
         "explanations": explanation_metrics(payments, timelines, fallback_reasons),
     }
+
+
+MONEY_PATHS = ("failover", "retry")
+MANUAL_BASELINE_SECONDS = 7200  # ADR-0009 decision 4: an assumption, never a measurement
+TIME_SAVED_LABEL = "estimated against the 2-hour manual baseline"
+TIME_SAVED_DEFINITION = (
+    "For each final failure that has a stored explanation: the 2-hour manual baseline of ADR-0009 (an assumption, "
+    "not a measurement) minus the measured time from the payment's final failure to its stored explanation, never "
+    "below zero, summed over the window. The total is an estimate against that baseline, not measured time saved."
+)
+RECOVERED_DEFINITION = (
+    "Revenue recovered counts only payments that failed an attempt on one processor and were captured on a later "
+    "attempt, by how the capturing attempt was routed (failover or retry), as integer minor units per currency, "
+    "never summed across currencies. A payment captured on its first attempt, or one that failed on every attempt, "
+    "is not counted."
+)
+
+
+def money_saved(payments: Sequence[PaymentRow], events: Sequence[EventRow]) -> dict[str, Any]:
+    """The money-saved figures (REL-64, docs/product/metrics.md): rescued payments and estimated investigation time."""
+    timelines = _by_payment(events)
+    counts = dict.fromkeys(MONEY_PATHS, 0)
+    money: dict[str, dict[str, int]] = {path: defaultdict(int) for path in MONEY_PATHS}
+    total: dict[str, int] = defaultdict(int)
+    explained_failures = 0
+    saved_micros = 0
+    for payment in payments:
+        items = timelines.get(payment.id, [])
+        captured = _first(items, "payment.captured")
+        if payment.is_final and payment.status == "captured" and captured is not None:
+            failed_earlier = any(e.type == "payment.failed" and e.attempt_no < captured.attempt_no for e in items)
+            routed = _routed_for(items, captured.attempt_no)
+            reason = routed.reason if routed else None
+            if failed_earlier and reason in MONEY_PATHS:
+                counts[reason] += 1
+                money[reason][payment.currency] += payment.amount_minor
+                total[payment.currency] += payment.amount_minor
+        final = _first(items, "payment.final")
+        if final is not None and final.data.get("outcome") in ("declined", "failed"):
+            explained = next(
+                (
+                    e
+                    for e in items
+                    if e.type == "payment.explained" and e.data.get("trigger", "final_failure") == "final_failure"
+                ),
+                None,
+            )
+            if explained is not None:
+                explained_failures += 1
+                # Clamped at zero: an explanation stamped before the final failure (clock skew) must never
+                # claim more than the baseline for one payment.
+                taken = max(0, _micros(explained.occurred_at - final.occurred_at))
+                saved_micros += max(0, MANUAL_BASELINE_SECONDS * 1_000_000 - taken)
+    return {
+        "payments_rescued": {
+            "count": sum(counts.values()),
+            "by_rescue_path": {
+                path: {"count": counts[path], "amount_minor_by_currency": dict(sorted(money[path].items()))}
+                for path in MONEY_PATHS
+            },
+        },
+        "revenue_recovered": {
+            "amount_minor_by_currency": dict(sorted(total.items())),
+            "definition": RECOVERED_DEFINITION,
+        },
+        "investigation_time_saved": {
+            "estimated": True,
+            "label": TIME_SAVED_LABEL,
+            "baseline_seconds": MANUAL_BASELINE_SECONDS,
+            "explained_failures": explained_failures,
+            "seconds_saved": round(saved_micros / 1_000_000, 3),
+            "definition": TIME_SAVED_DEFINITION,
+        },
+    }

@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "cd2efc14-9edf-40af-95a2-28e7e67dfcd3",
+      "processor": "A",
+      "source": "rule",
+      "status": "detected",
+      "title": "Processor A is being avoided by routing",
+      "opened_at": "2026-11-10T23:33:58.743Z",
+      "opened_by_event_id": 1280,
+      "recovered_at": "2026-11-10T23:35:53.126Z",
+      "triaged_at": null,
+      "resolved_at": null,
+      "created_at": "2026-11-10T23:33:59.099Z",
+      "affected_count": 64
+    }
+  ]
+}

@@ -54,3 +54,8 @@ export function reasonText(type: string, reason: string | null): string {
 export function statusLabel(p: Payment): string {
   return p.display_status;
 }
+
+/** Seconds as hours with one decimal ("4.0 hours"); only for estimates, never for measured durations. */
+export function formatHours(seconds: number): string {
+  return `${(seconds / 3600).toFixed(1)} hours`;
+}

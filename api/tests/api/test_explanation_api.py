@@ -14,7 +14,22 @@ from tests.explain.fakes import FakeModel, answer
 from tests.explainer.helpers import SENTINEL, captured, declined, retrying
 
 Factory = sessionmaker[Session]
-FIELDS = {"payment_id", "source", "model", "text", "cited_event_seqs", "trigger", "generated_at", "fallback_reason"}
+FIELDS = {
+    "payment_id",
+    "source",
+    "model",
+    "text",
+    "cited_event_seqs",
+    "trigger",
+    "generated_at",
+    "fallback_reason",
+    "attempted_model",
+    "model_cause",
+    "rules_cause",
+    "generation_ms",
+    "inputs",
+    "cross_check",
+}
 
 
 @pytest.fixture
@@ -142,3 +157,104 @@ def test_get_does_not_regenerate_on_repeat(client: TestClient, factory: Factory,
     for _ in range(3):
         client.get(url(pid), headers=auth(api_key))
     assert count(engine) == 1
+
+
+RIGHT = "decline_insufficient_funds"
+CROSS_CHECK_CASES = {
+    "agreed": (FakeModel(answer("Declined for funds.", [3, 4], RIGHT)), "agreed", "granite3.3:2b", RIGHT),
+    "disagreed": (
+        FakeModel(answer("Timed out.", [3, 4], "authorize_timeout")),
+        "disagreed_rules_used",
+        "granite3.3:2b",
+        "authorize_timeout",
+    ),
+    "unreachable": (FakeModel(unavailable="model_unreachable"), "model_unavailable", "granite3.3:2b", None),
+    "timeout": (FakeModel(unavailable="model_timeout"), "model_unavailable", "granite3.3:2b", None),
+    "unusable": (FakeModel(answer("Declined.", [99], RIGHT)), "model_unavailable", "granite3.3:2b", None),
+}
+
+
+@pytest.mark.parametrize("case", CROSS_CHECK_CASES)
+def test_get_returns_the_generation_details_and_the_cross_check(
+    client: TestClient, factory: Factory, api_key: str, case: str
+) -> None:
+    model, verdict, attempted, model_cause = CROSS_CHECK_CASES[case]
+    pid = declined(factory)
+    use(client, model)
+    body = client.get(url(pid), headers=auth(api_key)).json()
+    assert body["cross_check"] == verdict
+    assert body["attempted_model"] == attempted
+    assert body["model_cause"] == model_cause
+    assert body["rules_cause"] == RIGHT
+    assert isinstance(body["generation_ms"], int) and body["generation_ms"] >= 0
+    assert body["inputs"]["status"] == "declined"
+    assert body["inputs"]["amount"] == "12.50 USD"
+    assert [e["seq"] for e in body["inputs"]["events"]] == [1, 2, 3, 4]
+
+
+def test_rules_only_when_no_model_is_configured(client: TestClient, factory: Factory, api_key: str) -> None:
+    pid = declined(factory)
+    client.app.state.model_client = None  # type: ignore[attr-defined]
+    body = client.get(url(pid), headers=auth(api_key)).json()
+    assert body["cross_check"] == "rules_only"
+    assert body["attempted_model"] is None
+    assert body["generation_ms"] is None
+    assert body["inputs"]["status"] == "declined"
+
+
+def test_regenerate_returns_the_same_new_fields(client: TestClient, factory: Factory, api_key: str) -> None:
+    pid = declined(factory)
+    use(client, FakeModel(answer("Timed out.", [3], "authorize_timeout")))
+    body = client.post(url(pid, "/regenerate"), headers=auth(api_key)).json()
+    assert set(body) == FIELDS
+    assert body["cross_check"] == "disagreed_rules_used"
+    assert body["model_cause"] == "authorize_timeout"
+
+
+@pytest.mark.parametrize("case", CROSS_CHECK_CASES)
+def test_the_description_is_in_no_response_and_no_stored_input(
+    client: TestClient, factory: Factory, engine: Engine, api_key: str, case: str
+) -> None:
+    pid = declined(factory)
+    use(client, CROSS_CHECK_CASES[case][0])
+    first = client.get(url(pid), headers=auth(api_key))
+    second = client.post(url(pid, "/regenerate"), headers=auth(api_key))
+    with engine.connect() as connection:
+        stored = connection.execute(text("SELECT inputs::text FROM payment_explanations")).scalars().all()
+    assert len(stored) == 2
+    for blob in (first.text, second.text, *stored):
+        assert SENTINEL not in blob
+
+
+@pytest.mark.parametrize(
+    ("columns", "verdict"),
+    [
+        ("source = 'model', model = 'granite3.3:2b'", "agreed"),
+        ("fallback_reason = 'cause_mismatch'", "disagreed_rules_used"),
+        ("fallback_reason = 'model_timeout'", "model_unavailable"),
+        ("fallback_reason = 'model_error'", "model_unavailable"),
+        ("fallback_reason = 'citation_check_failed'", "model_unavailable"),
+        ("fallback_reason = 'model_unreachable'", None),
+    ],
+)
+def test_a_row_stored_before_the_details_existed_reads_as_unknown(
+    client: TestClient, factory: Factory, engine: Engine, api_key: str, columns: str, verdict: str | None
+) -> None:
+    pid = declined(factory)
+    with engine.begin() as connection:
+        connection.execute(
+            text(
+                "INSERT INTO payment_explanations (payment_id, source, model, text, cited_event_seqs, trigger,"
+                " final_event_at, generated_at)"
+                " VALUES (:p, 'rules', NULL, 'old', ARRAY[3], 'final_failure', now(), now())"
+            ),
+            {"p": pid},
+        )
+        connection.execute(
+            text("UPDATE payment_explanations SET " + columns + " WHERE payment_id = :p"),  # noqa: S608
+            {"p": pid},
+        )
+    body = client.get(url(pid), headers=auth(api_key)).json()
+    assert body["cross_check"] == verdict
+    assert (body["attempted_model"], body["model_cause"], body["rules_cause"]) == (None, None, None)
+    assert (body["generation_ms"], body["inputs"]) == (None, None)

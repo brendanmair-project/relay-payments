@@ -1,0 +1,13 @@
+{
+  "payment_id": "64e6e238-ba35-4610-a107-24bf9ac0cf54",
+  "source": "rules",
+  "model": null,
+  "text": "The payment stalled before it finished, so Relay's recovery job restarted it and it was then captured. No action is needed.",
+  "cited_event_seqs": [
+    3,
+    12
+  ],
+  "trigger": "on_request",
+  "generated_at": "2026-11-10T23:36:17.122Z",
+  "fallback_reason": "cause_mismatch"
+}

@@ -91,3 +91,9 @@ class ExplanationResponse(BaseModel):
     trigger: str
     generated_at: str
     fallback_reason: str | None
+    attempted_model: str | None
+    model_cause: str | None
+    rules_cause: str | None
+    generation_ms: int | None
+    inputs: dict[str, Any] | None
+    cross_check: str | None

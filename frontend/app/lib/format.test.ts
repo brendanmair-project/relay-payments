@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatAmount, formatTime, reasonText, statusLabel } from "./format";
+import { formatAmount, formatHours, formatTime, reasonText, statusLabel } from "./format";
 import type { Payment } from "./types";
 
 describe("formatAmount", () => {
@@ -78,5 +78,17 @@ describe("reasonText", () => {
 
   it("says in words that adaptive routing chose the processor, so the label is text", () => {
     expect(reasonText("payment.routed", "adaptive")).toBe(" (adaptive: chosen from recent processor outcomes)");
+  });
+});
+
+describe("formatHours", () => {
+  it.each([
+    [0, "0.0 hours"],
+    [14390, "4.0 hours"],
+    [7200, "2.0 hours"],
+    [90, "0.0 hours"],
+    [244800, "68.0 hours"],
+  ])("formats %i seconds as %s", (seconds, expected) => {
+    expect(formatHours(seconds)).toBe(expected);
   });
 });

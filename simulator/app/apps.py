@@ -17,6 +17,8 @@ from pydantic import BaseModel, Field
 from processors.profiles import PROCESSORS, Profile
 from processors.simulator import ChargeRequest, Simulator
 
+from .story import StoryController
+
 Sleep = Callable[[float], Awaitable[None]]
 
 
@@ -47,7 +49,9 @@ async def validation_error(_: Request, exc: Exception) -> JSONResponse:
     return error(422, "validation_error", f"{where}: {first.get('msg', 'invalid')}")
 
 
-def create_apps(sim: Simulator, sleep: Sleep = asyncio.sleep, api_key: str | None = None) -> tuple[FastAPI, FastAPI]:
+def create_apps(
+    sim: Simulator, sleep: Sleep = asyncio.sleep, api_key: str | None = None, story: StoryController | None = None
+) -> tuple[FastAPI, FastAPI]:
     processor_app = FastAPI(title="Relay simulator - processor API")
     control_app = FastAPI(title="Relay simulator - control API")
     for app in (processor_app, control_app):
@@ -96,6 +100,8 @@ def create_apps(sim: Simulator, sleep: Sleep = asyncio.sleep, api_key: str | Non
             return error(401, "unauthorized", "missing or invalid X-API-Key")
         return await call_next(request)
 
+    story_run = story if story is not None else StoryController()
+
     @control_app.get("/health")
     def control_health() -> dict[str, str]:
         return {"status": "ok"}
@@ -125,6 +131,22 @@ def create_apps(sim: Simulator, sleep: Sleep = asyncio.sleep, api_key: str | Non
             return unknown(processor)
         sim.outages[processor] = body.enabled
         return snapshot()
+
+    @control_app.post("/control/story/run", response_model=None)
+    def start_story() -> JSONResponse:
+        started, status = story_run.start()
+        if not started:
+            return error(409, "run_in_progress", "a story run is already in progress")
+        return JSONResponse(status_code=202, content=status)
+
+    @control_app.get("/control/story/run")
+    def story_status() -> dict:
+        return story_run.status()
+
+    @control_app.delete("/control/story/run")
+    def stop_story() -> dict:
+        # 200 with the current state, also when nothing runs (idle, finished): stopping is idempotent.
+        return story_run.stop()
 
     return processor_app, control_app
 

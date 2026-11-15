@@ -15,9 +15,13 @@ test.afterAll(async () => {
   await restoreProfiles();
 });
 
+// The home page shows the payment twice once it fails (the AI section's failure and the list): use the list's link.
+const paymentLink = (page: Page) =>
+  page.getByRole("region", { name: "Payments table" }).getByRole("link", { name: paymentId });
+
 async function openDetail(page: Page) {
   await page.goto("/");
-  await page.getByRole("link", { name: paymentId }).click();
+  await paymentLink(page).click();
   await expect(page).toHaveURL(new RegExp(`/payments/${paymentId}$`));
 }
 
@@ -28,11 +32,27 @@ test("create a payment, open its detail, see timeline and explanation", async ({
   await expect(page.getByRole("region", { name: "Explanation" })).toContainText("Rule-based");
 });
 
+// CI and this suite run with OLLAMA_URL pointing at nothing (REL-29, REL-63): the model is unreachable.
+test("the AI panel says the model could not be reached and the rules text is shown, never the description", async ({
+  page,
+}) => {
+  await openDetail(page);
+  const panel = page.getByRole("region", { name: "How the AI explained this" });
+  await expect(panel).toBeVisible();
+  await expect(panel).toContainText("Cross-check: not possible. The model was asked but gave no usable answer");
+  await expect(panel).toContainText("the model could not be reached");
+  await expect(panel).toContainText("so the rules text is shown");
+  await expect(panel).toContainText("running locally on this machine");
+  await expect(panel).toContainText("Time taken:");
+  await expect(panel).toContainText("never the payment description");
+  await expect(panel).not.toContainText("e2e order");
+});
+
 for (const where of ["list", "detail"] as const) {
   test(`axe reports no serious or critical violations on the ${where} page`, async ({ page }) => {
     if (where === "list") {
       await page.goto("/");
-      await expect(page.getByRole("link", { name: paymentId })).toBeVisible();
+      await expect(paymentLink(page)).toBeVisible();
     } else {
       await openDetail(page);
       await expect(page.getByRole("region", { name: "Explanation" })).toContainText("Rule-based");
@@ -50,9 +70,9 @@ test("the API key never appears in browser requests or page source", async ({ pa
     seen.push(`${req.url()}\n${JSON.stringify(req.headers())}\n${req.postData() ?? ""}`);
   });
   await page.goto("/");
-  await expect(page.getByRole("link", { name: paymentId })).toBeVisible();
+  await expect(paymentLink(page)).toBeVisible();
   const listHtml = await page.content();
-  await page.getByRole("link", { name: paymentId }).click();
+  await paymentLink(page).click();
   await expect(page.getByRole("region", { name: "Explanation" })).toContainText("Rule-based");
   const detailHtml = await page.content();
   const sourceRes = await page.request.get("/");

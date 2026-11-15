@@ -1,0 +1,22 @@
+{
+  "strategy": "rules",
+  "window_seconds": 60,
+  "error_threshold": 0.5,
+  "processors": [
+    {
+      "name": "A",
+      "attempts": 94,
+      "errors": 54,
+      "error_rate": 0.5745,
+      "state": "avoided"
+    },
+    {
+      "name": "B",
+      "attempts": 25,
+      "errors": 3,
+      "error_rate": 0.12,
+      "state": "preferred"
+    }
+  ],
+  "computed_at": "2026-11-10T23:47:03.662Z"
+}

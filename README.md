@@ -2,9 +2,11 @@
 
 Template: claude/showcase@1
 
-[![CI](https://github.com/brendanmair-project/relay/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/brendanmair-project/relay/actions/workflows/ci.yml)
+[![CI](https://github.com/brendanmair-project/relay-payments/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/brendanmair-project/relay-payments/actions/workflows/ci.yml)
 
 Payment operations platform that helps a two-processor merchant recover revenue lost to failed payments and explain each failure in minutes
+
+**Demo video:** a 90-second business cut and a 5-minute walkthrough with captions, attached to the [latest release](https://github.com/brendanmair-project/relay-payments/releases/latest) of the public copy (synthetic data only).
 
 > **Phase 4 verdict: the exit criterion is not met.** Adaptive routing did not beat the rule-based router under the win rule fixed before the runs (ADR-0016), in two pre-registered attempts: `adaptive` (mean uplift +1.82 pp, better on 10 of 15 pairs, calm-day latency 1.829 times `rules`) and `hybrid` (+0.58 pp, 8 of 15, 1.473). Its consistent strength is partial degradation, the case the rule router cannot see (+2.73 pp and +2.00 pp, with p95 latency at 0.340 and 0.605 of `rules`). All data is synthetic. Every condition and number is in [Results and learnings](#results-and-learnings).
 
@@ -20,7 +22,7 @@ All data in this project is synthetic. Relay never handles real payments or card
 
 ## What I built
 
-Phases 1 to 3 are built, measured and approved by the owner; Phase 4 (adaptive routing) is built and measured, and its exit criterion is not met (see Results and learnings).
+Phases 1 to 3 and 5 are built, measured and approved by the owner; Phase 4 (adaptive routing) is built and measured, and its exit criterion is not met (see Results and learnings).
 
 - A payments API (FastAPI) with idempotency keys, integer minor-unit money in four currencies and a strict payment state machine.
 - PostgreSQL as the source of truth: every state change appends an event to `payment_events` in the same transaction (the outbox), so each payment has one timeline.
@@ -36,6 +38,8 @@ Phase 2 added operations depth: an incident detector in its own container that o
 Phase 3 added integrations (ADR-0015): webhooks for payment lifecycle events, sent from their own `webhooks` container with an HMAC signature, retried with exponential backoff up to 8 attempts, limited to an allowlist of target hosts, with a delivery log and a success-rate summary (the `webhooks-demo` profile adds a sink that checks signatures and fails on demand); developer guides generated from the OpenAPI spec (quickstart, authentication and idempotency, webhooks, API reference; [all guides](docs/guides/README.md)); and a small Python SDK, `relay-sdk`, with examples and signature verification ([SDK guide](docs/guides/sdk.md)). The exit evidence is in `docs/evaluation/phase-3-exit-review.md`. Adaptive routing (Phase 4) is in `docs/product/roadmap.md`.
 
 Phase 4 added two opt-in routing strategies and the harness that measures them: `adaptive` (Thompson sampling over recent processor outcomes, ADR-0016) and `hybrid` (`rules` decides, and the sampler takes over only while a processor looks degraded but not yet failing, ADR-0017), selected with `ROUTING_STRATEGY`; `rules` stays the default. A real-stack experiment harness runs each strategy against `rules` on seeded scenarios under a protocol written before any comparison (`docs/evaluation/routing-experiments/protocol.md`). The measured result is in Results and learnings: neither strategy wins. Exit evidence: `docs/evaluation/phase-4-exit-review.md`.
+
+Phase 5 made the value visible (ADR-0018): the console now leads with the problem and a Money saved headline (revenue recovered per currency, payments rescued, and investigation time saved, estimated against the 2-hour manual baseline), then the AI section, which shows for each failure what the local model saw, its answer, the time it took and the rules cross-check. A one-click outage story mode runs the whole demo from the console, with step captions driven by the run's state. Exit evidence: `docs/evaluation/phase-5-exit-review.md`.
 
 ## Architecture
 
@@ -86,33 +90,33 @@ For each run it resets the system, then runs the same 300 seeded payments twice:
 
 ## Walkthrough
 
-A recorded run on the local stack with Processor A switched off partway through (synthetic payments only; screenshots taken with Playwright, 1280 px wide unless noted; no key appears because keys live in the frontend's server routes).
+A recorded run of the one-click outage story on the local stack with the Phase 5 console (synthetic payments only; the host Ollama answered with `granite3.3:2b`; screenshots taken with Playwright, 1280 px wide unless noted; no key appears because keys live in the frontend's server routes).
 
-1. Payments list mid-outage: the outage control reads "Active", and recent payments are captured on Processor B, several on their second attempt.
+1. The console's first screen after the story run: the problem, the Money saved headline (revenue recovered per currency, payments rescued, and investigation time saved, estimated against the 2-hour manual baseline) and the before-and-after success rates (58% against 89%, the committed outage demo), with the start of the AI section below. All figures are synthetic.
 
-   ![Payments list during the Processor A outage, with the outage control active](docs/images/walkthrough/01-payments-list-mid-outage.png)
+   ![Console first screen with the problem statement, the Money saved headline and the before-and-after success rates](docs/images/walkthrough/01-console-first-screen.png)
 
-2. The same list at phone width (390 px).
+2. Story mode mid-run, after pressing "Run the outage demo": the caption names the step ("Relay routing to Processor B", payment 62 of 90) and the headline numbers are already rising.
 
-   ![Payments list at phone width](docs/images/walkthrough/02-payments-list-phone.png)
+   ![Console during the story run with the step caption Relay routing to Processor B and the Money saved headline](docs/images/walkthrough/02-story-mode-mid-run.png)
 
-3. One payment's timeline with failover: attempt 1 on Processor A failed (outage), a retry was scheduled and attempt 2 on Processor B captured it. The plain-language explanation sits above the raw events.
+3. One payment's timeline: while Processor A was avoided, this payment was routed to Processor B (reason failover), B approved it, but the capture timed out. The explanation sits above the raw events, with "How the AI explained this" (what the model saw, its answer, time taken, and the cross-check with the rules).
 
-   ![Payment detail showing a failure on Processor A, a retry on Processor B and the explanation](docs/images/walkthrough/03-payment-timeline-failover.png)
+   ![Payment detail showing a failover to Processor B, a capture timeout, the explanation and the timeline](docs/images/walkthrough/03-payment-timeline-failover.png)
 
-4. Processor health: Processor A is avoided (every recent attempt failed), Processor B is preferred, so new payments go to B.
+4. Processor health during the outage: Processor A is avoided (25 of 49 attempts failed, 51%), Processor B is preferred, so new payments go to B.
 
    ![Processor health panel showing Processor A avoided and Processor B preferred](docs/images/walkthrough/04-processor-health-a-avoided.png)
 
-5. Analytics after the run: success rate per processor, failure reasons (outage on A) and revenue recovered by retry and failover.
+5. The AI section's "One failure, explained": a declined payment (expired card), the facts the model saw, its answer, the time taken (521 ms) and the cross-check, which agreed with the rules on the cause.
 
-   ![Analytics view after the outage with per-processor figures, failure reasons and revenue recovered](docs/images/walkthrough/05-analytics-after-outage.png)
+   ![One failure explained, with what the model saw, its answer, the time taken and the rules cross-check](docs/images/walkthrough/05-ai-explanation-cross-check.png)
 
-6. Incidents after the run: the rule-based detector opened "Processor A is being avoided by routing" for the five affected payments.
+6. The console at phone width (390 px).
 
-   ![Incidents list with one detected incident on Processor A](docs/images/walkthrough/06-incidents-after-outage.png)
+   ![Console at phone width](docs/images/walkthrough/06-console-phone.png)
 
-Rerun the capture with the stack up and `RELAY_API_KEY` set in the shell (it is not part of the CI end-to-end run): `npx --prefix frontend playwright test --config frontend/tests/walkthrough/playwright.config.ts`. The figures differ slightly on every run.
+These shots were taken with a one-off Playwright script during a story run, so the committed capture scripts produce similar but not identical images. Rerun a capture with the stack up and `RELAY_API_KEY` set in the shell (it is not part of the CI end-to-end run): `npx --prefix frontend playwright test --config frontend/tests/walkthrough/playwright.config.ts`, or the fixture-based console shots with `npx playwright test --config tests/screenshots/playwright.config.ts` from `frontend/` after `npm run build`. The figures differ slightly on every run.
 
 ## How to run
 
@@ -232,7 +236,7 @@ What the build taught me:
 
 ## Status
 
-Phases 1 to 4 complete and approved by the owner on 2026-11-09 (Phase 4 exit criterion not met). Phase 4 closes with its exit criterion recorded as not met after two pre-registered attempts (`docs/evaluation/phase-4-exit-review.md`, owner decision 2026-11-09); the dependency audit found no paid dependency or hosted API, and a clean clone starts healthy. Phases 1 to 3 have their exit reviews in `docs/evaluation/` (approved by the owner). 50 of 51 tasks are done; the remaining task is the portfolio release (REL-46, owner). The repository is private until ready.
+Phases 1 to 5 complete. Phase 5 (showcase polish) meets all four exit criteria (`docs/evaluation/phase-5-exit-review.md`); Phase 4 closed with its exit criterion recorded as not met after two pre-registered attempts (`docs/evaluation/phase-4-exit-review.md`, owner decision 2026-11-09). Each phase's exit review is in `docs/evaluation/`. 58 of 58 planned tasks are done. The public copy is https://github.com/brendanmair-project/relay-payments.
 
 ## Repository map
 

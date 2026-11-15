@@ -36,6 +36,12 @@ def _body(stored: StoredExplanation) -> dict[str, Any]:
         "trigger": stored.trigger,
         "generated_at": iso_utc(stored.generated_at),
         "fallback_reason": stored.fallback_reason,
+        "attempted_model": stored.attempted_model,
+        "model_cause": stored.model_cause,
+        "rules_cause": stored.rules_cause,
+        "generation_ms": stored.generation_ms,
+        "inputs": stored.inputs,
+        "cross_check": stored.cross_check,
     }
 
 
@@ -72,8 +78,10 @@ def _generate(request: Request, pid: uuid.UUID, trigger: str) -> StoredExplanati
     response_model=ExplanationResponse,
     summary="Get the latest explanation of a final payment",
     description="Returns the latest stored explanation, labelled with its source (`model` or `rules`). A final "
-    "payment without one gets one generated and stored with `trigger=on_request`. 404 for an unknown payment, 409 "
-    "`payment_not_final` while it is still processing or retrying.",
+    "payment without one gets one generated and stored with `trigger=on_request`. Also returns how it was produced: "
+    "the model asked, the cause each side named, `generation_ms`, the `inputs` the model was given (never the "
+    "description) and the `cross_check` verdict (null for rows stored before these were kept). 404 for an unknown "
+    "payment, 409 `payment_not_final` while it is still processing or retrying.",
 )
 def get_explanation(payment_id: str, request: Request) -> dict[str, Any]:
     pid = _payment_id(payment_id)

@@ -83,6 +83,28 @@ export const analyticsData: AnalyticsData = {
       amount_minor_by_currency: {},
     },
   },
+  money_saved: {
+    payments_rescued: {
+      count: 3,
+      by_rescue_path: {
+        failover: { count: 1, amount_minor_by_currency: { EUR: 3000 } },
+        retry: { count: 2, amount_minor_by_currency: { USD: 4500 } },
+      },
+    },
+    revenue_recovered: {
+      amount_minor_by_currency: { EUR: 3000, USD: 4500 },
+      definition:
+        "Revenue recovered counts only payments that failed an attempt on one processor and were captured on a later attempt.",
+    },
+    investigation_time_saved: {
+      estimated: true,
+      label: "estimated against the 2-hour manual baseline",
+      baseline_seconds: 7200,
+      explained_failures: 2,
+      seconds_saved: 14390,
+      definition: "The 2-hour manual baseline minus the measured time to explanation, per explained failure.",
+    },
+  },
   time_to_explanation: {
     available: true,
     sources: {

@@ -72,13 +72,17 @@ test("record the outage walkthrough", async ({ page }) => {
 
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto("/");
-    await expect(page.getByRole("link", { name: ids[ids.length - 1] })).toBeVisible();
+    await expect(
+      page.getByRole("region", { name: "Payments table" }).getByRole("link", { name: ids[ids.length - 1] }),
+    ).toBeVisible();
     await expect(page.getByText("Processor A outage: Active")).toBeVisible();
     await shot(page, "01-payments-list-mid-outage");
 
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
-    await expect(page.getByRole("link", { name: ids[ids.length - 1] })).toBeVisible();
+    await expect(
+      page.getByRole("region", { name: "Payments table" }).getByRole("link", { name: ids[ids.length - 1] }),
+    ).toBeVisible();
     await shot(page, "02-payments-list-phone");
 
     await page.setViewportSize({ width: 1280, height: 900 });

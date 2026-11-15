@@ -1,0 +1,1488 @@
+{
+  "id": "cd2efc14-9edf-40af-95a2-28e7e67dfcd3",
+  "processor": "A",
+  "source": "rule",
+  "status": "detected",
+  "title": "Processor A is being avoided by routing",
+  "opened_at": "2026-11-10T23:33:58.743Z",
+  "opened_by_event_id": 1280,
+  "recovered_at": "2026-11-10T23:35:53.126Z",
+  "triaged_at": null,
+  "resolved_at": null,
+  "created_at": "2026-11-10T23:33:59.099Z",
+  "affected_count": 64,
+  "affected_payments": [
+    {
+      "id": "038928ef-43e4-42f4-8f48-4564bf6abdd8",
+      "status": "captured",
+      "amount_minor": 163726,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1055,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.297Z"
+        },
+        {
+          "id": 1056,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.297Z"
+        }
+      ]
+    },
+    {
+      "id": "05381bd3-e7f8-4089-8b4f-3126196efd38",
+      "status": "captured",
+      "amount_minor": 20295,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1069,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.383Z"
+        },
+        {
+          "id": 1070,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.383Z"
+        }
+      ]
+    },
+    {
+      "id": "0a9832d2-6629-4188-bbaa-3b072e8ca90d",
+      "status": "captured",
+      "amount_minor": 8471,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 729,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.474Z"
+        },
+        {
+          "id": 730,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.474Z"
+        }
+      ]
+    },
+    {
+      "id": "0f82402d-f668-490d-8260-49d6ebe8657c",
+      "status": "captured",
+      "amount_minor": 188744,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 968,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.194Z"
+        },
+        {
+          "id": 969,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.194Z"
+        }
+      ]
+    },
+    {
+      "id": "114c8e2f-11a7-4eab-80f5-146f6d3f6d3e",
+      "status": "captured",
+      "amount_minor": 152099,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1259,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:56.421Z"
+        },
+        {
+          "id": 1260,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:56.421Z"
+        }
+      ]
+    },
+    {
+      "id": "15ef8bc1-7327-4227-911d-2ff8bbef1ecd",
+      "status": "captured",
+      "amount_minor": 6835,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 956,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.106Z"
+        },
+        {
+          "id": 957,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.106Z"
+        }
+      ]
+    },
+    {
+      "id": "1973293f-f856-471e-b876-e2b0b1878486",
+      "status": "captured",
+      "amount_minor": 137801,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 921,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.884Z"
+        },
+        {
+          "id": 922,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.884Z"
+        }
+      ]
+    },
+    {
+      "id": "1a10fed6-08da-4987-aa06-50c538d999d7",
+      "status": "captured",
+      "amount_minor": 139612,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 879,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.603Z"
+        },
+        {
+          "id": 880,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.603Z"
+        }
+      ]
+    },
+    {
+      "id": "1cb082bf-d0ac-4e8d-b8c5-0c6c2c188578",
+      "status": "captured",
+      "amount_minor": 149285,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 960,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.136Z"
+        },
+        {
+          "id": 961,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.136Z"
+        }
+      ]
+    },
+    {
+      "id": "2302bfca-d852-4e87-b979-9889ef4f2490",
+      "status": "captured",
+      "amount_minor": 64079,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 814,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.530Z"
+        },
+        {
+          "id": 815,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.530Z"
+        }
+      ]
+    },
+    {
+      "id": "265ff17b-e0b8-48cd-8560-eeb2d2f40193",
+      "status": "captured",
+      "amount_minor": 80832,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 840,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.355Z"
+        },
+        {
+          "id": 841,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.355Z"
+        }
+      ]
+    },
+    {
+      "id": "2ef4d58e-c8e4-4a8a-96d5-77dc52a7e583",
+      "status": "failed",
+      "amount_minor": 141188,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 883,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.632Z"
+        },
+        {
+          "id": 884,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.632Z"
+        }
+      ]
+    },
+    {
+      "id": "2fca8946-8fd1-4e13-8235-5c4ac12fce73",
+      "status": "captured",
+      "amount_minor": 244425,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 861,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.493Z"
+        },
+        {
+          "id": 862,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.493Z"
+        }
+      ]
+    },
+    {
+      "id": "35f9552e-6666-4814-af4f-322385e5f417",
+      "status": "captured",
+      "amount_minor": 102453,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 930,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.941Z"
+        },
+        {
+          "id": 931,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.941Z"
+        }
+      ]
+    },
+    {
+      "id": "3baa634a-74b1-4ead-b5b3-7e9b6e729390",
+      "status": "captured",
+      "amount_minor": 133370,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1202,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:48.091Z"
+        },
+        {
+          "id": 1203,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:48.091Z"
+        }
+      ]
+    },
+    {
+      "id": "3f93e90e-5a72-4313-add7-885205619428",
+      "status": "captured",
+      "amount_minor": 30938,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 913,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.831Z"
+        },
+        {
+          "id": 914,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.831Z"
+        }
+      ]
+    },
+    {
+      "id": "40b64783-584e-4bf6-a144-a0ad675f64b3",
+      "status": "captured",
+      "amount_minor": 130760,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 733,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.501Z"
+        },
+        {
+          "id": 735,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.501Z"
+        }
+      ]
+    },
+    {
+      "id": "4181c2fe-a8e4-4d87-a2fc-14b3693d04e4",
+      "status": "captured",
+      "amount_minor": 221545,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 857,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.466Z"
+        },
+        {
+          "id": 858,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.466Z"
+        }
+      ]
+    },
+    {
+      "id": "4517ad8a-160b-444a-8aaf-e175db2bbe36",
+      "status": "captured",
+      "amount_minor": 19117,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 994,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.917Z"
+        },
+        {
+          "id": 995,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.917Z"
+        }
+      ]
+    },
+    {
+      "id": "48c4858e-593c-462c-9c66-9f1cc598ea17",
+      "status": "captured",
+      "amount_minor": 238238,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1078,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.438Z"
+        },
+        {
+          "id": 1079,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.438Z"
+        }
+      ]
+    },
+    {
+      "id": "49974664-3177-4041-8f6f-7cb3b5d76f59",
+      "status": "captured",
+      "amount_minor": 232360,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1002,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.974Z"
+        },
+        {
+          "id": 1003,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.974Z"
+        }
+      ]
+    },
+    {
+      "id": "5a4515b6-100b-4115-97e9-36931bda4224",
+      "status": "captured",
+      "amount_minor": 178031,
+      "currency": "JPY",
+      "processor": "B",
+      "events": [
+        {
+          "id": 853,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.437Z"
+        },
+        {
+          "id": 854,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.437Z"
+        }
+      ]
+    },
+    {
+      "id": "5a64545e-356a-4195-9849-6180ab632b8c",
+      "status": "captured",
+      "amount_minor": 141362,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 849,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.410Z"
+        },
+        {
+          "id": 850,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.410Z"
+        }
+      ]
+    },
+    {
+      "id": "6418e1f8-88f7-4b51-81ce-8accaf3b0dff",
+      "status": "captured",
+      "amount_minor": 156236,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 977,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.253Z"
+        },
+        {
+          "id": 978,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.253Z"
+        }
+      ]
+    },
+    {
+      "id": "6ab34bf7-89ea-4092-bbe9-e1dfa346963f",
+      "status": "captured",
+      "amount_minor": 70918,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 887,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.660Z"
+        },
+        {
+          "id": 888,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.660Z"
+        }
+      ]
+    },
+    {
+      "id": "6ae56b04-4589-4962-a2ff-9fa9c5af39f9",
+      "status": "captured",
+      "amount_minor": 90016,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 742,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.929Z"
+        },
+        {
+          "id": 743,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.929Z"
+        }
+      ]
+    },
+    {
+      "id": "6b1d6301-a3d7-4ae1-b8c4-dadae447e897",
+      "status": "captured",
+      "amount_minor": 102827,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1061,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.327Z"
+        },
+        {
+          "id": 1062,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.327Z"
+        }
+      ]
+    },
+    {
+      "id": "6c4ef1dd-766e-4cca-86da-5d62aaff9600",
+      "status": "captured",
+      "amount_minor": 231367,
+      "currency": "GBP",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1065,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.355Z"
+        },
+        {
+          "id": 1066,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.355Z"
+        }
+      ]
+    },
+    {
+      "id": "6f2a758c-f0f9-4bb7-b21b-586590f97e81",
+      "status": "captured",
+      "amount_minor": 109215,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 809,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.502Z"
+        },
+        {
+          "id": 811,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.502Z"
+        }
+      ]
+    },
+    {
+      "id": "738db2bd-f7d9-4acf-82e2-fdf107a5c68c",
+      "status": "captured",
+      "amount_minor": 150816,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 844,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.382Z"
+        },
+        {
+          "id": 845,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.382Z"
+        }
+      ]
+    },
+    {
+      "id": "75a0d7b4-d50a-4baf-b5ce-489d70d5491f",
+      "status": "declined",
+      "amount_minor": 76152,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 904,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.772Z"
+        },
+        {
+          "id": 905,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.772Z"
+        }
+      ]
+    },
+    {
+      "id": "7cbede21-6eb5-4485-b43a-9becbecacd64",
+      "status": "captured",
+      "amount_minor": 215534,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 973,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.223Z"
+        },
+        {
+          "id": 974,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.223Z"
+        }
+      ]
+    },
+    {
+      "id": "7ea71ff2-6d33-401b-8e35-8ca93225d77d",
+      "status": "captured",
+      "amount_minor": 181078,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 900,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.743Z"
+        },
+        {
+          "id": 901,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.743Z"
+        }
+      ]
+    },
+    {
+      "id": "8b84891e-50b3-4dc1-b2f1-acf890f1f856",
+      "status": "captured",
+      "amount_minor": 43397,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 964,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.165Z"
+        },
+        {
+          "id": 965,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.165Z"
+        }
+      ]
+    },
+    {
+      "id": "8e20f02b-b577-4103-8667-c9ec597c68ab",
+      "status": "captured",
+      "amount_minor": 242856,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 908,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.802Z"
+        },
+        {
+          "id": 910,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.802Z"
+        }
+      ]
+    },
+    {
+      "id": "925cca38-efab-477f-a01d-6b591148920c",
+      "status": "captured",
+      "amount_minor": 98122,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 917,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.858Z"
+        },
+        {
+          "id": 918,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.858Z"
+        }
+      ]
+    },
+    {
+      "id": "963903ba-46cf-4eb0-80f5-8627b823632e",
+      "status": "captured",
+      "amount_minor": 132566,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 797,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.268Z"
+        },
+        {
+          "id": 798,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.268Z"
+        }
+      ]
+    },
+    {
+      "id": "a941be6d-9a73-4092-b938-ecdf1315c31c",
+      "status": "captured",
+      "amount_minor": 18653,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 998,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.944Z"
+        },
+        {
+          "id": 999,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.944Z"
+        }
+      ]
+    },
+    {
+      "id": "ac1e57e1-58bd-4462-8477-3c96be5d6f64",
+      "status": "captured",
+      "amount_minor": 14624,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 934,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.968Z"
+        },
+        {
+          "id": 935,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.968Z"
+        }
+      ]
+    },
+    {
+      "id": "ae9441b7-6141-47cb-b38c-9e5f3487fb4a",
+      "status": "captured",
+      "amount_minor": 79980,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 947,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.049Z"
+        },
+        {
+          "id": 948,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.049Z"
+        }
+      ]
+    },
+    {
+      "id": "b149d04e-975d-46f0-944e-03ccfc6209a2",
+      "status": "captured",
+      "amount_minor": 249795,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 866,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.520Z"
+        },
+        {
+          "id": 867,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.520Z"
+        }
+      ]
+    },
+    {
+      "id": "b1c72e59-e59d-4fd4-acab-27a74f9c8925",
+      "status": "captured",
+      "amount_minor": 224968,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 938,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.994Z"
+        },
+        {
+          "id": 939,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.994Z"
+        }
+      ]
+    },
+    {
+      "id": "b4baba4b-33a7-432c-be14-698bec66ee1f",
+      "status": "captured",
+      "amount_minor": 43625,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 891,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.688Z"
+        },
+        {
+          "id": 892,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.688Z"
+        }
+      ]
+    },
+    {
+      "id": "b5fb2e17-ec8c-452f-a431-ee6739ae902d",
+      "status": "declined",
+      "amount_minor": 235746,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 818,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.557Z"
+        },
+        {
+          "id": 819,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.557Z"
+        }
+      ]
+    },
+    {
+      "id": "b8a4a802-77f3-427e-b39f-af3f269743ac",
+      "status": "captured",
+      "amount_minor": 61538,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 926,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.912Z"
+        },
+        {
+          "id": 927,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.912Z"
+        }
+      ]
+    },
+    {
+      "id": "b9eebef7-8ec2-4d00-b9b6-207cd469165b",
+      "status": "captured",
+      "amount_minor": 220830,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 518,
+          "type": "attempt.authorize_result",
+          "reason": "timeout",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:12.621Z"
+        },
+        {
+          "id": 519,
+          "type": "payment.failed",
+          "reason": "timeout",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:12.621Z"
+        }
+      ]
+    },
+    {
+      "id": "bdab4fd9-061e-4058-a80f-09c67772a6b6",
+      "status": "captured",
+      "amount_minor": 188974,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1074,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.410Z"
+        },
+        {
+          "id": 1075,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.410Z"
+        }
+      ]
+    },
+    {
+      "id": "cb21d460-2b48-4152-ab2e-cfbf633f2d2c",
+      "status": "captured",
+      "amount_minor": 153878,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 874,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.576Z"
+        },
+        {
+          "id": 875,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.576Z"
+        }
+      ]
+    },
+    {
+      "id": "cbd4a0bd-5071-453e-a952-82696d9ccd66",
+      "status": "failed",
+      "amount_minor": 21807,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 951,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.077Z"
+        },
+        {
+          "id": 952,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.077Z"
+        }
+      ]
+    },
+    {
+      "id": "cd9cc119-e974-47f1-b6e6-f3bb9c84281c",
+      "status": "captured",
+      "amount_minor": 33432,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1182,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:46.224Z"
+        },
+        {
+          "id": 1183,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:46.224Z"
+        }
+      ]
+    },
+    {
+      "id": "d86cf92d-4e2f-470d-8be9-5bd41027e68e",
+      "status": "captured",
+      "amount_minor": 130225,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 870,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.548Z"
+        },
+        {
+          "id": 871,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.548Z"
+        }
+      ]
+    },
+    {
+      "id": "db0b698a-d9f2-4207-a535-7e9111dbaaae",
+      "status": "captured",
+      "amount_minor": 156267,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 721,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.421Z"
+        },
+        {
+          "id": 722,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.421Z"
+        }
+      ]
+    },
+    {
+      "id": "dd8ece1a-f31d-4a78-a97a-d8c541cb7046",
+      "status": "captured",
+      "amount_minor": 170817,
+      "currency": "JPY",
+      "processor": "B",
+      "events": [
+        {
+          "id": 943,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.022Z"
+        },
+        {
+          "id": 944,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:29.022Z"
+        }
+      ]
+    },
+    {
+      "id": "e31baddb-e926-4ef6-823f-dc3e139d0da5",
+      "status": "captured",
+      "amount_minor": 173021,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1153,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:39.164Z"
+        },
+        {
+          "id": 1154,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:39.164Z"
+        }
+      ]
+    },
+    {
+      "id": "e3495174-0e3f-492d-9ede-11faf586e994",
+      "status": "captured",
+      "amount_minor": 204456,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1051,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.271Z"
+        },
+        {
+          "id": 1052,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.271Z"
+        }
+      ]
+    },
+    {
+      "id": "e5309880-7f84-4f4d-b373-96eaebbe2c6b",
+      "status": "captured",
+      "amount_minor": 110007,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 896,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.715Z"
+        },
+        {
+          "id": 897,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:28.715Z"
+        }
+      ]
+    },
+    {
+      "id": "ea321e34-033c-4338-8c02-f467672215d0",
+      "status": "captured",
+      "amount_minor": 235627,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 822,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.585Z"
+        },
+        {
+          "id": 823,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:27.585Z"
+        }
+      ]
+    },
+    {
+      "id": "eaa4fc61-1517-4058-b2b4-f71549e45d7f",
+      "status": "captured",
+      "amount_minor": 103200,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1131,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:36.192Z"
+        },
+        {
+          "id": 1132,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:36.192Z"
+        }
+      ]
+    },
+    {
+      "id": "f0e108f0-f613-46e2-9c49-095100d64de1",
+      "status": "captured",
+      "amount_minor": 17702,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 725,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.447Z"
+        },
+        {
+          "id": 726,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:23.447Z"
+        }
+      ]
+    },
+    {
+      "id": "f5d35040-15db-43ba-9c53-95657060605e",
+      "status": "captured",
+      "amount_minor": 195027,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1103,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:34.157Z"
+        },
+        {
+          "id": 1104,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:34.157Z"
+        }
+      ]
+    },
+    {
+      "id": "f7e751a7-9e18-4350-93bc-84a80fd5a682",
+      "status": "captured",
+      "amount_minor": 176546,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1082,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.464Z"
+        },
+        {
+          "id": 1083,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:32.464Z"
+        }
+      ]
+    },
+    {
+      "id": "fd1d3718-7830-47e7-8fc6-c42bb666e8b5",
+      "status": "captured",
+      "amount_minor": 126408,
+      "currency": "USD",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1231,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:51.243Z"
+        },
+        {
+          "id": 1232,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:33:51.243Z"
+        }
+      ]
+    },
+    {
+      "id": "64e6e238-ba35-4610-a107-24bf9ac0cf54",
+      "status": "captured",
+      "amount_minor": 199965,
+      "currency": "EUR",
+      "processor": "B",
+      "events": [
+        {
+          "id": 1655,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:34:39.626Z"
+        },
+        {
+          "id": 1656,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:34:39.626Z"
+        }
+      ]
+    },
+    {
+      "id": "9c232331-a884-422f-b2cb-fbd8afabf4aa",
+      "status": "failed",
+      "amount_minor": 641,
+      "currency": "USD",
+      "processor": "A",
+      "events": [
+        {
+          "id": 1718,
+          "type": "attempt.authorize_result",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:34:44.500Z"
+        },
+        {
+          "id": 1719,
+          "type": "payment.failed",
+          "reason": "outage",
+          "processor": "A",
+          "occurred_at": "2026-11-10T23:34:44.500Z"
+        }
+      ]
+    }
+  ]
+}

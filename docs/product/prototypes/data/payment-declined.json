@@ -1,0 +1,105 @@
+{
+  "id": "5e2fd2b5-0566-413e-89ff-66f3aeb9b0c8",
+  "amount_minor": 128501,
+  "currency": "USD",
+  "description": null,
+  "reference": "processor-a-outage-7-000297",
+  "status": "declined",
+  "attempt_no": 1,
+  "is_final": true,
+  "display_status": "Declined",
+  "processor": "A",
+  "created_at": "2026-11-10T23:36:00.004Z",
+  "status_changed_at": "2026-11-10T23:36:31.799Z",
+  "final_at": "2026-11-10T23:36:31.799Z",
+  "events": [
+    {
+      "seq": 1,
+      "type": "payment.received",
+      "attempt_no": 0,
+      "from_status": null,
+      "to_status": "received",
+      "processor": null,
+      "reason": null,
+      "data": {},
+      "occurred_at": "2026-11-10T23:36:00.004Z"
+    },
+    {
+      "seq": 2,
+      "type": "payment.routed",
+      "attempt_no": 1,
+      "from_status": "received",
+      "to_status": "routed",
+      "processor": "A",
+      "reason": "initial",
+      "data": {
+        "health": {
+          "A": {
+            "state": "preferred",
+            "errors": 1,
+            "attempts": 97
+          },
+          "B": {
+            "state": "unknown",
+            "errors": 0,
+            "attempts": 0
+          }
+        }
+      },
+      "occurred_at": "2026-11-10T23:36:31.637Z"
+    },
+    {
+      "seq": 3,
+      "type": "attempt.authorize_result",
+      "attempt_no": 1,
+      "from_status": null,
+      "to_status": null,
+      "processor": "A",
+      "reason": "insufficient_funds",
+      "data": {
+        "result": "declined",
+        "latency_ms": 150
+      },
+      "occurred_at": "2026-11-10T23:36:31.799Z"
+    },
+    {
+      "seq": 4,
+      "type": "payment.declined",
+      "attempt_no": 1,
+      "from_status": "routed",
+      "to_status": "declined",
+      "processor": null,
+      "reason": "insufficient_funds",
+      "data": {},
+      "occurred_at": "2026-11-10T23:36:31.799Z"
+    },
+    {
+      "seq": 5,
+      "type": "payment.final",
+      "attempt_no": 1,
+      "from_status": null,
+      "to_status": null,
+      "processor": null,
+      "reason": null,
+      "data": {
+        "outcome": "declined"
+      },
+      "occurred_at": "2026-11-10T23:36:31.799Z"
+    },
+    {
+      "seq": 6,
+      "type": "payment.explained",
+      "attempt_no": 1,
+      "from_status": null,
+      "to_status": null,
+      "processor": null,
+      "reason": null,
+      "data": {
+        "source": "model",
+        "trigger": "final_failure",
+        "explanation_id": 35
+      },
+      "occurred_at": "2026-11-10T23:36:32.917Z"
+    }
+  ]
+}

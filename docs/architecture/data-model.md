@@ -158,7 +158,13 @@ Because the claim commits before the create starts, a concurrent request sees `i
 | `fallback_reason` | `text` | yes | For example `model_timeout`, `model_unreachable`, `model_error`, `citation_check_failed`, `cause_mismatch` |
 | `final_event_at` | `timestamptz` | no | The `payment.final` event time |
 | `generated_at` | `timestamptz` | no | |
+| `attempted_model` | `text` | yes | The model that was asked, also when the rules text is shown (REL-63); `CHECK (model IS NULL OR attempted_model = model)`; null: unknown or no model asked |
+| `model_cause` | `text` | yes | The cause key the model named; null when it gave no usable answer |
+| `rules_cause` | `text` | yes | The cause key the rules named (ADR-0013 compares the two) |
+| `generation_ms` | `integer` | yes | Wall time of the model call; `CHECK (generation_ms IS NULL OR generation_ms >= 0)`; null when no model was asked |
+| `inputs` | `jsonb` | yes | The structured facts the prompt was built from (status, reason codes, amount, timeline events); never the description |
 
+- Migration 0008 adds the five REL-63 columns as nullable, so older rows stay valid and read as unknown; its downgrade drops them.
 - Index `(payment_id, generated_at DESC)`: the endpoint returns the latest row.
 - Time to explanation (north-star metric, [ADR-0009](../decisions/0009-phase-1-owner-decisions.md)) is `generated_at - final_event_at` of each payment's first row with `trigger = 'final_failure'`.
 - A partial unique index `(payment_id) WHERE trigger = 'final_failure'` keeps the automatic explanation to one per payment: the insert uses `ON CONFLICT DO NOTHING`, and the `payment.explained` event is written only when a row was inserted, so a redelivered `payment.final` event creates nothing.

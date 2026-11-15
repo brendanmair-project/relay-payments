@@ -41,7 +41,11 @@ ENUMS: dict[str, dict[str, list[str]]] = {
     "PaymentDetailResponse": _PAYMENT_ENUMS,
     "AffectedPayment": {k: v for k, v in _PAYMENT_ENUMS.items() if k != "display_status"},
     "ProcessorHealthItem": {"name": PROCESSORS, "state": ["preferred", "avoided", "unknown"]},
-    "ExplanationResponse": {"source": ["model", "rules"], "trigger": ["final_failure", "on_request", "regenerate"]},
+    "ExplanationResponse": {
+        "source": ["model", "rules"],
+        "trigger": ["final_failure", "on_request", "regenerate"],
+        "cross_check": ["agreed", "disagreed_rules_used", "model_unavailable", "rules_only"],
+    },
     "SummaryResponse": {"source": ["model", "rules"], "trigger": ["on_request", "regenerate"]},
     "IncidentResponse": _INCIDENT_ENUMS,
     "IncidentListItem": _INCIDENT_ENUMS,

@@ -73,6 +73,12 @@ SCENARIOS: dict[str, Scenario] = {
             steps=(ControlStep(100, "a", True), ControlStep(200, "a", False)),
         ),
         Scenario(
+            "outage-story",
+            "Short console story run: Processor A is down for payments 25 to 64 (on before 25, off before 65).",
+            default_count=90,
+            steps=(ControlStep(25, "a", True), ControlStep(65, "a", False)),
+        ),
+        Scenario(
             "processor-a-degraded",
             "Processor A times out on 35% of payments (timeout_rate 0.35 instead of 0.02) for payments 100 to 199, "
             "then its default profile returns. A partial degradation, not an outage; the same drain applies.",

@@ -76,3 +76,14 @@ test("the api itself refuses analytics without the key, and a foreign Host is re
   expect(res.status()).toBe(403);
   await ctx.dispose();
 });
+
+// REL-67 exit check: the figures list once pushed the page 13 px sideways at 320 px.
+test("the analytics page has no horizontal page scroll at 320 px", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto("/analytics");
+  await expect(page.getByRole("table", { name: "Figures by processor" })).toBeVisible();
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
+});

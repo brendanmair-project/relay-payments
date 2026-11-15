@@ -16,16 +16,16 @@ Every endpoint needs one static key, `RELAY_API_KEY`. Put a plain value in your 
 bash:
 
 ```bash
-git clone https://github.com/brendanmair-project/relay.git
-cd relay
+git clone https://github.com/brendanmair-project/relay-payments.git
+cd relay-payments
 export RELAY_API_KEY=local-demo-key-1
 ```
 
 PowerShell:
 
 ```powershell
-git clone https://github.com/brendanmair-project/relay.git
-cd relay
+git clone https://github.com/brendanmair-project/relay-payments.git
+cd relay-payments
 $env:RELAY_API_KEY = "local-demo-key-1"
 ```
 
@@ -149,7 +149,7 @@ curl -s http://127.0.0.1:8000/payments/$PAYMENT_ID/explanation -H "X-API-Key: $R
 Invoke-RestMethod http://127.0.0.1:8000/payments/$PAYMENT_ID/explanation -Headers @{ "X-API-Key" = $env:RELAY_API_KEY }
 ```
 
-If a local Ollama model is reachable the text comes from the model (`"source":"model"`, and the first call can take several seconds); otherwise it comes from deterministic rules and is labelled `"source":"rules"`. Both are valid answers.
+If a local Ollama model is reachable the text comes from the model (`"source":"model"`, and the first call can take several seconds); otherwise it comes from deterministic rules and is labelled `"source":"rules"`. Both are valid answers. The response also says how the text was produced: `attempted_model`, `generation_ms` (how long the model call took; null when no model was asked), `model_cause` and `rules_cause` (what each side named), the `inputs` the model was given (status, reason codes, the timeline events and the amount; never the payment description) and a `cross_check` verdict: `agreed`, `disagreed_rules_used` (the model named a different cause than the rules, so the rules text is shown), `model_unavailable` or `rules_only`. The console shows the same on the payment page under "How the AI explained this".
 
 ## 7. Stop
 
@@ -159,6 +159,19 @@ docker compose down -v
 
 `-v` also deletes the data.
 
+## One-click story mode
+
+To show the whole outage story without a terminal, open the console at http://localhost:3000 and press **Run the outage demo**. The simulator starts a seeded run of 90 synthetic payments (seed 66, 4 a second; set `STORY_SEED` and `STORY_RATE` for the simulator service to change them): Processor A goes down before payment 25, comes back before payment 65, and the load generator waits for earlier payments to finish before each switch. The run takes about two minutes, mostly the router's health window after the outage ends.
+
+While it runs, one caption under the demo controls names the step, and each one follows the run's state or the console's own data, not a timer:
+
+1. **Payments flowing**: the run is sending payments.
+2. **Processor A failing**: the outage is on and Processor A is not yet avoided.
+3. **Relay routing to Processor B**: the processor health shows Processor A avoided.
+4. **Explanations arriving**: a payment that failed after the outage began has a stored explanation (the rules text when no model is reachable).
+5. **Money recovered**: the run finished; read the Revenue recovered figure in the Money saved headline.
+
+**Stop the demo** ends the run early and switches the outage back off. A second start while a run is active is refused (the console says a run is already running), and the manual Processor A outage switch is read-only until the run ends. The same run can be driven from a terminal with the keyed control API, see "Simulator APIs" in [api-contract.md](../architecture/api-contract.md).
 ## Troubleshooting
 
 - Compose complains that `RELAY_API_KEY` is not set: set it in the shell you run `docker compose` from.

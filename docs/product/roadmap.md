@@ -56,5 +56,20 @@ A complete vertical slice, small but end to end:
 - Adaptive routing beats the Phase 1 rule-based routing on the synthetic environment by a stated, reproducible measure.
 - Any paid dependency has an owner decision recorded as an Accepted ADR; otherwise the feature works with free and open-source tooling.
 
+## Phase 5 — Showcase polish
+Owner decisions of 2026-11-10 (ADR-0018, Proposed until the owner chooses a console direction):
+
+- The AI made visible: how each explanation was produced (the model, what it saw, its answer, the time taken and the rules cross-check), per failure (REL-63).
+- A money-saved headline: revenue recovered and investigation time saved, measured on the synthetic environment (REL-64).
+- A visual redesign of the console in the direction the owner chooses from three prototypes (`docs/product/prototypes/`): bolder but trustworthy, with a strong headline, charts, motion only in response to user actions, and status never shown by colour alone (REL-65).
+- A one-click outage story mode (REL-66).
+- The local free model stays (`granite3.3:2b`, ADR-0010); no hosted AI. A new frontend library needs an exact pin, a licence check at that version and the owner's approval recorded in ADR-0018 first; plain CSS and SVG are preferred.
+
+**Exit criteria:**
+- A viewer understands the problem, the AI's role and the money saved within the first screen.
+- Every number on that screen is measured on the synthetic environment, labelled "synthetic" (or "estimated against the 2-hour manual baseline" for time saved), and none is invented.
+- The outage story runs from one click.
+- The console passes axe with 0 violations at 1280, 375 and 320 px with no horizontal overflow.
+
 ## Sequencing risk
 Later phases consume the event history designed in Phase 1. If the event schema is under-designed, expect rework; tracked as R1 in `docs/delivery/risk-register.md` (Low likelihood given the transactional outbox).

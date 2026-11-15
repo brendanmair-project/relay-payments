@@ -319,6 +319,11 @@ services:
       RELAY_API_KEY: ${RELAY_API_KEY:?set RELAY_API_KEY in .env (cp .env.example .env)}
       SIM_SEED: ${SIM_SEED:-42}
       PROCESSOR_TIMEOUT_SECONDS: ${PROCESSOR_TIMEOUT_SECONDS:-5}
+      # REL-66 story run: the control API starts the load generator, which calls the public API (no depends_on:
+      # the worker already waits for the simulator, and a run starts only when asked).
+      RELAY_API_URL: ${RELAY_API_URL:-http://api:8000}
+      STORY_SEED: ${STORY_SEED:-66}
+      STORY_RATE: ${STORY_RATE:-4}
     ports:
       - "127.0.0.1:${SIM_CONTROL_HOST_PORT:-8101}:8101"
     healthcheck:

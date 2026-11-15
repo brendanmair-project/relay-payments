@@ -1,6 +1,12 @@
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import {
+  agreedExplanation,
+  agreedPayment,
+  disagreedExplanation,
+  disagreedPayment,
+} from "../tests/fixtures/explanations";
 import PaymentDetail from "./PaymentDetail";
 
 const ID = "00000000-0000-4000-8000-000000000042";
@@ -239,5 +245,30 @@ describe("PaymentDetail", () => {
     render(<PaymentDetail id={ID} />);
     expect(await screen.findByText(explanation.text)).toBeInTheDocument();
     expect(asked(fn)).toBe(true);
+  });
+
+  it("shows the 'How the AI explained this' panel from a real api response, without the description", async () => {
+    for (const [payment, x] of [
+      [agreedPayment, agreedExplanation],
+      [disagreedPayment, disagreedExplanation],
+    ] as const) {
+      cleanup();
+      stub({
+        [`/api/payments/${payment.id}`]: { body: payment },
+        [`/api/payments/${payment.id}/explanation`]: { body: x },
+        [H]: { body: health },
+      });
+      render(<PaymentDetail id={payment.id} />);
+      const panel = await screen.findByRole("region", { name: "How the AI explained this" });
+      expect(within(panel).getByText(/^Cross-check: /)).toBeInTheDocument();
+      expect(panel.textContent).not.toContain(payment.description);
+    }
+  });
+
+  it("shows no AI panel when no explanation is needed", async () => {
+    stub({ [P]: { body: firstTime }, [H]: { body: health } });
+    render(<PaymentDetail id={ID} />);
+    await screen.findByText(ID);
+    expect(screen.queryByRole("region", { name: "How the AI explained this" })).toBeNull();
   });
 });

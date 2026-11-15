@@ -1,0 +1,13 @@
+{
+  "payment_id": "75a0d7b4-d50a-4baf-b5ce-489d70d5491f",
+  "source": "model",
+  "model": "granite3.3:2b",
+  "text": "The customer's bank refused the payment 761.52 EUR on the second attempt due to the processor's 'do not honor' reason.",
+  "cited_event_seqs": [
+    3,
+    7
+  ],
+  "trigger": "final_failure",
+  "generated_at": "2026-11-10T23:33:49.021Z",
+  "fallback_reason": null
+}

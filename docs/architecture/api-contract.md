@@ -100,6 +100,14 @@ Every 4xx and 5xx response uses one body (REL-52):
 | `trigger` | string | `final_failure`, `on_request` or `regenerate` |
 | `generated_at` | timestamp | |
 | `fallback_reason` | string or null | Why the model was not used, for example `model_timeout` or `cause_mismatch` (the model named a different cause than the rules, ADR-0013) |
+| `attempted_model` | string or null | The model that was asked, even when the rules text is shown; null when no model was asked (rules only) and for rows stored before REL-63 |
+| `model_cause` | string or null | The cause key the model named (the same keys as `rules_cause`); null when it gave no usable answer |
+| `rules_cause` | string or null | The cause key the rules named for this timeline |
+| `generation_ms` | integer or null | Wall time of the model call in milliseconds, also when it timed out or failed; null when no model was asked |
+| `inputs` | object or null | The structured facts the prompt was built from: `status`, `reason_codes`, `amount` (major units with currency) and `events` (per event `seq`, `type`, `time`, `attempt`, `processor`, `reason`, `result`, `outcome`). Never the payment description (ADR-0012) |
+| `cross_check` | string or null | `agreed` (the model's text is shown), `disagreed_rules_used` (different causes, rules text shown), `model_unavailable` (asked but timed out, failed or gave an unusable answer, rules text shown) or `rules_only` (no model configured). Null only for a row stored before REL-63 that cannot tell (`model_unreachable` with no recorded attempt) |
+
+Rows stored before REL-63 read as unknown: `attempted_model`, `model_cause`, `rules_cause`, `generation_ms` and `inputs` are null, and `cross_check` is derived from `source` and `fallback_reason` where they tell.
 
 ## Endpoints
 
@@ -288,6 +296,7 @@ Response 200:
 | `latency` | object | `count`, `p50_ms`, `p95_ms`, `p99_ms`: `payment.received` to `payment.final` over final payments (nearest rank) |
 | `processors` | object | `A` and `B` (only the filtered one with `processor`), each: `volume` (payments routed to it), `captured`, `failed`, `declined`, `success_rate` (the one success-rate definition, below; null when the processor handled no final payment), `latency` (the same percentiles over final payments it handled, `payments.processor`), `call_latency` (`count` and percentiles of `latency_ms` in its `attempt.*` events) and `failure_reasons` (count per reason of its `payment.failed` and `payment.declined` events) |
 | `revenue_recovered_by_rescue_path` | object | `retry`, `failover`, `redrive`, each `count` and `amount_minor_by_currency` (minor units, never mixed) |
+| `money_saved` | object | REL-64, defined in [metrics](../product/metrics.md). `payments_rescued` (`count` and `by_rescue_path` with `failover` and `retry`, each `count` and `amount_minor_by_currency`), `revenue_recovered` (`amount_minor_by_currency`, minor units per currency, never summed across currencies, and its `definition`) and `investigation_time_saved` (`estimated: true`, `label` "estimated against the 2-hour manual baseline", `baseline_seconds` 7200, `explained_failures`, `seconds_saved`, `definition`). A rescued payment failed an attempt on one processor and was captured on a later attempt; empty windows give zeros and empty objects. The time saved is an estimate against the ADR-0009 assumption, never measured time saved |
 | `time_to_explanation` | object | `{"available": false, "note": ...}` before any explanation exists; otherwise per `source` `count`, `p50_ms`, `p95_ms`, plus `all`, `fallback_rate`, `fallback_reasons` (count per stored `fallback_reason`), `backlog_max` and `backlog_end` |
 
 ### `GET /analytics/baseline`
@@ -438,7 +447,12 @@ Control API, `127.0.0.1:8101`, requires `X-API-Key`:
 | `GET /control/processors` | `{"processors": {"a": {"profile": {...}, "outage": false}, "b": {...}}}` |
 | `PUT /control/processors/{a,b}/profile` | Body `{"latency_ms_p50", "latency_ms_p95", "decline_rate", "timeout_rate"}` plus optional `capture_failure_rate` (default 0); replaces the whole profile and returns the same shape as the GET |
 | `POST /control/processors/{a,b}/outage` | Body `{"enabled": true}` or `{"enabled": false}`; returns the same shape as the GET |
+| `POST /control/story/run` | Starts the seeded outage story (REL-66): the generator's `outage-story` scenario, 90 payments, Processor A down before payment 25 and up before payment 65, at `STORY_RATE` a second (default 4) with `STORY_SEED` (default 66). Returns 202 with the status. One run at a time: 409 `run_in_progress` while one is running or stopping |
+| `GET /control/story/run` | The status: `{"state": "idle" or "running" or "stopping" or "finished" or "stopped" or "failed", "phase": "flowing" or "outage" or "recovering" or "done" or null, "sent", "total", "switches": [{"processor", "outage", "at"}], "started_at", "finished_at", "error_code"}`. `phase` is null unless the run is active or finished; `error_code` is `api_unreachable`, `drain_timeout` or `run_failed` when `state` is `failed` |
+| `DELETE /control/story/run` | Stops a running run: answers 200 with the status (`state` `stopping`), and the run switches any outage back off before it ends as `stopped`. When nothing runs it also answers 200 with the current status and changes nothing (stopping is idempotent) |
 | `GET /health` | Liveness |
+
+The story run is the load generator on a thread inside the simulator; it calls only the public API (`RELAY_API_URL`, default `http://api:8000`) and this control API, with the same key. The console's `GET`, `POST` and `DELETE /api/demo/run` server routes forward to these endpoints: `POST` and `DELETE` are same-origin only (403 `forbidden_origin` otherwise, as for the outage switch), `GET` returns only the status fields above, and an upstream error such as the 409 passes through unchanged.
 
 Profiles are validated: latencies are positive with p95 at least p50, rates lie between 0 and 1, and neither `decline_rate` plus `timeout_rate` nor `capture_failure_rate` plus `timeout_rate` exceeds 1. Latency is log-normal with the profile's p50 and p95. Defaults (synthetic): A has p50 120 ms, p95 400 ms, decline 0.10, timeout 0.02, capture failure 0.01; B has p50 250 ms, p95 800 ms, decline 0.08, timeout 0.01, capture failure 0.01. Declines carry one of `insufficient_funds`, `do_not_honor` or `card_expired`; a failed capture carries `capture_failed`.
 

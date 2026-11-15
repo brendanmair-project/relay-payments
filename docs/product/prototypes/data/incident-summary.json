@@ -1,0 +1,14 @@
+{
+  "incident_id": "cd2efc14-9edf-40af-95a2-28e7e67dfcd3",
+  "source": "rules",
+  "model": null,
+  "text": "Processor A: 64 payments were affected. Failures by kind: 63 outage, 1 timeout, 0 capture_failed. They ran from 2026-11-10T23:33:12.621Z to 2026-11-10T23:34:44.500Z. 59 of the affected payments were rescued by failover or retry. Routing saw the processor healthy again 114 seconds after the incident opened.",
+  "cited_event_ids": [
+    518,
+    721
+  ],
+  "cause": "mixed",
+  "trigger": "on_request",
+  "generated_at": "2026-11-10T23:36:19.641Z",
+  "fallback_reason": "cause_mismatch"
+}

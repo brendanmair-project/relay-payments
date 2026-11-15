@@ -87,7 +87,7 @@ Responses:
 
 Get the latest explanation of a final payment
 
-Returns the latest stored explanation, labelled with its source (`model` or `rules`). A final payment without one gets one generated and stored with `trigger=on_request`. 404 for an unknown payment, 409 `payment_not_final` while it is still processing or retrying.
+Returns the latest stored explanation, labelled with its source (`model` or `rules`). A final payment without one gets one generated and stored with `trigger=on_request`. Also returns how it was produced: the model asked, the cause each side named, `generation_ms`, the `inputs` the model was given (never the description) and the `cross_check` verdict (null for rows stored before these were kept). 404 for an unknown payment, 409 `payment_not_final` while it is still processing or retrying.
 
 Parameters:
 
@@ -601,6 +601,12 @@ Responses:
 | `trigger` | one of `final_failure`, `on_request`, `regenerate` | yes |
 | `generated_at` | `string` | yes |
 | `fallback_reason` | `string` or `null` | yes |
+| `attempted_model` | `string` or `null` | yes |
+| `model_cause` | `string` or `null` | yes |
+| `rules_cause` | `string` or `null` | yes |
+| `generation_ms` | `integer` or `null` | yes |
+| `inputs` | `object` or `null` | yes |
+| `cross_check` | one of `agreed`, `disagreed_rules_used`, `model_unavailable`, `rules_only` or `null` | yes |
 
 ### `IncidentCreate`
 

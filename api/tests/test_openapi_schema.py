@@ -125,6 +125,7 @@ def test_an_unsupported_currency_is_still_422_validation_failed(client: TestClie
         ("ProcessorHealthItem", "state", ["preferred", "avoided", "unknown"]),
         ("ExplanationResponse", "source", ["model", "rules"]),
         ("ExplanationResponse", "trigger", ["final_failure", "on_request", "regenerate"]),
+        ("ExplanationResponse", "cross_check", ["agreed", "disagreed_rules_used", "model_unavailable", "rules_only"]),
         ("SummaryResponse", "source", ["model", "rules"]),
         ("SummaryResponse", "trigger", ["on_request", "regenerate"]),
         ("IncidentResponse", "source", ["rule", "manual"]),

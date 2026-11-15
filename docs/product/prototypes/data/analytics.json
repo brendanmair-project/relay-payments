@@ -1,0 +1,127 @@
+{
+  "window": {
+    "from": "2026-11-09T23:39:29.400Z",
+    "to": "2026-11-10T23:39:29.400Z",
+    "processor": null
+  },
+  "volume": {
+    "payments": 300,
+    "final": 300
+  },
+  "latency": {
+    "count": 300,
+    "p50_ms": 22900.129,
+    "p95_ms": 67289.273,
+    "p99_ms": 74170.948
+  },
+  "processors": {
+    "A": {
+      "volume": 263,
+      "captured": 174,
+      "failed": 2,
+      "declined": 22,
+      "success_rate": 0.8788,
+      "latency": {
+        "count": 198,
+        "p50_ms": 19747.929,
+        "p95_ms": 33880.542,
+        "p99_ms": 35354.554
+      },
+      "call_latency": {
+        "count": 438,
+        "p50_ms": 104.0,
+        "p95_ms": 379.0,
+        "p99_ms": 802.0
+      },
+      "failure_reasons": {
+        "card_expired": 8,
+        "do_not_honor": 6,
+        "insufficient_funds": 8,
+        "outage": 63,
+        "timeout": 4
+      }
+    },
+    "B": {
+      "volume": 103,
+      "captured": 92,
+      "failed": 2,
+      "declined": 8,
+      "success_rate": 0.902,
+      "latency": {
+        "count": 102,
+        "p50_ms": 38254.459,
+        "p95_ms": 73281.544,
+        "p99_ms": 74835.582
+      },
+      "call_latency": {
+        "count": 197,
+        "p50_ms": 260.0,
+        "p95_ms": 1015.0,
+        "p99_ms": 5006.0
+      },
+      "failure_reasons": {
+        "capture_failed": 1,
+        "card_expired": 3,
+        "do_not_honor": 2,
+        "insufficient_funds": 3,
+        "timeout": 2
+      }
+    }
+  },
+  "revenue_recovered_by_rescue_path": {
+    "retry": {
+      "count": 59,
+      "amount_minor_by_currency": {
+        "EUR": 2182898,
+        "GBP": 1263897,
+        "JPY": 348848,
+        "USD": 4103248
+      }
+    },
+    "failover": {
+      "count": 33,
+      "amount_minor_by_currency": {
+        "EUR": 949482,
+        "GBP": 354321,
+        "JPY": 553185,
+        "USD": 2455177
+      }
+    },
+    "redrive": {
+      "count": 12,
+      "amount_minor_by_currency": {
+        "EUR": 361389,
+        "GBP": 607168,
+        "USD": 773676
+      }
+    }
+  },
+  "time_to_explanation": {
+    "available": true,
+    "sources": {
+      "model": {
+        "count": 31,
+        "p50_ms": 1026.272,
+        "p95_ms": 4045.312
+      },
+      "rules": {
+        "count": 3,
+        "p50_ms": 1265.951,
+        "p95_ms": 1596.979
+      }
+    },
+    "all": {
+      "count": 34,
+      "p50_ms": 1062.714,
+      "p95_ms": 4045.312
+    },
+    "fallback_rate": 0.0882,
+    "fallback_reasons": {
+      "cause_mismatch": 3
+    },
+    "fallback_cause_mismatch": 3,
+    "fallback_model_failures": 0,
+    "backlog_max": 3,
+    "backlog_end": 0
+  }
+}

@@ -9,6 +9,7 @@ through the transition service. The partial unique index plus `ON CONFLICT DO NO
 import uuid
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Any
 
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import insert as pg_insert
@@ -23,6 +24,7 @@ from app.explain.model import ModelClient
 from app.explain.rules import ExplainEvent
 from app.services.transitions import PaymentNotFoundError, append_event
 
+UNAVAILABLE_REASONS = ("model_timeout", "model_error", "citation_check_failed")
 TRIGGERS = ("final_failure", "on_request", "regenerate")
 
 
@@ -50,6 +52,24 @@ class StoredExplanation:
     fallback_reason: str | None
     final_event_at: datetime
     generated_at: datetime
+    attempted_model: str | None = None
+    model_cause: str | None = None
+    rules_cause: str | None = None
+    generation_ms: int | None = None
+    inputs: dict[str, Any] | None = None
+
+    @property
+    def cross_check(self) -> str | None:
+        """How the model's answer and the rules compared (REL-63); None when a pre-REL-63 row cannot tell."""
+        if self.source == "model":
+            return "agreed"
+        if self.fallback_reason == "cause_mismatch":
+            return "disagreed_rules_used"
+        if self.attempted_model is not None or self.fallback_reason in UNAVAILABLE_REASONS:
+            return "model_unavailable"
+        if self.inputs is not None:
+            return "rules_only"  # stored with details, but no model was asked
+        return None  # an old model_unreachable row: no model configured, or one that did not answer
 
     @classmethod
     def of(cls, row: PaymentExplanation) -> "StoredExplanation":
@@ -64,6 +84,11 @@ class StoredExplanation:
             row.fallback_reason,
             row.final_event_at,
             row.generated_at,
+            row.attempted_model,
+            row.model_cause,
+            row.rules_cause,
+            row.generation_ms,
+            row.inputs,
         )
 
 
@@ -132,6 +157,11 @@ def insert_explanation(
             fallback_reason=generated.fallback_reason,
             final_event_at=snapshot.final_event_at,
             generated_at=sa.func.clock_timestamp(),
+            attempted_model=generated.attempted_model,
+            model_cause=generated.model_cause,
+            rules_cause=generated.rules_cause,
+            generation_ms=generated.generation_ms,
+            inputs=generated.inputs,
         )
         .on_conflict_do_nothing()
         .returning(PaymentExplanation)

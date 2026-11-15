@@ -46,6 +46,7 @@ Task status lives in GitHub Issues, one issue per task id.
 | Phase 2 - Operations depth | REL-33 to REL-38 | 6 |
 | Phase 3 - Integrations | REL-57 to REL-42 | 5 |
 | Phase 4 - Optimization | REL-58 to REL-61 | 7 |
+| Phase 5 - Showcase polish | REL-62 to REL-67 | 6 |
 
 ## Setup
 
@@ -1590,3 +1591,158 @@ Out of scope:
 - No work from later phases
 - No paid services or hosted AI APIs
 - No test weakening
+
+## Phase 5 - Showcase polish
+
+| ID | Task | Owner | Depends on | Checks |
+| --- | --- | --- | --- | --- |
+| REL-62 | Phase 5 decisions and three console design directions | Claude | REL-46 | `docs-review`, `owner-confirm` |
+| REL-63 | AI made visible: how each explanation was produced | Claude | REL-62 | `api-tests`, `api-lint`, `web-check`, `web-test`, `e2e` |
+| REL-64 | Money-saved metrics: revenue recovered and investigation time saved | Claude | REL-62 | `api-tests`, `api-lint` |
+| REL-65 | Console redesign in the chosen direction with the money-saved headline | Claude | REL-63, REL-64 | `web-check`, `web-test`, `e2e`, `owner-confirm` |
+| REL-66 | One-click outage story mode | Claude | REL-65 | `sim-tests`, `sim-lint`, `web-check`, `web-test`, `e2e`, `api-tests` |
+| REL-67 | Phase 5 exit: review, refreshed public copy and rebuilt demo video | Claude | REL-66 | `web-test`, `web-check`, `ci-green`, `docs-review`, `owner-confirm` |
+
+### REL-62: Phase 5 decisions and three console design directions
+
+- Owner: Claude
+- Depends on: REL-46
+- Labels: phase-5, design
+- Paths: `docs/`, `AGENTS.md`
+
+Acceptance:
+- [ ] Owner decision 2026-11-10 (Phase 5): Phase 5 makes Relay show its value: the AI made visible per failure, a money-saved headline, a visual redesign of the console, and a one-click outage story mode; the local free model stays (granite3.3:2b, ADR-0010), no hosted AI
+- [ ] Owner decision 2026-11-10 (Phase 5): the UI direction becomes bolder but trustworthy (a polished modern operations look with a strong headline, charts, motion only in response to user actions, still accessible with status never shown by colour alone); recorded as ADR-0018, which amends the UI direction in AGENTS.md
+- [ ] Three console design directions are built as prototypes on real data from the running stack with the `design-options` skill (screenshots at desktop and phone width), and the owner chooses one before REL-65 starts
+- [ ] `docs/product/roadmap.md` gains a Phase 5 section with exit criteria: a viewer understands the problem, the AI's role and the money saved within the first screen, every number on it is measured and labelled synthetic, and the outage story runs from one click
+- [ ] Any new frontend library a chosen direction needs (for example a chart or motion library) is free and open source, pinned exactly, licence-checked at that version and recorded in ADR-0018 with the owner's approval before REL-65 uses it; plain CSS and SVG are preferred
+
+Steps:
+1. **Write ADR-0018** - Record the Phase 5 decisions and the new UI direction.
+2. **Build three design directions** - Prototypes on real data with the design-options skill; screenshots for the owner.
+3. **Record the owner's choice** - Add the chosen direction and its rules to the dashboard spec.
+4. **Open pull request and pass review** - CI is green, the reviewer confirms correctness against the requirements, the maintainer approves, and the pull request is squash-merged with the issue closed.
+
+Out of scope:
+- No paid services or hosted AI APIs
+- No test weakening
+- No claim or number that the project's files do not support; synthetic results stay labelled
+
+### REL-63: AI made visible: how each explanation was produced
+
+- Owner: Claude
+- Depends on: REL-62
+- Labels: phase-5, ai, ui
+- Paths: `api/app/explain/`, `api/app/explainer/`, `api/app/db/`, `api/migrations/`, `api/app/api/`, `api/app/openapi_schema.py`, `api/tests/`, `frontend/app/`, `frontend/tests/`, `docs/architecture/`, `docs/guides/`
+
+Acceptance:
+- [ ] Each stored explanation records how long generation took (`generation_ms`), the model's named cause and the rules cause, and the inputs the model was given (the same facts the prompt uses: status, reason codes, timeline; never the payment description, ADR-0012); a migration adds the columns, existing rows read as unknown
+- [ ] `GET /payments/{id}/explanation` returns them, plus a `cross_check` verdict (`agreed`, `disagreed_rules_used` or `rules_only`); the API contract, the generated reference and the guides are updated
+- [ ] The payment page shows a panel 'How the AI explained this': model name and that it runs locally, inputs shown, answer, time taken, and the cross-check verdict in words; a rules-only explanation says so plainly
+- [ ] Tests: storage and API fields, the description never appears in stored inputs or the response, the panel in every source and verdict case (Vitest) and in the e2e suite with the model unreachable
+
+Steps:
+1. **Write failing tests** - Fields, the description guard, and the panel cases.
+2. **Record generation details** - Migration and explainer changes.
+3. **Expose them in the API** - Explanation response and docs.
+4. **Build the panel** - Payment page panel, accessible, in the chosen direction once REL-65 restyles it.
+5. **Open pull request and pass review** - CI is green, the reviewer confirms correctness against the requirements, the maintainer approves, and the pull request is squash-merged with the issue closed.
+
+Out of scope:
+- No paid services or hosted AI APIs
+- No test weakening
+- No claim or number that the project's files do not support; synthetic results stay labelled
+
+### REL-64: Money-saved metrics: revenue recovered and investigation time saved
+
+- Owner: Claude
+- Depends on: REL-62
+- Labels: phase-5, metrics
+- Paths: `api/app/analytics/`, `api/app/reporting/`, `api/app/openapi_schema.py`, `api/tests/`, `docs/product/`, `docs/architecture/`, `docs/guides/`
+
+Acceptance:
+- [ ] `/analytics` gains `money_saved`: revenue recovered per currency and payments rescued, split by rescue path (failover to the other processor, retry), counted from payments that failed an attempt on one processor and were captured on a later attempt; the definition is in `docs/product/metrics.md`
+- [ ] Investigation time saved: per explained final failure, the 2-hour manual baseline of ADR-0009 minus the measured time to explanation, summed and reported with its definition and the label 'estimated against the 2-hour manual baseline'; never presented as measured time saved
+- [ ] Tests with fixtures written through the real event code: each rescue path, a payment that failed on both processors (not rescued), currencies kept separate, the time-saved arithmetic, and empty windows
+
+Steps:
+1. **Write failing tests** - Rescue paths, the not-rescued case, currencies and time saved.
+2. **Compute money_saved** - In the analytics and reporting code, one definition.
+3. **Document the definitions** - metrics.md, api-contract.md and the generated reference.
+4. **Open pull request and pass review** - CI is green, the reviewer confirms correctness against the requirements, the maintainer approves, and the pull request is squash-merged with the issue closed.
+
+Out of scope:
+- No paid services or hosted AI APIs
+- No test weakening
+- No claim or number that the project's files do not support; synthetic results stay labelled
+
+### REL-65: Console redesign in the chosen direction with the money-saved headline
+
+- Owner: Claude
+- Depends on: REL-63, REL-64
+- Labels: phase-5, ui
+- Paths: `frontend/app/`, `frontend/tests/`, `frontend/public/`, `docs/architecture/`
+
+Acceptance:
+- [ ] The console is rebuilt in the direction the owner chose in REL-62: a headline band with revenue recovered, payments rescued and investigation time saved (from REL-64, labelled synthetic and estimated where it is), processor health with a clear failover state, the payments list, the AI panel (REL-63) and the AI incident summary of any open incident
+- [ ] Accessibility is kept: axe passes on every page, status is never shown by colour alone, text contrast meets WCAG AA, motion only in response to user actions and respecting reduced motion
+- [ ] Screenshots at 1280 px and phone width during a scripted outage for the owner's approval; the dashboard spec is updated
+
+Steps:
+1. **Write failing tests** - Headline figures from the API, accessibility and layout states.
+2. **Rebuild the console** - In the chosen direction, reusing the existing data routes.
+3. **Screenshots for the owner** - Desktop and phone width during an outage.
+4. **Open pull request and pass review** - CI is green, the reviewer confirms correctness against the requirements, the maintainer approves, and the pull request is squash-merged with the issue closed.
+
+Out of scope:
+- No paid services or hosted AI APIs
+- No test weakening
+- No claim or number that the project's files do not support; synthetic results stay labelled
+
+### REL-66: One-click outage story mode
+
+- Owner: Claude
+- Depends on: REL-65
+- Labels: phase-5, ui, demo
+- Paths: `simulator/app/`, `simulator/generator/`, `simulator/tests/`, `frontend/app/`, `frontend/tests/`, `docker-compose.yml`, `api/tests/`, `docs/architecture/`, `docs/guides/`
+
+Acceptance:
+- [ ] A 'Run the outage demo' control starts a seeded scenario run: the simulator gains a keyed control endpoint that starts and reports a load run (the load generator still uses only the public API), and the console's server route calls it under the same-origin and local-host rules of ADR-0012
+- [ ] While it runs, the console shows short step captions (payments flowing, Processor A failing, Relay routing to B, explanations arriving, money recovered) driven by the run's state, not by timers alone; the run can be stopped; a second start while one runs is refused
+- [ ] Tests: the simulator endpoint (start, status, refuse a second, stop), the server route's access rules, and an e2e test of the story mode end to end with the model unreachable
+
+Steps:
+1. **Write failing tests** - Simulator control endpoint, route guard and e2e.
+2. **Add the run control** - Simulator endpoint and compose wiring.
+3. **Build story mode** - Console control and step captions.
+4. **Open pull request and pass review** - CI is green, the reviewer confirms correctness against the requirements, the maintainer approves, and the pull request is squash-merged with the issue closed.
+
+Out of scope:
+- No paid services or hosted AI APIs
+- No test weakening
+- No claim or number that the project's files do not support; synthetic results stay labelled
+
+### REL-67: Phase 5 exit: review, refreshed public copy and rebuilt demo video
+
+- Owner: Claude
+- Depends on: REL-66
+- Labels: phase-5, release
+- Paths: `docs/`, `README.md`, `frontend/app/`, `frontend/tests/`
+
+Acceptance:
+- [ ] Exit review `docs/evaluation/phase-5-exit-review.md` against the Phase 5 exit criteria, with fresh evidence and owner approval; the README's walkthrough screenshots are retaken
+- [ ] The public copy `relay-payments` is refreshed from the release tree with the noreply author (lesson L-081), scanned for secrets, paths and the owner's address, and pushed only after the owner's explicit go-ahead
+- [ ] The demo video is rebuilt with the `demo-video` skill: story first, readable at 1080p, the AI and money saved shown, a full cut of about 5 to 6 minutes (business story plus technical depth) and a business-first 90-second cut, captions and a spoken script; it is attached to a GitHub release of `relay-payments` (owner decision 2026-11-14: not committed, the 25 MiB guard stays) only after the owner's go-ahead, and the README links to it
+- [ ] Accessibility findings of the exit check are fixed with regression tests: the story-mode hint text met 1.41:1 contrast (4.5:1 needed) after a run, and the analytics per-processor table overflowed the page at 320 px; axe reports 0 violations at 1280, 375 and 320 px on the console, analytics and incidents pages, including the story-mode finished state
+
+Steps:
+1. **Write the exit review** - Exit criteria with fresh evidence.
+2. **Fix the exit-check accessibility findings** - Story-mode hint contrast and the analytics table at 320 px, tests first.
+3. **Refresh the public copy** - Export, scan, owner go-ahead, push.
+4. **Rebuild the demo video** - With the demo-video skill; deliver to Downloads; attach to a relay-payments release after the owner's go-ahead.
+5. **Open pull request and pass review** - CI is green, the reviewer confirms correctness against the requirements, the maintainer approves, and the pull request is squash-merged with the issue closed.
+
+Out of scope:
+- No paid services or hosted AI APIs
+- No test weakening
+- No claim or number that the project's files do not support; synthetic results stay labelled

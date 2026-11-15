@@ -4,10 +4,18 @@ Template: claude/dashboard@1
 
 Status: Active (REL-26)  
 Owner: Brendan  
-Last reviewed: 2026-10-29  
+Last reviewed: 2026-11-14  
 Review due: 2026-11-29
 
 ## Decision question
+
+Phase 5 layout (ADR-0018, chosen by the owner on 2026-11-10; REL-65 builds it, and this section governs where it differs from the Phase 1 layout below). From top to bottom:
+
+1. The value story from prototype B: the problem in one sentence, the money-saved headline with its labels, and the before and after.
+2. The AI section from prototype C: the five-step strip, one failure's explanation panel and a cross-check disagreement case.
+3. The dense console from prototype A: processor health and failover, the payments list, and the incident with its AI summary.
+
+"Run the outage demo" sits in the header. Every figure on a page comes from one run. The prototypes are in `docs/product/prototypes/` (`console-a-command-centre.html`, `console-b-value-story.html` and `console-c-ai-first.html`).
 
 This dashboard answers: **Which payments are failing, stuck or being retried right now, and on which processor?**
 
@@ -49,6 +57,18 @@ Counts are for the rows in view only (latest 20). Both signals are text, not col
 - Text alternative/table: the table is the text form; each status is a text label (Received, Processing, Retrying, Captured, Declined, Failed) from the API's `display_status`. A failed payment that is not final shows as Retrying.
 - Source/query: `GET /api/payments?limit=20`, which calls `GET /payments?limit=20` ([api-contract.md](api-contract.md)).
 - Drill-down: the payment id links to the detail view when REL-27 adds it; until then it is plain text.
+
+### Home page, Phase 5 build (REL-65)
+
+Built as the three-part layout above; the text below is the contract the code and `frontend/app/page.test.tsx` follow.
+
+- Header: product name, "Synthetic data only.", links to Incidents and Analytics, the Processor A outage control (kept as the demo control; the one-click story is REL-66) and a skip link to the console.
+- Money saved (headline band, label "Synthetic data"): the problem in one sentence, then three figures read from `money_saved` in `GET /api/analytics` over the last 24 hours (refreshed every 10 s): revenue recovered per currency (one figure per currency, never summed across currencies; the older `revenue_recovered_by_rescue_path` is not used here), payments rescued with the failover and retry split, and investigation time saved in hours with the API's exact label "estimated against the 2-hour manual baseline" and the count of explained failures. "How these are counted" shows the API's two definitions. Empty window: "No rescued payments in the last 24 hours yet." Error: "Could not load the money-saved figures."
+- Before and after (label "Synthetic data"): static-routing against Relay success rate from `GET /api/analytics/baseline` (committed REL-30 run), as text with a bar that repeats the number; "Baseline unavailable" when the file is missing.
+- How the AI explains failures: the five-step strip (failure, one timeline, local model, rules check, verdict), the measured counts from `time_to_explanation` (written by the model, rules text, fallback rate, median time), and "One failure, explained": the newest final Declined or Failed payment in the latest 20 with its explanation and the REL-63 panel, which shows the cross-check verdict in words including a disagreement.
+- Console: processor health from `GET /api/processors/health` every 5 s, each processor's state as a word with glyph and border (Preferred, Avoided, Unknown) and a failover line in words ("Failover active: new payments go to Processor B while Processor A is avoided"; "No failover"; both avoided; static routing); after a failed read it says unavailable rather than showing a state. Open incident: the newest unresolved incident from `GET /api/incidents`, its status word, times, affected count and AI summary with its source (rule-based or model). Then the Latest payments table described above.
+- Accessibility: status is a word plus a glyph and border style; text colours are tokens in `globals.css` checked at 4.5:1 by `frontend/tests/unit/css-accessibility.test.ts`; motion is limited to button hover inside `prefers-reduced-motion: no-preference`; axe runs on the home page at 1280 and 390 px (`tests/e2e/console.spec.ts`).
+- Screenshots during a scripted outage: `frontend/tests/screenshots/console-outage-1280.png` and `console-outage-390-phone.png`, made by `tests/screenshots/console.capture.ts` from fixtures (figures are illustrative synthetic values, not a measured run).
 
 ### Incidents list (REL-36)
 
